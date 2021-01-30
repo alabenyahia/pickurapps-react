@@ -19,12 +19,15 @@ const theme = createMuiTheme({
                 textTransform: 'none'
             }
         },
-        MuiPaper: {
-            root: {
+        MuiDrawer: {
+            paper: {
                 backgroundColor: '#673ab7',
                 color: '#ffffff'
             }
         }
+    },
+    typography: {
+        fontFamily: 'Inter, sans-serif',
     }
 });
 

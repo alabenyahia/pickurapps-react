@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 'auto',
         backgroundColor: theme.palette.primary.main,
         color: '#ffffff',
-
+        fontWeight: '500'
     },
 }));
 
