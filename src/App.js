@@ -1,7 +1,12 @@
+import Header from "./Header";
+import theme from "./theme";
+import {ThemeProvider} from "@material-ui/core";
 
 function App() {
   return (
-    <h1>pickurapps</h1>
+      <ThemeProvider theme={theme}>
+        <Header/>
+      </ThemeProvider>
   );
 }
 
