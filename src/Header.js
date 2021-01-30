@@ -180,7 +180,7 @@ export default function Header() {
 
     return (
         <header>
-            <AppBar className={header}>
+            <AppBar className={header} position='sticky'>
                 {mobileView ? displayMobile() : displayDesktop()}
             </AppBar>
         </header>
