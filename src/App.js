@@ -1,11 +1,11 @@
-import Header from "./Header";
-import Footer from "./Footer"
-import theme from "./theme";
+import Header from "./commons/Header";
+import Footer from "./commons/Footer"
+import theme from "./commons/theme";
 
 import {ThemeProvider} from "@material-ui/core";
 import {createGlobalStyle} from "styled-components";
 import styled from "styled-components";
-import Routing from "./Routing";
+import Routing from "./commons/Routing";
 
 const GlobalStyles = createGlobalStyle`
   body {
