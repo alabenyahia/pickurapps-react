@@ -43,7 +43,8 @@ const useStyles = makeStyles(() => ({
         },
     },
     logo: {
-        width:"170px"
+        width:"170px",
+        pointerEvents: "none"
     },
     menuButton: {
         size: "18px",

@@ -4,6 +4,8 @@ import theme from "./theme";
 
 import {ThemeProvider} from "@material-ui/core";
 import {createGlobalStyle} from "styled-components";
+import styled from "styled-components";
+import Routing from "./Routing";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -17,12 +19,25 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
+const StyledContainer = styled.main`
+    width: 70%;
+    margin: 24px auto;
+    
+    @media screen and (max-width: 960px) {
+      width: calc(100% - 24px);
+      margin: 16px auto;
+    }
+`;
+
 function App() {
   return (
       <>
           <GlobalStyles/>
           <ThemeProvider theme={theme}>
             <Header/>
+            <StyledContainer>
+                <Routing/>
+            </StyledContainer>
             <Footer/>
           </ThemeProvider>
       </>
