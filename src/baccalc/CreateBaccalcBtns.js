@@ -2,7 +2,7 @@ import sectionData from "./sectionData";
 import {Button, Grid, Icon} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 
-export default function createBacCalcBtns() {
+export default function CreateBaccalcBtns() {
     const btns = [];
     for (const prop in sectionData) {
         let btn = (

@@ -2,8 +2,9 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {Grid} from "@material-ui/core";
 import createHomeCards from "../home/createHomeCards";
-import createBacCalcBtns from "../baccalc/createBacCalcBtns";
+import CreateBaccalcBtns from "../baccalc/CreateBaccalcBtns";
 import StyledContainer from "./StyledContainer";
+import CreateBaccalcForm from "../baccalc/CreateBaccalcForm";
 
 function Routing() {
     return (
@@ -20,8 +21,14 @@ function Routing() {
             <Route path='/baccalc' exact>
                 <StyledContainer>
                     <Grid container spacing={3}>
-                        {createBacCalcBtns()}
+                        {CreateBaccalcBtns()}
                     </Grid>
+                </StyledContainer>
+            </Route>
+
+            <Route path='/baccalc/:section' exact>
+                <StyledContainer>
+                    <CreateBaccalcForm/>
                 </StyledContainer>
             </Route>
         </Switch>
