@@ -72,7 +72,7 @@ export default function CreateBaccalcForm(props) {
     }
 
     return (
-        <form className={classes.root} onSubmit={handleFormSubmit}>
+        <form className={classes.root} onSubmit={handleFormSubmit} method="POST">
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Typography component="h3" variant="h3" display="block" color="secondary">Choisissez votre Session</Typography>
