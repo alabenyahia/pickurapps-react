@@ -7,15 +7,18 @@ const sectionData = {
             sesPrin: {
                 math: {
                     name: 'Mathématiques',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 2
                 },
                 phys: {
                     name: 'Physiques',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 sci: {
                     name: 'Sciences',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 0.5
                 },
                 philo: {
                     name: 'Philosophie',
@@ -23,11 +26,13 @@ const sectionData = {
                 },
                 fr: {
                     name: 'Français',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ang: {
                     name: 'Anglais',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ar: {
                     name: 'Arabe',
@@ -76,15 +81,18 @@ const sectionData = {
             sesPrin: {
                 math: {
                     name: 'Mathématiques',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1
                 },
                 phys: {
                     name: 'Physiques',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 sci: {
                     name: 'Sciences',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 philo: {
                     name: 'Philosophie',
@@ -92,11 +100,13 @@ const sectionData = {
                 },
                 fr: {
                     name: 'Français',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ang: {
                     name: 'Anglais',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ar: {
                     name: 'Arabe',
@@ -145,19 +155,23 @@ const sectionData = {
             sesPrin: {
                 math: {
                     name: 'Mathématiques',
-                    coef: 2
+                    coef: 2,
+                    coefScr: 0.5
                 },
                 eco: {
                     name: 'Économie',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 gest: {
                     name: 'Gestion',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 hg: {
                     name: 'Histoire & Geo',
-                    coef: 2
+                    coef: 2,
+                    coefScr: 0.5
                 },
                 philo: {
                     name: 'philosophie',
@@ -165,11 +179,13 @@ const sectionData = {
                 },
                 fr: {
                     name: 'Français',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ang: {
                     name: 'Anglais',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ar: {
                     name: 'Arabe',
@@ -221,15 +237,18 @@ const sectionData = {
             sesPrin: {
                 math:{
                     name: 'Mathématiques',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 phys:{
                     name: 'Physiques',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1
                 },
                 tech:{
                     name: 'Technique',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 philo:{
                     name: 'Philosophie',
@@ -237,11 +256,13 @@ const sectionData = {
                 },
                 fr:{
                     name: 'Français',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ang:{
                     name: 'Anglais',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ar:{
                     name: 'Arabe',
@@ -294,23 +315,28 @@ const sectionData = {
                 },
                 hg:{
                     name: 'Histoire & Geo',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1
                 },
                 philo:{
                     name: 'Philosophie',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 fr:{
                     name: 'Français',
-                    coef: 2
+                    coef: 2,
+                    coefScr: 1
                 },
                 ang:{
                     name: 'Anglais',
-                    coef: 2
+                    coef: 2,
+                    coefScr: 1
                 },
                 ar:{
                     name: 'Arabe',
-                    coef: 4
+                    coef: 4,
+                    coefScr: 1.5
                 },
                 info:{
                     name: 'Informatique',
@@ -352,23 +378,28 @@ const sectionData = {
             sesPrin: {
                 math: {
                     name: 'Mathématiques',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 phys: {
                     name: 'Physiques',
-                    coef: 2
+                    coef: 2,
+                    coefScr: 0.5
                 },
                 algo: {
                     name: 'Algorithmes',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 bd: {
                     name: 'BD',
-                    coef: 1.5
+                    coef: 1.5,
+                    coefScr: 0.25
                 },
                 tic: {
                     name: 'TIC',
-                    coef: 1.5
+                    coef: 1.5,
+                    coefScr: 0.25
                 },
                 philo: {
                     name: 'Philosophie',
@@ -376,11 +407,13 @@ const sectionData = {
                 },
                 fr: {
                     name: 'Français',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ang: {
                     name: 'Anglais',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 1
                 },
                 ar: {
                     name: 'Arabe',
@@ -432,35 +465,43 @@ const sectionData = {
                 },
                 phys: {
                     name: 'Physiques',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 0.5
                 },
                 sci: {
                     name: 'Sciences',
-                    coef: 3
+                    coef: 3,
+                    coefScr: 1.5
                 },
                 sprtheo: {
                     name: 'Sport Théorique',
-                    coef: 0.5
+                    coef: 0.5,
+                    coefScr: 0.5
                 },
                 sprpra: {
                     name: 'Sport Pratique',
-                    coef: 2.5
+                    coef: 2.5,
+                    coefScr: 0.5
                 },
                 eduphys: {
                     name: 'Education Physique',
-                    coef: 1
+                    coef: 1,
+                    coefScr: 0.5
                 },
                 philo: {
                     name: 'Philosophie',
-                    coef: 1.5
+                    coef: 1.5,
+                    coefScr: 0.5
                 },
                 fr: {
                     name: 'Français',
-                    coef: 1.5
+                    coef: 1.5,
+                    coefScr: 1
                 },
                 ang: {
                     name: 'Anglais',
-                    coef: 1.5
+                    coef: 1.5,
+                    coefScr: 1
                 },
                 ar: {
                     name: 'Arabe',
