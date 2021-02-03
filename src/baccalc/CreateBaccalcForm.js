@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import sectionData from "./sectionData";
 import {useState} from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,6 +43,15 @@ const useStyles = makeStyles((theme) => ({
         '@media screen and (max-width:600px)': {
             fontSize: '1.5rem'
         }
+    },
+    swalHStyle: {
+        margin: '0.5rem',
+        fontSize: '1rem',
+        color: '#ffffff'
+    },
+    swalPStyle: {
+        margin: '0.3rem',
+        color: '#ffffff'
     }
 }));
 
@@ -63,6 +74,8 @@ export default function CreateBaccalcForm(props) {
     const [prinInputs, setPrinInputs] = useState(() => initState('principale'));
     const [contInputs, setContInputs] = useState(() => initState('controle'));
 
+    const MySwal = withReactContent(Swal)
+
     const handleSessionRadioChange = (event) => {
         setSessionRadio(event.target.value);
     };
@@ -76,12 +89,31 @@ export default function CreateBaccalcForm(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        let moy;
+        let score;
         if (sessionRadio === 'principale') {
-            console.log("moy: ", calcPrincMoy(), "score: ", calcScore(true), prinInputs, contInputs);
+            moy = calcPrincMoy();
+            score = calcScore(true);
         } else {
-            console.log("moy: ", calcContMoy(), "score: ", calcScore(false), prinInputs, contInputs);
+            moy = calcContMoy();
+            score = calcScore(false);
         }
 
+        const swalContent = (
+            <>
+                <h6 className={classes.swalHStyle}>Votre Moyenne:</h6>
+                <p className={classes.swalPStyle}>{moy}</p>
+                <h6 className={classes.swalHStyle}>Votre Score:</h6>
+                <p className={classes.swalPStyle}>{score}</p>
+            </>
+        );
+
+        MySwal.fire({
+            html: swalContent,
+            padding: '1rem',
+            background: moy >= 10 ? '#00C851' : '#ff4444',
+            confirmButtonColor: moy >= 10 ? '#ff4081' : '#673ab7',
+        })
     }
 
     function renderMatieres(session) {
