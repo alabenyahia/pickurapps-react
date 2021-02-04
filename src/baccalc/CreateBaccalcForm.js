@@ -16,6 +16,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import CloseIcon from '@material-ui/icons/Close'
 import {calcContMoy, calcPrincMoy, calcScore, validateInputs} from "./baccalcUtils";
+import Confetti from 'react-confetti'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,9 +77,11 @@ export default function CreateBaccalcForm(props) {
         return recObj;
     };
 
+
     const [prinInputs, setPrinInputs] = useState(() => initState('principale'));
     const [contInputs, setContInputs] = useState(() => initState('controle'));
     const [isToastOpen, setIsToastOpen] = useState(false);
+    const [isConfettiOpen, setIsConfettiOpen] = useState(false);
 
     const MySwal = withReactContent(Swal);
 
@@ -128,7 +131,12 @@ export default function CreateBaccalcForm(props) {
                 padding: '1rem',
                 background: moy >= 10 ? '#00C851' : '#ff4444',
                 confirmButtonColor: moy >= 10 ? '#ff4081' : '#673ab7',
-            })
+            }).then(() => {
+                setIsConfettiOpen(false);
+            });
+            if (moy >= 10) {
+                setIsConfettiOpen(true);
+            }
         } else {
             setIsToastOpen(true);
         }
@@ -196,6 +204,11 @@ export default function CreateBaccalcForm(props) {
                         </IconButton>
                     }/>
             </Snackbar>
+            {
+                isConfettiOpen && <Confetti/>
+
+            }
+
         </form>
     );
 }
