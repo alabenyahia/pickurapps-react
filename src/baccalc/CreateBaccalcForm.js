@@ -15,6 +15,7 @@ import {useState} from "react";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import CloseIcon from '@material-ui/icons/Close'
+import {calcContMoy, calcPrincMoy, calcScore, validateInputs} from "./baccalcUtils";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,9 +56,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#ffffff'
     },
     toastStyle: {
-
         backgroundColor: '#ff4444'
-
     }
 }));
 
@@ -81,7 +80,7 @@ export default function CreateBaccalcForm(props) {
     const [contInputs, setContInputs] = useState(() => initState('controle'));
     const [isToastOpen, setIsToastOpen] = useState(false);
 
-    const MySwal = withReactContent(Swal)
+    const MySwal = withReactContent(Swal);
 
     const handleSessionRadioChange = (event) => {
         setSessionRadio(event.target.value);
@@ -104,15 +103,15 @@ export default function CreateBaccalcForm(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if (validateInputs()) {
+        if (validateInputs(sessionRadio, prinInputs, contInputs)) {
             let moy;
             let score;
             if (sessionRadio === 'principale') {
-                moy = calcPrincMoy();
-                score = calcScore(true);
+                moy = calcPrincMoy(prinInputs, section);
+                score = calcScore(true, prinInputs, contInputs, section);
             } else {
-                moy = calcContMoy();
-                score = calcScore(false);
+                moy = calcContMoy(prinInputs, contInputs, section);
+                score = calcScore(false, prinInputs, contInputs, section);
             }
 
             const swalContent = (
@@ -152,74 +151,7 @@ export default function CreateBaccalcForm(props) {
         return matieres;
     }
 
-    function calcPrincMoy(marks = prinInputs) {
-        let diviser = 0;
-        let moy = 0;
 
-        for (const prop in marks) {
-            if (prop !== `${section}-opt`) {
-                let coef = parseFloat(sectionData[section].matiere.sesPrin[prop.substring(prop.indexOf('-') + 1)].coef);
-                diviser += coef;
-                moy+= parseFloat(marks[prop]) * coef;
-            } else if (parseFloat(marks[prop]) > 10) moy+= parseFloat(marks[prop]) - 10;
-        }
-        console.log('divider ', diviser, 'moy ', moy);
-        return moy / diviser;
-    }
-
-    function calcContMoy() {
-        function replaceHigherMarks() {
-            let savePrinMarks = {...prinInputs};
-            const saveContMarks = {...contInputs};
-            for (let prop in saveContMarks) {
-                if (parseFloat(saveContMarks[prop]) > savePrinMarks[prop.replace('Ctrl', '')])
-                    savePrinMarks[prop.replace('Ctrl', '')] = saveContMarks[prop];
-            }
-            return savePrinMarks;
-        }
-
-        let changedMarks = replaceHigherMarks();
-        return calcPrincMoy(changedMarks);
-    }
-
-    function calcScore(isPrincipale) {
-        function replaceMarksPrinX2PlusCont() {
-            let savePrinMarks = {...prinInputs};
-            const saveContMarks = {...contInputs};
-            for (let prop in saveContMarks) {
-                let prinProp = prop.replace('Ctrl', '');
-                savePrinMarks[prinProp] = (((parseFloat(savePrinMarks[prinProp]) * 2) + parseFloat(saveContMarks[prop])) / 3);
-            }
-            return savePrinMarks;
-        }
-
-        let score = 0;
-
-        let moye = isPrincipale ? calcPrincMoy(prinInputs) : (((calcPrincMoy(prinInputs) * 2) + calcContMoy()) / 3) ;
-        let marks = isPrincipale ? prinInputs : replaceMarksPrinX2PlusCont();
-
-        for (let prop in marks) {
-            if (sectionData[section].matiere.sesPrin[prop.substring(prop.indexOf('-') + 1)].hasOwnProperty('coefScr'))
-                score += parseFloat(marks[prop]) * parseFloat(sectionData[section].matiere.sesPrin[prop.substring(prop.indexOf('-') + 1)].coefScr);
-        }
-
-        score += parseFloat(moye) * 4;
-        return score;
-    }
-
-    function validateInputs(){
-        for (let prop in prinInputs) {
-            if (prinInputs[prop].length <= 0 || parseFloat(prinInputs[prop]) < 0 || parseFloat(prinInputs[prop]) > 20 || isNaN(prinInputs[prop])) return false;
-        }
-
-        if (sessionRadio === 'controle') {
-            for (let prop in contInputs) {
-                if (contInputs[prop].length <= 0 || parseFloat(contInputs[prop]) < 0 || parseFloat(contInputs[prop]) > 20 || isNaN(contInputs[prop])) return false;
-            }
-        }
-
-        return true;
-    }
 
     return (
         <form className={classes.root} onSubmit={handleFormSubmit} method="POST" noValidate>
