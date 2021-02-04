@@ -4,9 +4,9 @@ import {
     Button,
     FormControl,
     FormControlLabel,
-    Grid, Icon,
+    Grid, Icon, IconButton,
     Radio,
-    RadioGroup,
+    RadioGroup, Snackbar, SnackbarContent,
     TextField,
     Typography
 } from "@material-ui/core";
@@ -14,6 +14,7 @@ import sectionData from "./sectionData";
 import {useState} from "react";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
+import CloseIcon from '@material-ui/icons/Close'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
     swalPStyle: {
         margin: '0.3rem',
         color: '#ffffff'
+    },
+    toastStyle: {
+
+        backgroundColor: '#ff4444'
+
     }
 }));
 
@@ -73,6 +79,7 @@ export default function CreateBaccalcForm(props) {
 
     const [prinInputs, setPrinInputs] = useState(() => initState('principale'));
     const [contInputs, setContInputs] = useState(() => initState('controle'));
+    const [isToastOpen, setIsToastOpen] = useState(false);
 
     const MySwal = withReactContent(Swal)
 
@@ -87,33 +94,46 @@ export default function CreateBaccalcForm(props) {
         else setContInputs(oldObj);
     };
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-        let moy;
-        let score;
-        if (sessionRadio === 'principale') {
-            moy = calcPrincMoy();
-            score = calcScore(true);
-        } else {
-            moy = calcContMoy();
-            score = calcScore(false);
+    const handleToastClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
         }
 
-        const swalContent = (
-            <>
-                <h6 className={classes.swalHStyle}>Votre Moyenne:</h6>
-                <p className={classes.swalPStyle}>{moy}</p>
-                <h6 className={classes.swalHStyle}>Votre Score:</h6>
-                <p className={classes.swalPStyle}>{score}</p>
-            </>
-        );
+        setIsToastOpen(false);
+    }
 
-        MySwal.fire({
-            html: swalContent,
-            padding: '1rem',
-            background: moy >= 10 ? '#00C851' : '#ff4444',
-            confirmButtonColor: moy >= 10 ? '#ff4081' : '#673ab7',
-        })
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (validateInputs()) {
+            let moy;
+            let score;
+            if (sessionRadio === 'principale') {
+                moy = calcPrincMoy();
+                score = calcScore(true);
+            } else {
+                moy = calcContMoy();
+                score = calcScore(false);
+            }
+
+            const swalContent = (
+                <>
+                    <h6 className={classes.swalHStyle}>Votre Moyenne:</h6>
+                    <p className={classes.swalPStyle}>{moy}</p>
+                    <h6 className={classes.swalHStyle}>Votre Score:</h6>
+                    <p className={classes.swalPStyle}>{score}</p>
+                </>
+            );
+
+            MySwal.fire({
+                html: swalContent,
+                padding: '1rem',
+                background: moy >= 10 ? '#00C851' : '#ff4444',
+                confirmButtonColor: moy >= 10 ? '#ff4081' : '#673ab7',
+            })
+        } else {
+            setIsToastOpen(true);
+        }
+
     }
 
     function renderMatieres(session) {
@@ -187,6 +207,20 @@ export default function CreateBaccalcForm(props) {
         return score;
     }
 
+    function validateInputs(){
+        for (let prop in prinInputs) {
+            if (prinInputs[prop].length <= 0 || parseFloat(prinInputs[prop]) < 0 || parseFloat(prinInputs[prop]) > 20 || isNaN(prinInputs[prop])) return false;
+        }
+
+        if (sessionRadio === 'controle') {
+            for (let prop in contInputs) {
+                if (contInputs[prop].length <= 0 || parseFloat(contInputs[prop]) < 0 || parseFloat(contInputs[prop]) > 20 || isNaN(contInputs[prop])) return false;
+            }
+        }
+
+        return true;
+    }
+
     return (
         <form className={classes.root} onSubmit={handleFormSubmit} method="POST" noValidate>
             <Grid container spacing={2}>
@@ -215,6 +249,21 @@ export default function CreateBaccalcForm(props) {
                     <Button className={classes.btnStyle} size='large' endIcon={<Icon>send</Icon>} type="submit" variant="contained" color="secondary">Calculer</Button>
                 </Grid>
             </Grid>
+            <Snackbar
+                open={isToastOpen}
+                autoHideDuration={3000}
+                onClose={handleToastClose}
+
+            >
+                <SnackbarContent
+                    message="Un des Notes est invalide"
+                    className={classes.toastStyle}
+                    action={
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleToastClose}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    }/>
+            </Snackbar>
         </form>
     );
 }
