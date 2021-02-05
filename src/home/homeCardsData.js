@@ -27,7 +27,7 @@ const homeCardsData = [
         cardTextLi1: 'Devinez les drapeaux',
         cardTextLi2: 'Gagnez des \'coins\'',
         cardTextLi3: 'Ouvrez des nouveaux continentes',
-        cardToUrl: '/guess10flags'
+        cardToUrl: '/guessflags'
     }
     ];
 

@@ -24,7 +24,7 @@ const headersData = [
     },
     {
         label: "Guess 10 Flags",
-        href: "/guess10flags",
+        href: "/guessflags",
     },
     {
         label: "Dlilek Mlak",

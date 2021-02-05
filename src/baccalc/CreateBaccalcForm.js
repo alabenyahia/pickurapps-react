@@ -206,7 +206,6 @@ export default function CreateBaccalcForm(props) {
             </Snackbar>
             {
                 isConfettiOpen && <Confetti/>
-
             }
 
         </form>

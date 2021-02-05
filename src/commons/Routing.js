@@ -5,6 +5,7 @@ import createHomeCards from "../home/createHomeCards";
 import CreateBaccalcBtns from "../baccalc/CreateBaccalcBtns";
 import StyledContainer from "./StyledContainer";
 import CreateBaccalcForm from "../baccalc/CreateBaccalcForm";
+import MainBoard from "../guessflags/MainBoard";
 
 function Routing() {
     return (
@@ -30,6 +31,10 @@ function Routing() {
                 <StyledContainer>
                     <CreateBaccalcForm/>
                 </StyledContainer>
+            </Route>
+
+            <Route path='/guessflags' exact>
+                <MainBoard/>
             </Route>
         </Switch>
     );
