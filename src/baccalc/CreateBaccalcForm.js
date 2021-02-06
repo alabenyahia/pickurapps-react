@@ -68,7 +68,7 @@ export default function CreateBaccalcForm(props) {
 
     const [sessionRadio, setSessionRadio] = useState('principale');
 
-    const initState = session => {
+    const initInputsState = session => {
         const objc =  session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
         const recObj={};
         for (const prop in objc) {
@@ -77,11 +77,23 @@ export default function CreateBaccalcForm(props) {
         return recObj;
     };
 
-
-    const [prinInputs, setPrinInputs] = useState(() => initState('principale'));
-    const [contInputs, setContInputs] = useState(() => initState('controle'));
+    const [prinInputs, setPrinInputs] = useState(() => initInputsState('principale'));
+    const [contInputs, setContInputs] = useState(() => initInputsState('controle'));
     const [isToastOpen, setIsToastOpen] = useState(false);
     const [isConfettiOpen, setIsConfettiOpen] = useState(false);
+
+    const initToDisableState = () => {
+        let state = [];
+        for (const prop in sectionData[section].matiere.sesCont) {
+            if (sectionData[section].matiere.sesCont[prop].hasOwnProperty('toDisable')) {
+                state.push({toDisable: section + '-' + prop, disabled: false});
+            }
+        }
+
+        return state;
+    };
+
+    const [inputsToDisable, setInputsToDisable] = useState(() => initToDisableState());
 
     const MySwal = withReactContent(Swal);
 
@@ -94,6 +106,23 @@ export default function CreateBaccalcForm(props) {
         oldObj[e.target.name] = e.target.value ;
         if (session === 'principale') setPrinInputs(oldObj);
         else setContInputs(oldObj);
+        if (session === 'controle' && inputsToDisable.length >0) {
+            for (let i=0; i<inputsToDisable.length; i++) {
+                if (e.target.name === inputsToDisable[i].toDisable) {
+                    for (let j=0; j<inputsToDisable.length; j++) {
+                        if (j===i) continue;
+                        let oldArr = [...inputsToDisable];
+                        if (e.target.value.length > 0) {
+                            oldArr[j].disabled = true;
+                            setInputsToDisable(oldArr);
+                        } else {
+                            oldArr[j].disabled = false;
+                            setInputsToDisable(oldArr);
+                        }
+                    }
+                }
+            }
+        }
     };
 
     const handleToastClose = (event, reason) => {
@@ -106,15 +135,15 @@ export default function CreateBaccalcForm(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        if (validateInputs(sessionRadio, prinInputs, contInputs)) {
+        if (validateInputs(sessionRadio, prinInputs, contInputs, inputsToDisable)) {
             let moy;
             let score;
             if (sessionRadio === 'principale') {
                 moy = calcPrincMoy(prinInputs, section);
-                score = calcScore(true, prinInputs, contInputs, section);
+                score = calcScore(true, prinInputs, contInputs, section, inputsToDisable);
             } else {
-                moy = calcContMoy(prinInputs, contInputs, section);
-                score = calcScore(false, prinInputs, contInputs, section);
+                moy = calcContMoy(prinInputs, contInputs, section, inputsToDisable);
+                score = calcScore(false, prinInputs, contInputs, section,inputsToDisable);
             }
 
             const swalContent = (
@@ -147,9 +176,16 @@ export default function CreateBaccalcForm(props) {
         const matieres = [];
         const objc =  session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
         for (const prop in objc) {
+            let disabledObjIndex = false;
+            if (session === 'controle' && inputsToDisable.length > 0 ) {
+                for (let i=0; i<inputsToDisable.length; i++) {
+                    if (inputsToDisable[i].toDisable === section + '-' + prop) disabledObjIndex = i;
+                }
+            }
             let matiere = (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={section + '-' + prop}>
-                    <TextField fullWidth label={objc[prop].name} className={classes.textField}
+                    <TextField fullWidth label={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled ? 'Désactivé' : objc[prop].name : objc[prop].name} className={classes.textField}
+                               disabled={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled : false}
                                color="primary" variant="outlined" type="number" onChange={(e) => handleInputChange(e, session)}
                                name={section + '-' + prop} value={prinInputs[section + '-' + prop]}/>
                 </Grid>

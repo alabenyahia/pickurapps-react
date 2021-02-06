@@ -207,6 +207,7 @@ const sectionData = {
             sesCont: {
                 mathCtrl: {
                     name: 'Mathématiques',
+                    toDisable: true
                 },
                 ecoCtrl: {
                     name: 'Économie',
@@ -216,6 +217,7 @@ const sectionData = {
                 },
                 hgCtrl: {
                     name: 'Histoire & Geo',
+                    toDisable: true
                 },
                 frCtrl: {
                     name: 'Français',
@@ -437,9 +439,11 @@ const sectionData = {
                 },
                 physCtrl: {
                     name: 'Physiques',
+                    toDisable: true
                 },
                 bdCtrl: {
                     name: 'BD',
+                    toDisable: true
                 },
                 frCtrl: {
                     name: 'Français',
@@ -519,12 +523,14 @@ const sectionData = {
             sesCont: {
                 mathCtrl: {
                     name: 'Mathématiques',
+                    toDisable: true
                 },
                 sciCtrl: {
                     name: 'Sciences',
                 },
                 physCtrl: {
                     name: 'Physiques',
+                    toDisable: true
                 },
                 sprtheoCtrl: {
                     name: 'Sport Theorique',
