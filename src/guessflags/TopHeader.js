@@ -18,8 +18,8 @@ function TopHeader() {
             <IconButton size="small" aria-label="back" color="inherit">
                 <ArrowBackIcon />
             </IconButton>
-            <p style={{margin:0}}>1/10</p>
-            <div style={{display: 'flex', alignItems: 'center'}}>
+            <p style={{margin:0, pointerEvents: 'none'}}>1/10</p>
+            <div style={{display: 'flex', alignItems: 'center', pointerEvents: 'none'}}>
                 <span style={{marginRight: '8px'}}>2000</span><img width={28} height={28} src={coloredCoins} alt="colored-coins"/>
             </div>
         </StyledHeader>
