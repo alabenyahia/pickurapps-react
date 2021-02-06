@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TopHeader from "./TopHeader";
 import ShowFlag from "./ShowFlag";
 import AnswerField from "./AnswerField";
+import ChooseRows from "./ChooseRows";
 
 const StyledGridItem = styled(Grid)`
     max-width: 600px;
@@ -31,6 +32,7 @@ function MainBoard() {
                 <TopHeader/>
                 <ShowFlag />
                 <AnswerField />
+                <ChooseRows />
             </StyledGridItem>
         </Grid>
     );

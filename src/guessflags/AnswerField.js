@@ -28,6 +28,7 @@ const StyledResetBtn = styled.div`
   padding: 10px 16px;
   cursor: pointer;
   display: inline-block;
+  font-size: 0.875rem;
 `;
 
 function AnswerField() {
