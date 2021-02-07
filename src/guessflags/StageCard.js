@@ -28,17 +28,15 @@ const StyledCardText = styled.div`
 
 
 
-
-
-function StageCard() {
+function StageCard(props) {
 
     return (
-        <NavLink to='/guessflags/game' exact style={{textDecoration: "none"}}>
+        <NavLink to={props.to} exact style={{textDecoration: "none"}}>
             <StyledCard>
                 <StyledCardImgContainer>
                     <Icon fontSize='inherit' color='inherit'>lock</Icon>
                 </StyledCardImgContainer>
-                <StyledCardText>South America</StyledCardText>
+                <StyledCardText>{props.name}</StyledCardText>
             </StyledCard>
         </NavLink>
     );

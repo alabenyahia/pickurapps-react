@@ -37,8 +37,8 @@ function Routing() {
                 <MainBoard path='/guessflags'/>
             </Route>
 
-            <Route path='/guessflags/game' exact>
-                <MainBoard path='/guessflags/game'/>
+            <Route path='/guessflags/:continent' exact>
+                <MainBoard path='/guessflags/continent'/>
             </Route>
         </Switch>
     );
