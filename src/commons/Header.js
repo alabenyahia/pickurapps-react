@@ -139,7 +139,7 @@ export default function Header() {
                 <Link
                     {...{
                         component: NavLink,
-                        exact: href !== '/baccalc',
+                        exact: href !== '/baccalc' && href !== '/guessflags',
                         to: href,
                         activeStyle: {color: '#ff4081'},
                         color: "inherit",
@@ -167,7 +167,7 @@ export default function Header() {
                         key: label,
                         color: "inherit",
                         to: href,
-                        exact: href !== '/baccalc',
+                        exact: href !== '/baccalc' && href !== '/guessflags',
                         component: NavLink,
                         activeStyle: {color: '#ff4081'},
                         className: menuButton,

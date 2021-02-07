@@ -34,7 +34,11 @@ function Routing() {
             </Route>
 
             <Route path='/guessflags' exact>
-                <MainBoard/>
+                <MainBoard path='/guessflags'/>
+            </Route>
+
+            <Route path='/guessflags/game' exact>
+                <MainBoard path='/guessflags/game'/>
             </Route>
         </Switch>
     );

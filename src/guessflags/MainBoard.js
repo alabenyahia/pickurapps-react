@@ -4,6 +4,7 @@ import TopHeader from "./TopHeader";
 import ShowFlag from "./ShowFlag";
 import AnswerField from "./AnswerField";
 import ChooseRows from "./ChooseRows";
+import StageCards from "./StageCards";
 
 const StyledGridItem = styled(Grid)`
     max-width: 600px;
@@ -24,15 +25,28 @@ const StyledGridItem = styled(Grid)`
     }
 `;
 
-function MainBoard() {
+function MainBoard(props) {
+
+    function renderMainBoard() {
+        if (props.path === '/guessflags')
+            return (
+                <StageCards />
+            );
+        else
+            return (
+                <>
+                    <TopHeader/>
+                    <ShowFlag />
+                    <AnswerField />
+                    <ChooseRows />
+                </>
+            );
+    }
 
     return (
         <Grid container>
             <StyledGridItem item xs={12} >
-                <TopHeader/>
-                <ShowFlag />
-                <AnswerField />
-                <ChooseRows />
+                {renderMainBoard()}
             </StyledGridItem>
         </Grid>
     );
