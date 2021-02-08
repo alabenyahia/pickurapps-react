@@ -5,7 +5,9 @@ import ShowFlag from "./ShowFlag";
 import AnswerField from "./AnswerField";
 import ChooseRows from "./ChooseRows";
 import StageCards from "./StageCards";
-import {useEffect} from "react";
+import {useState} from "react";
+import useStateFromLS from "./useStateFromLS";
+import {continentsDefaultData} from "./gameData";
 
 const StyledGridItem = styled(Grid)`
     max-width: 600px;
@@ -26,42 +28,10 @@ const StyledGridItem = styled(Grid)`
 `;
 
 function MainBoard(props) {
+    const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
+    const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
 
-    useEffect(() => {
-/*        let contData;
-        if (localStorage.getItem('guess10flags-coins') === null) {
-            localStorage.setItem('guess10flags-coins', '80');
-        }
-
-        if (localStorage.getItem('guess10flags-contdata') === null) {
-            contData = {
-                sa: {
-                    isLocked: false,
-                    currFlagNum: 1
-                },
-                na: {
-                    isLocked: true,
-                    currFlagNum: 1
-                },
-                eur: {
-                    isLocked: true,
-                    currFlagNum: 1
-                },
-                asi: {
-                    isLocked: true,
-                    currFlagNum: 1
-                },
-                afr: {
-                    isLocked: true,
-                    currFlagNum: 1
-                }
-            };
-            localStorage.setItem('guess10flags-contdata', JSON.stringify(contData));
-        } else {
-            contData = JSON.parse(localStorage.getItem('guess10flags-contdata'));
-        }*/
-        console.log("FIIIIIIIREEEED");
-    }, [])
+    console.log(coins, contData);
 
     function renderMainBoard() {
         if (props.path === '/guessflags')
@@ -80,7 +50,7 @@ function MainBoard(props) {
     }
 
     return (
-        <Grid container>
+        <Grid container onClick={() => setCoins(Math.random())}>
             <StyledGridItem item xs={12} >
                 {renderMainBoard()}
             </StyledGridItem>

@@ -330,5 +330,28 @@ class Africa extends Continent {
     }
 }
 
-export {SouthAmerica, NorthAmerica, Europe, Asia, Africa};
+const continentsDefaultData = {
+    sa: {
+        isLocked: false,
+        currFlagNum: 1
+    },
+    na: {
+        isLocked: true,
+        currFlagNum: 1
+    },
+    eur: {
+        isLocked: true,
+        currFlagNum: 1
+    },
+    asi: {
+        isLocked: true,
+        currFlagNum: 1
+    },
+    afr: {
+        isLocked: true,
+        currFlagNum: 1
+    }
+};
+
+export {SouthAmerica, NorthAmerica, Europe, Asia, Africa, continentsDefaultData};
 
