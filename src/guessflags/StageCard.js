@@ -31,10 +31,10 @@ const StyledCardText = styled.div`
 function StageCard(props) {
 
     return (
-        <NavLink to={props.to} exact style={{textDecoration: "none"}}>
-            <StyledCard>
+        <NavLink to={props.isLocked ? false : props.to} exact style={{textDecoration: "none"}}>
+            <StyledCard onClick={()=> props.handleContCardClick(props.isLocked)}>
                 <StyledCardImgContainer>
-                    <Icon fontSize='inherit' color='inherit'>lock</Icon>
+                    <Icon fontSize='inherit' color='inherit'>{props.isLocked ? 'lock' : 'lock_open'}</Icon>
                 </StyledCardImgContainer>
                 <StyledCardText>{props.name}</StyledCardText>
             </StyledCard>
