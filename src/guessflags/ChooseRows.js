@@ -6,7 +6,6 @@ const StyledRows = styled.div`
 `;
 
 function ChooseRows(props) {
-    console.log("chooseRows arr", props.charArr);
     return (
         <StyledRows>
             <ChooseRow charrArr={props.charArr.slice(0, 7)}/>

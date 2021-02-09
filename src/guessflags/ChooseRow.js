@@ -8,7 +8,6 @@ const StyledRow = styled.div`
 
 function ChooseRow(props) {
     function renderBtns() {
-        console.log("chooseRow arr", props.charrArr);
         return props.charrArr.map((item, index) => <ChooseBtn char={item} key={index}/>)
     }
 

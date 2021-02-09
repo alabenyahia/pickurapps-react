@@ -52,6 +52,29 @@ function MainBoard(props) {
           let oldObj = {...contData}
           oldObj[continent].currFlagNum++;
           setContData(oldObj);
+      } else {
+          let oldData = {...contData};
+          switch (continent) {
+              case 'sa':
+                  oldData.na.isLocked = false;
+                  setContData(oldData);
+                  break;
+              case 'na':
+                  oldData.eur.isLocked = false;
+                  setContData(oldData);
+                  break;
+              case 'eur':
+                  oldData.asi.isLocked = false;
+                  setContData(oldData);
+                  break;
+              case 'asi':
+                  oldData.afr.isLocked = false;
+                  setContData(oldData);
+                  break;
+              default :
+                  oldData.sa.isLocked = false;
+                  setContData(oldData);
+          }
       }
     };
 
@@ -104,7 +127,7 @@ function MainBoard(props) {
                     default :
                         currContObj = new SouthAmerica();
                 }
-                console.log("ob",currContObj)
+
                 return (
                     <>
                         <TopHeader coins={coins} currFlagNum={contData[continent].currFlagNum}/>
