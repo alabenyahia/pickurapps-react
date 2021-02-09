@@ -20,6 +20,7 @@ const StyledBtn = styled.div`
     border-radius: 6px;
     display: inline-flex;
     justify-content: center;
+    align-items: center;
     margin: 0 2%;
     width: 96%;
     text-align: center;
@@ -33,7 +34,7 @@ function ShowError() {
             setRedirect(true);
         }, 5000);
         return () => clearTimeout(id);
-    }, [])
+    }, []);
 
     return (
         <>

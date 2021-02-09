@@ -12,6 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {useParams} from "react-router-dom";
 import ShowError from "./ShowError";
 
+
 const StyledGridItem = styled(Grid)`
     max-width: 600px;
     margin: 16px auto;
@@ -103,6 +104,7 @@ function MainBoard(props) {
                     default :
                         currContObj = new SouthAmerica();
                 }
+                console.log("ob",currContObj)
                 return (
                     <>
                         <TopHeader coins={coins} currFlagNum={contData[continent].currFlagNum}/>

@@ -6,12 +6,11 @@ const StyledRows = styled.div`
 `;
 
 function ChooseRows(props) {
-    const firstHalf = props.charArr.splice(0, 7);
-    const secondHalf = props.charArr.splice(-7);
+    console.log("chooseRows arr", props.charArr);
     return (
         <StyledRows>
-            <ChooseRow charrArr={firstHalf}/>
-            <ChooseRow charrArr={secondHalf}/>
+            <ChooseRow charrArr={props.charArr.slice(0, 7)}/>
+            <ChooseRow charrArr={props.charArr.slice(7, 14)}/>
         </StyledRows>
     );
 }
