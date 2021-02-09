@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {Button, Icon} from "@material-ui/core";
-import {SouthAmerica} from "./gameData";
 const StyledShowFlagContainer = styled.div`
   width: 60%;
   background-color: #7D5A5A;
@@ -15,14 +14,13 @@ const StyledShowFlagContainer = styled.div`
 `;
 
 
-function ShowFlag() {
-    let ii = new SouthAmerica(false, 1);
+function ShowFlag(props) {
 
     return (
         <StyledShowFlagContainer>
             <div style={{padding: '6px 0'}}>Flag of which country?</div>
-            <div><img src={ii.flags[0].imgSrc} alt=""/></div>
-            <div><Button fullWidth color="inherit">Next flag (20 coins)<Icon>navigate_next</Icon></Button></div>
+            <div><img src={props.imgSrc} alt="Flag"/></div>
+            <div><Button fullWidth color="inherit" onClick={()=> props.handleOnNextFlagClick()}>Next flag (20 coins)<Icon>navigate_next</Icon></Button></div>
         </StyledShowFlagContainer>
     );
 }

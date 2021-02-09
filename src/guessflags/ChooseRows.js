@@ -5,12 +5,13 @@ const StyledRows = styled.div`
   margin: 30px 8px;
 `;
 
-function ChooseRows() {
-
+function ChooseRows(props) {
+    const firstHalf = props.charArr.splice(0, 7);
+    const secondHalf = props.charArr.splice(-7);
     return (
         <StyledRows>
-            <ChooseRow/>
-            <ChooseRow/>
+            <ChooseRow charrArr={firstHalf}/>
+            <ChooseRow charrArr={secondHalf}/>
         </StyledRows>
     );
 }

@@ -11,10 +11,10 @@ const StyledBtn = styled.div`
     cursor: pointer;
 `;
 
-function ChooseBtn() {
+function ChooseBtn(props) {
 
     return (
-        <StyledBtn>U</StyledBtn>
+        <StyledBtn>{props.char}</StyledBtn>
     );
 }
 

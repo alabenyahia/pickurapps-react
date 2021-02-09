@@ -15,21 +15,21 @@ class Flag {
 }
 
 class Continent {
-    isLocked;
+    //isLocked;
     flags = [];
-    currentFlagNum;
+    //currentFlagNum;
     id;
 
-    constructor(isLocked, currentFlagNum) {
+/*    constructor(isLocked, currentFlagNum) {
         this.isLocked = isLocked;
         this.currentFlagNum = currentFlagNum;
-    }
+    }*/
 }
 
 class SouthAmerica extends Continent {
 
-    constructor(isLocked, currentFlagNum) {
-        super(isLocked, currentFlagNum);
+    constructor(/*isLocked, currentFlagNum*/) {
+        super(/*isLocked, currentFlagNum*/);
         this.id = 'sa';
 
         let correctAnswerArgentina = ['A', 'R', 'G', 'E', 'N', 'T', 'I', 'N', 'A'];
@@ -95,8 +95,8 @@ class SouthAmerica extends Continent {
 
 class NorthAmerica extends Continent {
 
-    constructor(isLocked, currentFlagNum) {
-        super(isLocked, currentFlagNum);
+    constructor(/*isLocked, currentFlagNum*/) {
+        super(/*isLocked, currentFlagNum*/);
         this.id = 'na';
 
         let correctAnswerBahamas = ['B', 'A', 'H', 'A', 'M', 'A', 'S'];
@@ -155,8 +155,8 @@ class NorthAmerica extends Continent {
 
 class Europe extends Continent {
 
-    constructor(isLocked, currentFlagNum) {
-        super(isLocked, currentFlagNum);
+    constructor(/*isLocked, currentFlagNum*/) {
+        super(/*isLocked, currentFlagNum*/);
         this.id = 'eur';
 
         let correctAnswerBelgium = ['B', 'E', 'L', 'G', 'I', 'U', 'M'];
@@ -215,8 +215,8 @@ class Europe extends Continent {
 
 class Asia extends Continent {
 
-    constructor(isLocked, currentFlagNum) {
-        super(isLocked, currentFlagNum);
+    constructor(/*isLocked, currentFlagNum*/) {
+        super(/*isLocked, currentFlagNum*/);
         this.id = 'asi';
 
         let correctAnswerChina = ['C', 'H', 'I', 'N', 'A'];
@@ -273,8 +273,8 @@ class Asia extends Continent {
 
 class Africa extends Continent {
 
-    constructor(isLocked, currentFlagNum) {
-        super(isLocked, currentFlagNum);
+    constructor(/*isLocked, currentFlagNum*/) {
+        super(/*isLocked, currentFlagNum*/);
         this.id = 'afr';
 
         let correctAnswerAlgeria = ['A', 'L', 'G', 'E', 'R', 'I', 'A'];

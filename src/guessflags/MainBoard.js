@@ -7,7 +7,7 @@ import ChooseRows from "./ChooseRows";
 import StageCards from "./StageCards";
 import {useState} from "react";
 import useStateFromLS from "./useStateFromLS";
-import {continentsDefaultData} from "./gameData";
+import {Africa, continentsDefaultData, Europe, NorthAmerica, SouthAmerica, Asia} from "./gameData";
 import CloseIcon from "@material-ui/icons/Close";
 import {useParams} from "react-router-dom";
 import ShowError from "./ShowError";
@@ -31,6 +31,7 @@ const StyledGridItem = styled(Grid)`
 `;
 
 function MainBoard(props) {
+    let currContObj = null;
     const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
     const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
     const [showContLockedToast, setShowContLockedToast] = useState(false);
@@ -43,6 +44,14 @@ function MainBoard(props) {
         }
 
         setShowContLockedToast(false);
+    };
+
+    const handleOnNextFlagClick = () => {
+      if (continent && contData[continent].currFlagNum < 10) {
+          let oldObj = {...contData}
+          oldObj[continent].currFlagNum++;
+          setContData(oldObj);
+      }
     };
 
     function renderMainBoard() {
@@ -75,12 +84,31 @@ function MainBoard(props) {
             );
         else {
             if (continent && (contData.hasOwnProperty(continent)) && (!contData[continent].isLocked)) {
+                switch (continent) {
+                    case 'sa':
+                        currContObj = new SouthAmerica();
+                        break;
+                    case 'na':
+                        currContObj = new NorthAmerica();
+                        break;
+                    case 'eur':
+                        currContObj = new Europe();
+                        break;
+                    case 'asi':
+                        currContObj = new Asia();
+                        break;
+                    case 'afr':
+                        currContObj = new Africa();
+                        break;
+                    default :
+                        currContObj = new SouthAmerica();
+                }
                 return (
                     <>
-                        <TopHeader/>
-                        <ShowFlag />
+                        <TopHeader coins={coins} currFlagNum={contData[continent].currFlagNum}/>
+                        <ShowFlag imgSrc={currContObj.flags[contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
                         <AnswerField />
-                        <ChooseRows />
+                        <ChooseRows charArr={currContObj.flags[contData[continent].currFlagNum-1].randomChars}/>
                     </>
                 );
             } else {
@@ -93,7 +121,7 @@ function MainBoard(props) {
     }
 
     return (
-        <Grid container onClick={() => setCoins(Math.random())}>
+        <Grid container>
             <StyledGridItem item xs={12} >
                 {renderMainBoard()}
             </StyledGridItem>

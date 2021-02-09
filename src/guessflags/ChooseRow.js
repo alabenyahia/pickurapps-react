@@ -6,17 +6,14 @@ const StyledRow = styled.div`
     margin-bottom: 12px;
 `;
 
-function ChooseRow() {
+function ChooseRow(props) {
+    function renderBtns() {
+        return props.charrArr.map((item, index)=> <ChooseBtn key={index} char={item}/>);
+    }
 
     return (
         <StyledRow>
-            <ChooseBtn/>
-            <ChooseBtn/>
-            <ChooseBtn/>
-            <ChooseBtn/>
-            <ChooseBtn/>
-            <ChooseBtn/>
-            <ChooseBtn/>
+            {renderBtns()}
         </StyledRow>
     );
 }
