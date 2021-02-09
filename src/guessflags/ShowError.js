@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {Icon} from "@material-ui/core";
+import {useEffect, useState} from "react";
 
 const StyledDiv = styled.div`
   background-color: #ff4444;
@@ -25,6 +26,14 @@ const StyledBtn = styled.div`
 `;
 
 function ShowError() {
+    const [redirect, setRedirect] = useState(false)
+
+    useEffect(() => {
+        const id = setTimeout(function () {
+            setRedirect(true);
+        }, 5000);
+        return () => clearTimeout(id);
+    }, [])
 
     return (
         <>
@@ -35,6 +44,11 @@ function ShowError() {
             <NavLink to='/guessflags' exact style={{textDecoration: 'none'}}>
                 <StyledBtn><Icon>arrow_back_ios</Icon>BACK NOW</StyledBtn>
             </NavLink>
+            {
+                redirect &&
+                <Redirect to='/guessflags'/>
+            }
+
         </>
     );
 }
