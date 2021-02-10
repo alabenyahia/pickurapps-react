@@ -5,7 +5,7 @@ import ShowFlag from "./ShowFlag";
 import AnswerField from "./AnswerField";
 import ChooseRows from "./ChooseRows";
 import StageCards from "./StageCards";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import useStateFromLS from "./useStateFromLS";
 import {Africa, continentsDefaultData, Europe, NorthAmerica, SouthAmerica, Asia} from "./gameData";
 import CloseIcon from "@material-ui/icons/Close";
@@ -45,6 +45,30 @@ function MainBoard(props) {
     let {continent} = useParams();
     const MySwal = withReactContent(Swal);
 
+    useEffect(() => {
+        if (answText.length>0) {
+            if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
+                if (answText === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.join("")) {
+                    MySwal.fire({
+                        html: <WinningSwal num={answText.length}/>,
+                        padding: '1rem',
+                        confirmButtonColor: '#f6c358',
+                        confirmButtonText: 'NEXT FLAG',
+                        allowEscapeKey: false,
+                        allowOutsideClick: false,
+                        background: '#7D5A5A'
+                    }).then(() => setAnswText(""));
+                }
+            }
+
+            else if (answText.length > currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
+                setShowAnswIncoToast(true);
+                setAnswText("");
+            }
+        }
+
+    }, [answText, MySwal, contData, continent])
+
     const handleOnNextFlagClick = () => {
       if (continent && contData[continent].currFlagNum < 10) {
           let oldObj = {...contData}
@@ -82,7 +106,7 @@ function MainBoard(props) {
         setAnswText(oldText);
         console.log("OLD",answText);
 
-        if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length)
+        /*if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length)
             if (answText === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.join("")) {
                 MySwal.fire({
                     html: <WinningSwal num={answText.length}/>,
@@ -98,7 +122,7 @@ function MainBoard(props) {
         else if (answText.length > currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
             setShowAnswIncoToast(true);
             setAnswText("");
-        }
+        }*/
     }
 
     function renderMainBoard() {
