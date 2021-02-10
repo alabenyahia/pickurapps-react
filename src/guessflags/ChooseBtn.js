@@ -14,7 +14,7 @@ const StyledBtn = styled.div`
 function ChooseBtn(props) {
 
     return (
-        <StyledBtn>{props.char}</StyledBtn>
+        <StyledBtn onClick={() => props.handleChooseBtnClick(props.char)}>{props.char}</StyledBtn>
     );
 }
 

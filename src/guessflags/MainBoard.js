@@ -11,6 +11,9 @@ import {Africa, continentsDefaultData, Europe, NorthAmerica, SouthAmerica, Asia}
 import CloseIcon from "@material-ui/icons/Close";
 import {useParams} from "react-router-dom";
 import ShowError from "./ShowError";
+import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
+import WinningSwal from "./WinningSwal";
 
 
 const StyledGridItem = styled(Grid)`
@@ -36,16 +39,11 @@ function MainBoard(props) {
     const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
     const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
     const [showContLockedToast, setShowContLockedToast] = useState(false);
+    const [answText, setAnswText] = useState("");
+    const [showAnswIncoToast, setShowAnswIncoToast] = useState(false);
     console.log(coins, contData);
     let {continent} = useParams();
-
-    const handleToastClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setShowContLockedToast(false);
-    };
+    const MySwal = withReactContent(Swal);
 
     const handleOnNextFlagClick = () => {
       if (continent && contData[continent].currFlagNum < 10) {
@@ -78,30 +76,53 @@ function MainBoard(props) {
       }
     };
 
+    const handleChooseBtnClick = (char) => {
+        let oldText = answText;
+        oldText+=char;
+        setAnswText(oldText);
+        console.log("OLD",answText);
+
+        if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length)
+            if (answText === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.join("")) {
+                MySwal.fire({
+                    html: <WinningSwal num={answText.length}/>,
+                    padding: '1rem',
+                    confirmButtonColor: '#f6c358',
+                    confirmButtonText: 'NEXT FLAG',
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    background: '#7D5A5A'
+                });
+            }
+
+        else if (answText.length > currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
+            setShowAnswIncoToast(true);
+            setAnswText("");
+        }
+    }
+
     function renderMainBoard() {
         console.log("cont", continent);
         if (props.path === '/guessflags')
             return (
                 <>
                     <StageCards contData={contData} handleContCardClick={(isLocked)=> isLocked ? setShowContLockedToast(true) : setShowContLockedToast(false)}/>
-                    {
-                        showContLockedToast &&
-                        <Snackbar
-                            open={showContLockedToast}
-                            autoHideDuration={3000}
-                            onClose={handleToastClose}
 
-                        >
-                            <SnackbarContent
-                                message="Complete previous continents to unlock this!"
-                                style={{backgroundColor: '#ff4444'}}
-                                action={
-                                    <IconButton size="small" aria-label="close" color="inherit" onClick={handleToastClose}>
-                                        <CloseIcon fontSize="small" />
-                                    </IconButton>
-                                }/>
-                        </Snackbar>
-                    }
+                    <Snackbar
+                        open={showContLockedToast}
+                        autoHideDuration={3000}
+                        onClose={(e, r) => r === 'clickaway' ? false : setShowContLockedToast(false)}
+
+                    >
+                        <SnackbarContent
+                            message="Complete previous continents to unlock this!"
+                            style={{backgroundColor: '#ff4444'}}
+                            action={
+                                <IconButton size="small" aria-label="close" color="inherit" onClick={(e, r) => r === 'clickaway' ? false : setShowContLockedToast(false)}>
+                                    <CloseIcon fontSize="small" />
+                                </IconButton>
+                            }/>
+                    </Snackbar>
 
                 </>
 
@@ -132,8 +153,26 @@ function MainBoard(props) {
                     <>
                         <TopHeader coins={coins} currFlagNum={contData[continent].currFlagNum}/>
                         <ShowFlag imgSrc={currContObj.flags[contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
-                        <AnswerField />
-                        <ChooseRows charArr={currContObj.flags[contData[continent].currFlagNum-1].randomChars}/>
+                        <AnswerField text={answText}/>
+                        <ChooseRows charArr={currContObj.flags[contData[continent].currFlagNum-1].randomChars}
+                                    handleChooseBtnClick={handleChooseBtnClick}/>
+
+                        <Snackbar
+                            open={showAnswIncoToast}
+                            autoHideDuration={3000}
+                            onClose={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false)}
+
+                        >
+                            <SnackbarContent
+                                message="INCORRECT ANSWER, TRY AGAIN!"
+                                style={{backgroundColor: '#ff4444'}}
+                                action={
+                                    <IconButton size="small" aria-label="close" color="inherit"
+                                                onClick={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false) }>
+                                        <CloseIcon fontSize="small" />
+                                    </IconButton>
+                                }/>
+                        </Snackbar>
                     </>
                 );
             } else {

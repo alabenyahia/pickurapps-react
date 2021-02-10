@@ -31,11 +31,11 @@ const StyledResetBtn = styled.div`
   font-size: 0.875rem;
 `;
 
-function AnswerField() {
+function AnswerField(props) {
 
     return (
         <StyledAnswerContainer>
-            <StyledAnswerInput>UNITEDSTATES</StyledAnswerInput>
+            <StyledAnswerInput>{props.text}</StyledAnswerInput>
             <StyledResetBtn>RESET</StyledResetBtn>
         </StyledAnswerContainer>
     );
