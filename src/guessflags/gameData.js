@@ -1,6 +1,282 @@
 import shuffle from "lodash/shuffle";
 import {africaImgs, asiaImgs, europeImgs, northAmericaImgs, southAmericaImgs} from "./imgs/flags";
 
+const gameDB = {
+    sa: {
+        flags: [
+            {
+                corrAnsw: ['A', 'R', 'G', 'E', 'N', 'T', 'I', 'N', 'A'],
+                randChars: ['A', 'R', 'G', 'E', 'N', 'T', 'I', 'N', 'A', 'Q', 'A', 'L', 'O', 'M'],
+                imgSrc: southAmericaImgs[0]
+            },
+            {
+                corrAnsw: ['B', 'O', 'L', 'I', 'V', 'I', 'A'],
+                randChars: ['B', 'O', 'L', 'I', 'V', 'I', 'A', 'O', 'B', 'K', 'L', 'I', 'J', 'S'],
+                imgSrc: southAmericaImgs[1]
+            },
+            {
+                corrAnsw: ['B', 'R', 'A', 'Z', 'I', 'L'],
+                randChars: ['B', 'R', 'A', 'Z', 'I', 'L', 'S', 'C', 'R', 'A', 'O', 'P', 'M', 'W'],
+                imgSrc: southAmericaImgs[2]
+            },
+            {
+                corrAnsw: ['C', 'H', 'I', 'L', 'E'],
+                randChars: ['C', 'H', 'I', 'L', 'E', 'A', 'J', 'B', 'C', 'A', 'G', 'D', 'X', 'N'],
+                imgSrc: southAmericaImgs[3]
+            },
+            {
+                corrAnsw: ['C', 'O', 'L', 'O', 'M', 'B', 'I', 'A'],
+                randChars: ['C', 'O', 'L', 'O', 'M', 'B', 'I', 'A', 'B', 'L', 'C', 'T', 'E', 'A'],
+                imgSrc: southAmericaImgs[4]
+            },
+            {
+                corrAnsw: ['E', 'C', 'U', 'A', 'D', 'O', 'R'],
+                randChars: ['E', 'C', 'U', 'A', 'D', 'O', 'R', 'Q', 'D', 'C', 'B', 'U', 'K', 'P'],
+                imgSrc: southAmericaImgs[5]
+            },
+            {
+                corrAnsw: ['P', 'A', 'R', 'A', 'G', 'U', 'A', 'Y'],
+                randChars: ['P', 'A', 'R', 'A', 'G', 'U', 'A', 'Y', 'N', 'Q', 'S', 'L', 'P', 'V'],
+                imgSrc: southAmericaImgs[6]
+            },
+            {
+                corrAnsw: ['P', 'E', 'R', 'U'],
+                randChars: ['P', 'E', 'R', 'U', 'W', 'Z', 'U', 'N', 'N', 'L', 'U', 'H', 'G', 'T'],
+                imgSrc: southAmericaImgs[7]
+            },
+            {
+                corrAnsw: ['U', 'R', 'U', 'G', 'U', 'A', 'Y'],
+                randChars: ['U', 'R', 'U', 'G', 'U', 'A', 'Y', 'V', 'J', 'K', 'S', 'O', 'P', 'M'],
+                imgSrc: southAmericaImgs[8]
+            },
+            {
+                corrAnsw: ['V', 'E', 'N', 'E', 'Z', 'U', 'E', 'L', 'A'],
+                randChars: ['V', 'E', 'N', 'E', 'Z', 'U', 'E', 'L', 'A', 'V', 'S', 'B', 'T', 'C'],
+                imgSrc: southAmericaImgs[9]
+            },
+        ],
+    },
+
+    na: {
+        flags: [
+            {
+                corrAnsw: ['B', 'A', 'H', 'A', 'M', 'A', 'S'],
+                randChars: ['B', 'A', 'H', 'A', 'M', 'A', 'S', 'N', 'A', 'Q', 'A', 'L', 'O', 'M'],
+                imgSrc: northAmericaImgs[0]
+            },
+            {
+                corrAnsw: ['C', 'A', 'N', 'A', 'D', 'A'],
+                randChars: ['C', 'A', 'N', 'A', 'D', 'A', 'A', 'O', 'B', 'K', 'L', 'I', 'J', 'S'],
+                imgSrc: northAmericaImgs[1]
+            },
+            {
+                corrAnsw: ['C', 'O', 'S', 'T', 'A', 'R', 'I', 'C', 'A'],
+                randChars: ['C', 'O', 'S', 'T', 'A', 'R', 'I', 'C', 'A', 'A', 'O', 'P', 'M', 'W'],
+                imgSrc: northAmericaImgs[2]
+            },
+            {
+                corrAnsw: ['C', 'U', 'B', 'A'],
+                randChars: ['C', 'U', 'B', 'A', 'E', 'A', 'J', 'B', 'C', 'A', 'G', 'D', 'X', 'N'],
+                imgSrc: northAmericaImgs[3]
+            },
+            {
+                corrAnsw: ['H', 'A', 'I', 'T', 'I'],
+                randChars: ['H', 'A', 'I', 'T', 'I', 'B', 'I', 'A', 'B', 'L', 'C', 'T', 'E', 'A'],
+                imgSrc: northAmericaImgs[4]
+            },
+            {
+                corrAnsw: ['H', 'O', 'N', 'D', 'U', 'R', 'A', 'S'],
+                randChars: ['H', 'O', 'N', 'D', 'U', 'R', 'A', 'S', 'D', 'C', 'B', 'U', 'K', 'P'],
+                imgSrc: northAmericaImgs[5]
+            },
+            {
+                corrAnsw: ['J', 'A', 'M', 'A', 'I', 'C', 'A'],
+                randChars: ['J', 'A', 'M', 'A', 'I', 'C', 'A', 'Y', 'N', 'Q', 'S', 'L', 'P', 'V'],
+                imgSrc: northAmericaImgs[6]
+            },
+            {
+                corrAnsw: ['M', 'E', 'X', 'I', 'C', 'O'],
+                randChars: ['M', 'E', 'X', 'I', 'C', 'O', 'U', 'N', 'N', 'L', 'U', 'H', 'G', 'T'],
+                imgSrc: northAmericaImgs[7]
+            },
+            {
+                corrAnsw: ['P', 'A', 'N', 'A', 'M', 'A'],
+                randChars: ['P', 'A', 'N', 'A', 'M', 'A', 'Y', 'V', 'J', 'K', 'S', 'O', 'P', 'M'],
+                imgSrc: northAmericaImgs[8]
+            },
+            {
+                corrAnsw: ['U', 'N', 'I', 'T', 'E', 'D', 'S', 'T', 'A', 'T', 'E', 'S'],
+                randChars: ['U', 'N', 'I', 'T', 'E', 'D', 'S', 'T', 'A', 'T', 'E', 'S', 'T', 'C'],
+                imgSrc: northAmericaImgs[9]
+            },
+        ],
+    },
+
+    eur: {
+        flags: [
+            {
+                corrAnsw: ['B', 'E', 'L', 'G', 'I', 'U', 'M'],
+                randChars: ['B', 'E', 'L', 'G', 'I', 'U', 'M', 'N', 'A', 'Q', 'A', 'L', 'O', 'M'],
+                imgSrc: europeImgs[0]
+            },
+            {
+                corrAnsw: ['C', 'R', 'O', 'A', 'T', 'I', 'A'],
+                randChars: ['C', 'R', 'O', 'A', 'T', 'I', 'A', 'O', 'B', 'K', 'L', 'I', 'J', 'S'],
+                imgSrc: europeImgs[1]
+            },
+            {
+                corrAnsw: ['D', 'E', 'N', 'M', 'A', 'R', 'K'],
+                randChars: ['D', 'E', 'N', 'M', 'A', 'R', 'K', 'C', 'R', 'A', 'O', 'P', 'M', 'W'],
+                imgSrc: europeImgs[2]
+            },
+            {
+                corrAnsw: ['F', 'R', 'A', 'N', 'C', 'E'],
+                randChars: ['F', 'R', 'A', 'N', 'C', 'E', 'J', 'B', 'C', 'A', 'G', 'D', 'X', 'N'],
+                imgSrc: europeImgs[3]
+            },
+            {
+                corrAnsw: ['G', 'R', 'E', 'E', 'C', 'E'],
+                randChars: ['G', 'R', 'E', 'E', 'C', 'E', 'I', 'A', 'B', 'L', 'C', 'T', 'E', 'A'],
+                imgSrc: europeImgs[4]
+            },
+            {
+                corrAnsw: ['N', 'O', 'R', 'W', 'A', 'Y'],
+                randChars: ['N', 'O', 'R', 'W', 'A', 'Y', 'A', 'S', 'D', 'C', 'B', 'U', 'K', 'P'],
+                imgSrc: europeImgs[5]
+            },
+            {
+                corrAnsw: ['P', 'O', 'R', 'T', 'U', 'G', 'A', 'L'],
+                randChars: ['P', 'O', 'R', 'T', 'U', 'G', 'A', 'L', 'N', 'Q', 'S', 'L', 'P', 'V'],
+                imgSrc: europeImgs[6]
+            },
+            {
+                corrAnsw: ['S', 'L', 'O', 'V', 'E', 'N', 'I', 'A'],
+                randChars: ['S', 'L', 'O', 'V', 'E', 'N', 'I', 'A', 'N', 'L', 'U', 'H', 'G', 'T'],
+                imgSrc: europeImgs[7]
+            },
+            {
+                corrAnsw: ['S', 'W', 'E', 'D', 'E', 'N'],
+                randChars: ['S', 'W', 'E', 'D', 'E', 'N', 'Y', 'V', 'J', 'K', 'S', 'O', 'P', 'M'],
+                imgSrc: europeImgs[8]
+            },
+            {
+                corrAnsw: ['S', 'W', 'I', 'T', 'Z', 'E', 'R', 'L', 'A', 'N', 'D'],
+                randChars: ['S', 'W', 'I', 'T', 'Z', 'E', 'R', 'L', 'A', 'N', 'D', 'S', 'T', 'C'],
+                imgSrc: europeImgs[9]
+            },
+        ],
+    },
+
+    asi: {
+        flags: [
+            {
+                corrAnsw: ['C', 'H', 'I', 'N', 'A'],
+                randChars: ['C', 'H', 'I', 'N', 'A', 'U', 'M', 'N', 'A', 'Q', 'A', 'L', 'O', 'M'],
+                imgSrc: asiaImgs[0]
+            },
+            {
+                corrAnsw: ['I', 'N', 'D', 'I', 'A'],
+                randChars: ['I', 'N', 'D', 'I', 'A', 'I', 'A', 'O', 'B', 'K', 'L', 'I', 'J', 'S'],
+                imgSrc: asiaImgs[1]
+            },
+            {
+                corrAnsw: ['I', 'N', 'D', 'O', 'N', 'E', 'S', 'I', 'A'],
+                randChars: ['I', 'N', 'D', 'O', 'N', 'E', 'S', 'I', 'A', 'A', 'O', 'P', 'M', 'W'],
+                imgSrc: asiaImgs[2]
+            },
+            {
+                corrAnsw: ['J', 'A', 'P', 'A', 'N'],
+                randChars: ['J', 'A', 'P', 'A', 'N', 'E', 'J', 'B', 'C', 'A', 'G', 'D', 'X', 'N'],
+                imgSrc: asiaImgs[3]
+            },
+            {
+                corrAnsw: ['K', 'U', 'W', 'A', 'I', 'T'],
+                randChars: ['K', 'U', 'W', 'A', 'I', 'T', 'I', 'A', 'B', 'L', 'C', 'T', 'E', 'A'],
+                imgSrc: asiaImgs[4]
+            },
+            {
+                corrAnsw: ['L', 'E', 'B', 'A', 'N', 'O', 'N'],
+                randChars: ['L', 'E', 'B', 'A', 'N', 'O', 'N', 'S', 'D', 'C', 'B', 'U', 'K', 'P'],
+                imgSrc: asiaImgs[5]
+            },
+            {
+                corrAnsw: ['P', 'A', 'K', 'I', 'S', 'T', 'A', 'N'],
+                randChars: ['P', 'A', 'K', 'I', 'S', 'T', 'A', 'N', 'N', 'Q', 'S', 'L', 'P', 'V'],
+                imgSrc: asiaImgs[6]
+            },
+            {
+                corrAnsw: ['Q', 'A', 'T', 'A', 'R'],
+                randChars: ['Q', 'A', 'T', 'A', 'R', 'N', 'I', 'A', 'N', 'L', 'U', 'H', 'G', 'T'],
+                imgSrc: asiaImgs[7]
+            },
+            {
+                corrAnsw: ['T', 'H', 'A', 'I', 'L', 'A', 'N', 'D'],
+                randChars: ['T', 'H', 'A', 'I', 'L', 'A', 'N', 'D', 'J', 'K', 'S', 'O', 'P', 'M'],
+                imgSrc: asiaImgs[8]
+            },
+            {
+                corrAnsw: ['Y', 'E', 'M', 'E', 'N'],
+                randChars: ['Y', 'E', 'M', 'E', 'N', 'E', 'R', 'L', 'A', 'N', 'D', 'S', 'T', 'C'],
+                imgSrc: asiaImgs[9]
+            },
+        ],
+    },
+
+    afr: {
+        flags: [
+            {
+                corrAnsw: ['A', 'L', 'G', 'E', 'R', 'I', 'A'],
+                randChars: ['A', 'L', 'G', 'E', 'R', 'I', 'A', 'N', 'A', 'Q', 'S', 'L', 'O', 'M'],
+                imgSrc: africaImgs[0]
+            },
+            {
+                corrAnsw: ['A', 'N', 'G', 'O', 'L', 'A'],
+                randChars: ['A', 'N', 'G', 'O', 'L', 'A', 'A', 'O', 'B', 'K', 'L', 'I', 'J', 'S'],
+                imgSrc: africaImgs[1]
+            },
+            {
+                corrAnsw: ['E', 'G', 'Y', 'P', 'T'],
+                randChars: ['E', 'G', 'Y', 'P', 'T', 'E', 'S', 'I', 'A', 'A', 'O', 'P', 'M', 'W'],
+                imgSrc: africaImgs[2]
+            },
+            {
+                corrAnsw: ['K', 'E', 'N', 'Y', 'A'],
+                randChars: ['K', 'E', 'N', 'Y', 'A', 'E', 'J', 'B', 'C', 'A', 'G', 'D', 'X', 'N'],
+                imgSrc: africaImgs[3]
+            },
+            {
+                corrAnsw: ['M', 'O', 'R', 'O', 'C', 'C', 'O'],
+                randChars: ['M', 'O', 'R', 'O', 'C', 'C', 'O', 'A', 'B', 'L', 'C', 'T', 'E', 'A'],
+                imgSrc: africaImgs[4]
+            },
+            {
+                corrAnsw: ['M', 'O', 'Z', 'A', 'M', 'B', 'I', 'Q', 'U', 'E'],
+                randChars: ['M', 'O', 'Z', 'A', 'M', 'B', 'I', 'Q', 'U', 'E', 'B', 'U', 'K', 'P'],
+                imgSrc: africaImgs[5]
+            },
+            {
+                corrAnsw: ['N', 'I', 'G', 'E', 'R', 'I', 'A'],
+                randChars: ['N', 'I', 'G', 'E', 'R', 'I', 'A', 'N', 'N', 'Q', 'S', 'L', 'P', 'V'],
+                imgSrc: africaImgs[6]
+            },
+            {
+                corrAnsw: ['S', 'O', 'U', 'T', 'H', 'A', 'F', 'R', 'I', 'C', 'A'],
+                randChars: ['S', 'O', 'U', 'T', 'H', 'A', 'F', 'R', 'I', 'C', 'A', 'H', 'G', 'T'],
+                imgSrc: africaImgs[7]
+            },
+            {
+                corrAnsw: ['S', 'U', 'D', 'A', 'N'],
+                randChars: ['S', 'U', 'D', 'A', 'N', 'A', 'N', 'D', 'J', 'K', 'S', 'O', 'P', 'M'],
+                imgSrc: africaImgs[8]
+            },
+            {
+                corrAnsw: ['T', 'U', 'N', 'I', 'S', 'I', 'A'],
+                randChars: ['T', 'U', 'N', 'I', 'S', 'I', 'A', 'L', 'A', 'N', 'D', 'S', 'T', 'C'],
+                imgSrc: africaImgs[9]
+            },
+        ],
+    },
+};
 
 class Flag {
     imgSrc;
@@ -346,5 +622,5 @@ const continentsDefaultData = {
     }
 };
 
-export {SouthAmerica, NorthAmerica, Europe, Asia, Africa, continentsDefaultData};
+export {SouthAmerica, NorthAmerica, Europe, Asia, Africa, continentsDefaultData, gameDB};
 
