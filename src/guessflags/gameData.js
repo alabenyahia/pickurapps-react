@@ -1,7 +1,7 @@
 import shuffle from "lodash/shuffle";
 import {africaImgs, asiaImgs, europeImgs, northAmericaImgs, southAmericaImgs} from "./imgs/flags";
 
-const gameDB = {
+const contDB = {
     sa: {
         flags: [
             {
@@ -622,5 +622,5 @@ const continentsDefaultData = {
     }
 };
 
-export {SouthAmerica, NorthAmerica, Europe, Asia, Africa, continentsDefaultData, gameDB};
+export {SouthAmerica, NorthAmerica, Europe, Asia, Africa, continentsDefaultData, contDB};
 

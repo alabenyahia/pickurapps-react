@@ -7,7 +7,7 @@ import ChooseRows from "./ChooseRows";
 import StageCards from "./StageCards";
 import {useEffect, useState} from "react";
 import useStateFromLS from "./useStateFromLS";
-import {Africa, continentsDefaultData, Europe, NorthAmerica, SouthAmerica, Asia} from "./gameData";
+import {Africa, continentsDefaultData, Europe, NorthAmerica, SouthAmerica, Asia, contDB} from "./gameData";
 import CloseIcon from "@material-ui/icons/Close";
 import {useParams} from "react-router-dom";
 import ShowError from "./ShowError";
@@ -35,7 +35,7 @@ const StyledGridItem = styled(Grid)`
 `;
 
 function MainBoard(props) {
-    let currContObj = null;
+/*    //let currContObj = null;
     const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
     const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
     const [showContLockedToast, setShowContLockedToast] = useState(false);
@@ -45,7 +45,7 @@ function MainBoard(props) {
     let {continent} = useParams();
     const MySwal = withReactContent(Swal);
 
-    useEffect(() => {
+    /!*useEffect(() => {
         if (answText.length>0) {
             if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
                 if (answText === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.join("")) {
@@ -67,7 +67,7 @@ function MainBoard(props) {
             }
         }
 
-    }, [answText, MySwal, contData, continent])
+    }, [answText, MySwal, contData, continent])*!/
 
     const handleOnNextFlagClick = () => {
       if (continent && contData[continent].currFlagNum < 10) {
@@ -106,7 +106,7 @@ function MainBoard(props) {
         setAnswText(oldText);
         console.log("OLD",answText);
 
-        /*if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length)
+        /!*if (answText.length === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length)
             if (answText === currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.join("")) {
                 MySwal.fire({
                     html: <WinningSwal num={answText.length}/>,
@@ -122,7 +122,7 @@ function MainBoard(props) {
         else if (answText.length > currContObj.flags[contData[continent].currFlagNum-1].correctAnsw.length) {
             setShowAnswIncoToast(true);
             setAnswText("");
-        }*/
+        }*!/
     }
 
     function renderMainBoard() {
@@ -153,7 +153,7 @@ function MainBoard(props) {
             );
         else {
             if (continent && (contData.hasOwnProperty(continent)) && (!contData[continent].isLocked)) {
-                switch (continent) {
+/!*                switch (continent) {
                     case 'sa':
                         currContObj = new SouthAmerica();
                         break;
@@ -171,14 +171,14 @@ function MainBoard(props) {
                         break;
                     default :
                         currContObj = new SouthAmerica();
-                }
+                }*!/
 
                 return (
                     <>
                         <TopHeader coins={coins} currFlagNum={contData[continent].currFlagNum}/>
-                        <ShowFlag imgSrc={currContObj.flags[contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
+                        <ShowFlag imgSrc={contDB[continent].flags[contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
                         <AnswerField text={answText}/>
-                        <ChooseRows charArr={currContObj.flags[contData[continent].currFlagNum-1].randomChars}
+                        <ChooseRows charArr={contDB[continent].flags[contData[continent].currFlagNum-1].randChars}
                                     handleChooseBtnClick={handleChooseBtnClick}/>
 
                         <Snackbar
@@ -206,12 +206,12 @@ function MainBoard(props) {
             }
         }
 
-    }
+    }*/
 
     return (
         <Grid container>
             <StyledGridItem item xs={12} >
-                {renderMainBoard()}
+                {props.children}
             </StyledGridItem>
         </Grid>
     );
