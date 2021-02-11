@@ -1,17 +1,16 @@
-import MainBoard from "./MainBoard";
 import GameMenu from "./GameMenu";
-
+import GameMain from "./GameMain";
 
 function Game(props) {
 
     function renderGame() {
-        if (props.path === 'dlilekmlak') {
+        if (props.path === '/dlilekmlak') {
             return (
                 <GameMenu />
             );
         } else {
             return (
-                <GameMenu />
+                <GameMain />
             );
         }
     }

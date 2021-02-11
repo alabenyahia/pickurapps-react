@@ -1,6 +1,7 @@
 import MainBoard from "./MainBoard";
 import styled from "styled-components";
 import {Icon} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const StyledBtn = styled.button`
     border: none;
@@ -21,12 +22,16 @@ const StyledBtn = styled.button`
 
 
 function GameMenu(props) {
+    const history = useHistory()
 
+    const handleClick = path => {
+        history.push('/dlilekmlak/'+path);
+    }
     return (
         <MainBoard>
             <div style={{direction: 'rtl', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}>
-                <StyledBtn play={true}> أبدأ العب<Icon style={{marginRight: '8px'}}>play_circle</Icon></StyledBtn>
-                <StyledBtn play={false}> قائمة الرابحين<Icon style={{marginRight: '8px'}}>list_alt</Icon></StyledBtn>
+                <StyledBtn onClick={()=>handleClick('game')} play={true}> أبدأ العب<Icon style={{marginRight: '8px'}}>play_circle</Icon></StyledBtn>
+                <StyledBtn onClick={()=>handleClick('wins')}  play={false}> قائمة الرابحين<Icon style={{marginRight: '8px'}}>list_alt</Icon></StyledBtn>
             </div>
         </MainBoard>
     );

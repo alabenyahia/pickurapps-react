@@ -46,6 +46,10 @@ function Routing() {
             <Route path='/dlilekmlak' exact>
                 <DMGame path='/dlilekmlak'/>
             </Route>
+
+            <Route path='/dlilekmlak/game' exact>
+                <DMGame path='/dlilekmlak/game'/>
+            </Route>
         </Switch>
     );
 }
