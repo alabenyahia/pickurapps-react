@@ -6,7 +6,8 @@ import CreateBaccalcBtns from "../baccalc/CreateBaccalcBtns";
 import StyledContainer from "./StyledContainer";
 import CreateBaccalcForm from "../baccalc/CreateBaccalcForm";
 import MainBoard from "../guessflags/MainBoard";
-import Game from "../guessflags/Game";
+import GFGame from "../guessflags/Game";
+import DMGame from "../dlilekmlak/Game"
 
 function Routing() {
     return (
@@ -35,11 +36,15 @@ function Routing() {
             </Route>
 
             <Route path='/guessflags' exact>
-                <Game path='/guessflags'/>
+                <GFGame path='/guessflags'/>
             </Route>
 
             <Route path='/guessflags/:continent' exact>
-                <Game path='/guessflags/continent'/>
+                <GFGame path='/guessflags/continent'/>
+            </Route>
+
+            <Route path='/dlilekmlak' exact>
+                <DMGame path='/dlilekmlak'/>
             </Route>
         </Switch>
     );
