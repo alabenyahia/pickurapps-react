@@ -8,9 +8,14 @@ import {IconButton, Snackbar, SnackbarContent} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import ShowError from "./ShowError";
 import {useParams} from "react-router-dom";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import useStateFromLS from "./useStateFromLS";
 import shuffle from "lodash/shuffle";
+import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
+import WinningSwal from "./WinningSwal";
+import { useHistory } from "react-router-dom";
+
 
 
 function GameMain(props) {
@@ -21,6 +26,52 @@ function GameMain(props) {
     let {continent} = useParams();
     const contDBCopy = useRef({...contDB});
     let shouldRandomize = useRef(true);
+    const history = useHistory();
+    const MySwal = useRef(withReactContent(Swal));
+
+    useEffect(() => {
+        if (answText.length > 0){
+            let corrAnsw = contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].corrAnsw;
+            if (corrAnsw && answText.length === corrAnsw.length) {
+                if (answText === corrAnsw.join("")) {
+                    setCoins(coins+answText.length);
+                    if (props.contData[continent].currFlagNum < 10) {
+                        MySwal.current.fire({
+                            html: <WinningSwal num={answText.length} type='next_flag'/>,
+                            padding: '1rem',
+                            confirmButtonColor: '#f6c358',
+                            confirmButtonText: 'NEXT FLAG',
+                            allowEscapeKey: false,
+                            allowOutsideClick: false,
+                            background: '#7D5A5A'
+                        }).then(() => {
+                            setAnswText("");
+                            let oldObj = {...props.contData};
+                            oldObj[continent].currFlagNum++;
+                            props.setContData(oldObj);
+                        });
+                    } else {
+                        unlockNextCont();
+                        MySwal.current.fire({
+                            html: <WinningSwal num={answText.length} type='next_cont'/>,
+                            padding: '1rem',
+                            confirmButtonColor: '#f6c358',
+                            confirmButtonText: 'BACK TO CONTINENTS',
+                            allowEscapeKey: false,
+                            allowOutsideClick: false,
+                            background: '#7D5A5A'
+                        }).then(() => {
+                            if (history)
+                                history.push('/guessflags');
+                        });
+                    }
+                }
+            } else if (corrAnsw && answText.length > corrAnsw.length) {
+                setAnswText("");
+                setShowAnswIncoToast(true);
+            }
+        }
+    },[answText])
 
     function randomizeDB() {
         console.log('copy',contDBCopy)
@@ -31,34 +82,50 @@ function GameMain(props) {
         }
     }
 
+    function unlockNextCont() {
+        let oldData = {...props.contData};
+        switch (continent) {
+            case 'sa':
+                oldData.na.isLocked = false;
+                props.setContData(oldData);
+                break;
+            case 'na':
+                oldData.eur.isLocked = false;
+                props.setContData(oldData);
+                break;
+            case 'eur':
+                oldData.asi.isLocked = false;
+                props.setContData(oldData);
+                break;
+            case 'asi':
+                oldData.afr.isLocked = false;
+                props.setContData(oldData);
+                break;
+            default :
+                oldData.sa.isLocked = false;
+                props.setContData(oldData);
+        }
+    }
+
     const handleOnNextFlagClick = () => {
         if (continent && props.contData[continent].currFlagNum < 10) {
             let oldObj = {...props.contData}
             oldObj[continent].currFlagNum++;
             props.setContData(oldObj);
         } else {
-            let oldData = {...props.contData};
-            switch (continent) {
-                case 'sa':
-                    oldData.na.isLocked = false;
-                    props.setContData(oldData);
-                    break;
-                case 'na':
-                    oldData.eur.isLocked = false;
-                    props.setContData(oldData);
-                    break;
-                case 'eur':
-                    oldData.asi.isLocked = false;
-                    props.setContData(oldData);
-                    break;
-                case 'asi':
-                    oldData.afr.isLocked = false;
-                    props.setContData(oldData);
-                    break;
-                default :
-                    oldData.sa.isLocked = false;
-                    props.setContData(oldData);
-            }
+            unlockNextCont();
+            MySwal.current.fire({
+                html: <WinningSwal num={answText.length} type='next_cont'/>,
+                padding: '1rem',
+                confirmButtonColor: '#f6c358',
+                confirmButtonText: 'BACK TO CONTINENTS',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                background: '#7D5A5A'
+            }).then(() => {
+                if (history)
+                    history.push('/guessflags');
+            });
         }
     };
 
