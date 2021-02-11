@@ -32,11 +32,15 @@ const StyledResetBtn = styled.div`
 `;
 
 function AnswerField(props) {
+    const handleResetBtnClick = () => {
+        props.setAnswText("");
+        props.setResetVisibility(true);
+    }
 
     return (
         <StyledAnswerContainer>
             <StyledAnswerInput>{props.text}</StyledAnswerInput>
-            <StyledResetBtn>RESET</StyledResetBtn>
+            <StyledResetBtn onClick={()=> handleResetBtnClick()}>RESET</StyledResetBtn>
         </StyledAnswerContainer>
     );
 }

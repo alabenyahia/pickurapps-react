@@ -21,7 +21,7 @@ import { useHistory } from "react-router-dom";
 function GameMain(props) {
     const [showAnswIncoToast, setShowAnswIncoToast] = useState(false);
     const [answText, setAnswText] = useState("");
-
+    const [resetVisibility, setResetVisibility] = useState(false);
     const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
     let {continent} = useParams();
     const contDBCopy = useRef({...contDB});
@@ -29,11 +29,13 @@ function GameMain(props) {
     const history = useHistory();
     const MySwal = useRef(withReactContent(Swal));
 
+
     useEffect(() => {
         if (answText.length > 0){
             let corrAnsw = contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].corrAnsw;
             if (corrAnsw && answText.length === corrAnsw.length) {
                 if (answText === corrAnsw.join("")) {
+                    setResetVisibility(true);
                     setCoins(coins+answText.length);
                     if (props.contData[continent].currFlagNum < 10) {
                         MySwal.current.fire({
@@ -68,6 +70,7 @@ function GameMain(props) {
                 }
             } else if (corrAnsw && answText.length > corrAnsw.length) {
                 setAnswText("");
+                setResetVisibility(true);
                 setShowAnswIncoToast(true);
             }
         }
@@ -108,6 +111,8 @@ function GameMain(props) {
     }
 
     const handleOnNextFlagClick = () => {
+        setAnswText("");
+        setResetVisibility(true);
         if (continent && props.contData[continent].currFlagNum < 10) {
             let oldObj = {...props.contData}
             oldObj[continent].currFlagNum++;
@@ -147,9 +152,10 @@ function GameMain(props) {
                 <>
                     <TopHeader coins={coins} currFlagNum={props.contData[continent].currFlagNum}/>
                     <ShowFlag imgSrc={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
-                    <AnswerField text={answText}/>
+                    <AnswerField setAnswText={setAnswText} text={answText} setResetVisibility={setResetVisibility}/>
                     <ChooseRows charArr={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].randChars}
-                                handleChooseBtnClick={handleChooseBtnClick}/>
+                                handleChooseBtnClick={handleChooseBtnClick} resetVisibility={resetVisibility}
+                                setResetVisibility={setResetVisibility}/>
 
                     <Snackbar
                         open={showAnswIncoToast}

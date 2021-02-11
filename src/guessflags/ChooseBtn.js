@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from "react";
 
 const StyledBtn = styled.div`
     flex: 1;
@@ -11,11 +12,30 @@ const StyledBtn = styled.div`
     cursor: pointer;
 `;
 
-function ChooseBtn(props) {
+class ChooseBtn extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={isVisible:true};
+    }
 
-    return (
-        <StyledBtn onClick={() => props.handleChooseBtnClick(props.char)}>{props.char}</StyledBtn>
-    );
+
+    static getDerivedStateFromProps(props){
+        if(props.resetVisibility) {
+            props.setResetVisibility(false);
+            return {isVisible: true};
+        }
+    }
+
+     handleClick() {
+        this.props.handleChooseBtnClick(this.props.char);
+        this.setState({isVisible: false});
+    }
+
+    render(){
+        return (
+            <StyledBtn style={{visibility: this.state.isVisible? 'visible' : 'hidden'}} onClick={() => this.handleClick()}>{this.props.char}</StyledBtn>
+        );
+    }
 }
 
 export default ChooseBtn;
