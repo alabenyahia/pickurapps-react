@@ -602,23 +602,28 @@ class Africa extends Continent {
 const continentsDefaultData = {
     sa: {
         isLocked: false,
-        currFlagNum: 1
+        currFlagNum: 1,
+        isCompleted: false,
     },
     na: {
         isLocked: true,
-        currFlagNum: 1
+        currFlagNum: 1,
+        isCompleted: false,
     },
     eur: {
         isLocked: true,
-        currFlagNum: 1
+        currFlagNum: 1,
+        isCompleted: false,
     },
     asi: {
         isLocked: true,
-        currFlagNum: 1
+        currFlagNum: 1,
+        isCompleted: false,
     },
     afr: {
         isLocked: true,
-        currFlagNum: 1
+        currFlagNum: 1,
+        isCompleted: false,
     }
 };
 

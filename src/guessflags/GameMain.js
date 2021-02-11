@@ -15,6 +15,7 @@ import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
 import WinningSwal from "./WinningSwal";
 import { useHistory } from "react-router-dom";
+import ContCompletedMsg from "./ContCompletedMsg";
 
 
 
@@ -53,19 +54,7 @@ function GameMain(props) {
                             props.setContData(oldObj);
                         });
                     } else {
-                        unlockNextCont();
-                        MySwal.current.fire({
-                            html: <WinningSwal num={answText.length} type='next_cont'/>,
-                            padding: '1rem',
-                            confirmButtonColor: '#f6c358',
-                            confirmButtonText: 'BACK TO CONTINENTS',
-                            allowEscapeKey: false,
-                            allowOutsideClick: false,
-                            background: '#7D5A5A'
-                        }).then(() => {
-                            if (history)
-                                history.push('/guessflags');
-                        });
+                        contCompleted();
                     }
                 }
             } else if (corrAnsw && answText.length > corrAnsw.length) {
@@ -74,7 +63,26 @@ function GameMain(props) {
                 setShowAnswIncoToast(true);
             }
         }
-    },[answText])
+    },[answText]);
+
+    function contCompleted() {
+        unlockNextCont();
+        let oldObj = {...props.contData};
+        oldObj[continent].isCompleted = true;
+        props.setContData(oldObj);
+        MySwal.current.fire({
+            html: <WinningSwal num={answText.length} type='next_cont'/>,
+            padding: '1rem',
+            confirmButtonColor: '#f6c358',
+            confirmButtonText: 'BACK TO CONTINENTS',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            background: '#7D5A5A'
+        }).then(() => {
+            if (history)
+                history.push('/guessflags');
+        });
+    }
 
     function randomizeDB() {
         console.log('copy',contDBCopy)
@@ -118,19 +126,7 @@ function GameMain(props) {
             oldObj[continent].currFlagNum++;
             props.setContData(oldObj);
         } else {
-            unlockNextCont();
-            MySwal.current.fire({
-                html: <WinningSwal num={answText.length} type='next_cont'/>,
-                padding: '1rem',
-                confirmButtonColor: '#f6c358',
-                confirmButtonText: 'BACK TO CONTINENTS',
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                background: '#7D5A5A'
-            }).then(() => {
-                if (history)
-                    history.push('/guessflags');
-            });
+            contCompleted();
         }
     };
 
@@ -148,32 +144,39 @@ function GameMain(props) {
                 randomizeDB();
                 shouldRandomize.current = false;
             }
-            return (
-                <>
-                    <TopHeader coins={coins} currFlagNum={props.contData[continent].currFlagNum}/>
-                    <ShowFlag imgSrc={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
-                    <AnswerField setAnswText={setAnswText} text={answText} setResetVisibility={setResetVisibility}/>
-                    <ChooseRows charArr={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].randChars}
-                                handleChooseBtnClick={handleChooseBtnClick} resetVisibility={resetVisibility}
-                                setResetVisibility={setResetVisibility}/>
+            if (props.contData[continent].isCompleted) {
+                return (
+                    <ContCompletedMsg contData={props.contData} setContData={props.setContData}/>
+                );
+            } else {
+                return (
+                    <>
+                        <TopHeader coins={coins} currFlagNum={props.contData[continent].currFlagNum}/>
+                        <ShowFlag imgSrc={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].imgSrc} handleOnNextFlagClick={handleOnNextFlagClick}/>
+                        <AnswerField setAnswText={setAnswText} text={answText} setResetVisibility={setResetVisibility}/>
+                        <ChooseRows charArr={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum-1].randChars}
+                                    handleChooseBtnClick={handleChooseBtnClick} resetVisibility={resetVisibility}
+                                    setResetVisibility={setResetVisibility}/>
 
-                    <Snackbar
-                        open={showAnswIncoToast}
-                        autoHideDuration={3000}
-                        onClose={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false)}
-                    >
-                        <SnackbarContent
-                            message="INCORRECT ANSWER, TRY AGAIN!"
-                            style={{backgroundColor: '#ff4444'}}
-                            action={
-                                <IconButton size="small" aria-label="close" color="inherit"
-                                            onClick={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false) }>
-                                    <CloseIcon fontSize="small" />
-                                </IconButton>
-                            }/>
-                    </Snackbar>
-                </>
-            );
+                        <Snackbar
+                            open={showAnswIncoToast}
+                            autoHideDuration={3000}
+                            onClose={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false)}
+                        >
+                            <SnackbarContent
+                                message="INCORRECT ANSWER, TRY AGAIN!"
+                                style={{backgroundColor: '#ff4444'}}
+                                action={
+                                    <IconButton size="small" aria-label="close" color="inherit"
+                                                onClick={(e, r) => r === 'clickaway' ? false : setShowAnswIncoToast(false) }>
+                                        <CloseIcon fontSize="small" />
+                                    </IconButton>
+                                }/>
+                        </Snackbar>
+                    </>
+                );
+            }
+
         } else {
             return (
                 <ShowError />
