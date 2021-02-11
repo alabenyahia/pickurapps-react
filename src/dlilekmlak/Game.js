@@ -1,12 +1,23 @@
 import MainBoard from "./MainBoard";
+import GameMenu from "./GameMenu";
 
 
 function Game(props) {
 
-    return (
-        <MainBoard>
+    function renderGame() {
+        if (props.path === 'dlilekmlak') {
+            return (
+                <GameMenu />
+            );
+        } else {
+            return (
+                <GameMenu />
+            );
+        }
+    }
 
-        </MainBoard>
+    return (
+        renderGame()
     );
 }
 
