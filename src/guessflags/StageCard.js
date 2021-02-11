@@ -29,6 +29,15 @@ const StyledCardText = styled.div`
   padding: 12px 4px;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 320px) {
+    font-size: 0.65rem;
+  }
+  
 `;
 
 
