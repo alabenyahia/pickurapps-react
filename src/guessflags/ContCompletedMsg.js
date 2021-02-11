@@ -19,6 +19,12 @@ const StyledBtn = styled.button`
   margin-right: ${props => props.reset ? '1rem' : '0'};
   border-radius: 6px;
   cursor: pointer;
+  transition: transform 150ms ease-in;
+
+  &:hover {
+    background-color: ${props => props.reset ? '#6E4D4D' : '#e5e4e4'};
+    transform: scale(1.07);
+  }
 `;
 
 function TopHeader(props) {

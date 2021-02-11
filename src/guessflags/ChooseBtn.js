@@ -10,6 +10,12 @@ const StyledBtn = styled.div`
     text-align: center;
     border-radius: 4px;
     cursor: pointer;
+    transition: transform 150ms ease-in;
+
+    &:hover {
+      transform: scale(1.07);
+      background-color: #6E4D4D;
+    }
 `;
 
 class ChooseBtn extends React.Component{

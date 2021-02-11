@@ -10,6 +10,11 @@ const StyledCard = styled.div`
   width: 100%;
   color: white;
   text-align: center;
+  transition: transform 150ms ease-in;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const StyledCardImgContainer = styled.div`
