@@ -1,7 +1,9 @@
+import React from "react"
 import MainBoard from "./MainBoard";
-import {boxes} from "./gameData";
+import {GameData} from "./gameData";
 import Panel from "./Panel";
 import styled from "styled-components";
+import shuffle from "lodash/shuffle";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -15,22 +17,27 @@ const StyledPanelsDiv = styled.div`
 
 
 
-function GameMain(props) {
+class GameMain extends React.Component{
+    constructor(props) {
+        super(props);
+        this.gameData = new GameData();
+    }
 
+    render() {
+        return (
+            <MainBoard>
+                <StyledDiv>
+                    <StyledPanelsDiv>
+                        <Panel panelItems={this.gameData.boxes.slice(0, 12)} left={false}/>
+                    </StyledPanelsDiv>
 
-    return (
-        <MainBoard>
-            <StyledDiv>
-                <StyledPanelsDiv>
-                    <Panel panelItems={boxes.slice(0, 12)} left={false}/>
-                </StyledPanelsDiv>
-
-                <StyledPanelsDiv>
-                    <Panel panelItems={boxes.slice(12, 24)} left={true}/>
-                </StyledPanelsDiv>
-            </StyledDiv>
-        </MainBoard>
-    );
+                    <StyledPanelsDiv>
+                        <Panel panelItems={this.gameData.boxes.slice(12, 24)} left={true}/>
+                    </StyledPanelsDiv>
+                </StyledDiv>
+            </MainBoard>
+        );
+    }
 }
 
 export default GameMain;
