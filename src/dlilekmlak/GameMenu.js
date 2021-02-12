@@ -22,7 +22,7 @@ const StyledBtn = styled.button`
 
 
 function GameMenu(props) {
-    const history = useHistory()
+    const history = useHistory();
 
     const handleClick = path => {
         history.push('/dlilekmlak/'+path);
