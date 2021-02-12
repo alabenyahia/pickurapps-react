@@ -20,7 +20,9 @@ const StyledPanelsDiv = styled.div`
 class GameMain extends React.Component{
     constructor(props) {
         super(props);
-        this.gameData = new GameData();
+        
+        const gameData = new GameData();
+        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes};
     }
 
     render() {
@@ -28,11 +30,11 @@ class GameMain extends React.Component{
             <MainBoard>
                 <StyledDiv>
                     <StyledPanelsDiv>
-                        <Panel panelItems={this.gameData.boxes.slice(0, 12)} left={false}/>
+                        <Panel panelItems={this.state.boxes.slice(0, 12)} left={false}/>
                     </StyledPanelsDiv>
 
                     <StyledPanelsDiv>
-                        <Panel panelItems={this.gameData.boxes.slice(12, 24)} left={true}/>
+                        <Panel panelItems={this.state.boxes.slice(12, 24)} left={true}/>
                     </StyledPanelsDiv>
                 </StyledDiv>
             </MainBoard>
