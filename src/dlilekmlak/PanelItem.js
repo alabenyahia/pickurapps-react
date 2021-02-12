@@ -8,12 +8,14 @@ const StyledDiv = styled.div`
     outline: 1px solid white;
     text-align: ${props => props.left ? 'left' : 'right'};
     font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
 `;
 
 function PanelItem(props) {
 
     return (
-        <StyledDiv></StyledDiv>
+        <StyledDiv left={props.left}>{props.children}</StyledDiv>
     );
 }
 
