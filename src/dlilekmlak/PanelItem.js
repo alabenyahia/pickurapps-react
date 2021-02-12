@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const StyledDiv = styled.div`
     padding: 0.5rem 1rem;
-    background: brown;
+    background: ${props=> props.bgColor};
+    background: ${props=> props.bgGradient};
     color: #ffffff;
     direction: rtl;
     outline: 1px solid white;
@@ -15,7 +16,7 @@ const StyledDiv = styled.div`
 function PanelItem(props) {
 
     return (
-        <StyledDiv left={props.left}>{props.children}</StyledDiv>
+        <StyledDiv bgColor={props.bgColor} bgGradient={props.bgGradient} left={props.left}>{props.children}</StyledDiv>
     );
 }
 
