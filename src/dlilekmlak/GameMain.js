@@ -61,7 +61,7 @@ class GameMain extends React.Component{
                         {this.state.chooseBox && <StyledH3>أختار صندوق</StyledH3>}
                     </StyledCenterDiv>
 
-                    <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
+                    <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible', direction: 'rtl'}}>
                         <Panel panelItems={this.state.boxes.slice(12, 24)} left={true} />
                     </StyledPanelsDiv>
                 </StyledDiv>
