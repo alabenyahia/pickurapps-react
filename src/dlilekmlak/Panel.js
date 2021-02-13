@@ -3,7 +3,7 @@ import PanelItem from "./PanelItem";
 function Panel(props) {
     function renderPanel() {
 
-        return props.panelItems.map((item) => {
+        return props.panelItems.map((item, index) => {
             let bgColor = '';
             let bgGradient = '';
             switch (item.id) {
@@ -50,9 +50,8 @@ function Panel(props) {
                     bgColor =  '#39bdff';
                     bgGradient = 'linear-gradient(90deg, #39bdff 0%, #1777ff 100%)';
             }
-            return (<PanelItem key={item.id} left={props.left} bgColor={bgColor} bgGradient={bgGradient}>
-                {(item.id === 'lwc-02' || item.id === 'lwc-06' || item.id === 'lwc-10' || item.id === 'lwc-12') ? item.value : ` ${item.value} د `}
-            </PanelItem>)
+            return (<PanelItem key={item.id} left={props.left} bgColor={bgColor} bgGradient={bgGradient}
+                               value={item.value} id={item.id}/>)
         });
     }
 

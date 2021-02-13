@@ -27,8 +27,16 @@ const StyledSpan = styled.span`
 
 function Box(props) {
 
+    const handleClick = () => {
+        if (props.yourBox) return
+        let oldBoxes = [...props.boxes];
+        oldBoxes[props.text-1].value = '';
+        props.setState(oldBoxes);
+    }
+
     return (
-        <StyledDiv yourBox={props.yourBox}>
+        <StyledDiv style={{visibility: (props.yourBox!==true && props.boxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
+                   yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}>
             <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
             <StyledSpan>{props.text}</StyledSpan>
         </StyledDiv>

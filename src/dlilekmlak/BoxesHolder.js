@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Box from "./Box";
+import Panel from "./Panel";
+import React from "react";
 
 const StyledDiv = styled.div`
   padding: ${props => props.yourBox ? '0' : '10px 8px'};
@@ -21,7 +23,10 @@ const StyledColumn = styled.div`
 function BoxesHolder(props) {
     function renderBoxes() {
         if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text}/></StyledColumn>
-        else return props.boxes.map((item, index)=> <StyledColumn><Box key={item.id} text={index+1}/></StyledColumn>)
+        else return props.boxes.map((item, index)=>
+            (<StyledColumn>
+                <Box key={item.id} text={index+1} boxes={props.boxes} setState={props.setState}/>
+            </StyledColumn>));
     }
 
     return (

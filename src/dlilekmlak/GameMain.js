@@ -41,7 +41,8 @@ class GameMain extends React.Component{
         super(props);
 
         const gameData = new GameData();
-        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes, chooseBox: true};
+        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes, chooseBox: false};
+        this.setState = this.setState.bind(this);
     }
 
     render() {
@@ -49,11 +50,11 @@ class GameMain extends React.Component{
             <MainBoard>
                 <StyledDiv>
                     <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
-                        <Panel panelItems={this.state.boxes.slice(0, 12)} left={false}/>
+                        <Panel panelItems={this.state.boxes.slice(0, 12)} left={false} />
                     </StyledPanelsDiv>
 
                     <StyledCenterDiv>
-                        <BoxesHolder boxes={this.state.shuffledBoxes}/>
+                        <BoxesHolder boxes={this.state.shuffledBoxes} setState={this.setState}/>
 
                         <BoxesHolder yourBox={true}/>
 
@@ -61,7 +62,7 @@ class GameMain extends React.Component{
                     </StyledCenterDiv>
 
                     <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
-                        <Panel panelItems={this.state.boxes.slice(12, 24)} left={true}/>
+                        <Panel panelItems={this.state.boxes.slice(12, 24)} left={true} />
                     </StyledPanelsDiv>
                 </StyledDiv>
             </MainBoard>
