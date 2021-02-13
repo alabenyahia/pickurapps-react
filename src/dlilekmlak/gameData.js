@@ -2,13 +2,14 @@ import shuffle from "lodash/shuffle"
 
 class GameData {
     constructor() {
-        this.things = shuffle(things);
-        this.boxes = boxes;
+        this.things = shuffle([...things]);
+        this.boxes = [...boxes];
         this.boxes[1].value = this.things[0];
         this.boxes[5].value = this.things[1];
         this.boxes[9].value = this.things[2];
         this.boxes[11].value = this.things[3];
-        this.shuffledBoxes = shuffle(boxes);
+        this.shuffledBoxes = shuffle(this.boxes);
+        console.log("ruuuun");
     }
 }
 

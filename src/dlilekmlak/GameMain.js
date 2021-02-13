@@ -40,10 +40,13 @@ class GameMain extends React.Component{
     constructor(props) {
         super(props);
 
-        const gameData = new GameData();
-        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes, chooseBox: false};
+        this.gameData = new GameData();
+        console.log("GD",this.gameData.shuffledBoxes);
+        this.state = {boxes: [...this.gameData.boxes], shuffledBoxes: [...this.gameData.shuffledBoxes], yourBox: {}, chooseBox: true};
         this.setState = this.setState.bind(this);
+        console.log(this.state.shuffledBoxes)
     }
+
 
     render() {
         return (
@@ -54,9 +57,9 @@ class GameMain extends React.Component{
                     </StyledPanelsDiv>
 
                     <StyledCenterDiv>
-                        <BoxesHolder boxes={this.state.shuffledBoxes} setState={this.setState}/>
+                        <BoxesHolder mainState={this.state} setState={this.setState}/>
 
-                        <BoxesHolder yourBox={true}/>
+                        <BoxesHolder yourBoxVal={this.state.yourBox} yourBox={true}/>
 
                         {this.state.chooseBox && <StyledH3>أختار صندوق</StyledH3>}
                     </StyledCenterDiv>

@@ -29,16 +29,23 @@ function Box(props) {
 
     const handleClick = () => {
         if (props.yourBox) return
-        let oldBoxes = [...props.boxes];
-        oldBoxes[props.text-1].value = '';
-        props.setState(oldBoxes);
+        if (props.mainState.chooseBox) {
+            let newState = {...props.mainState};
+            newState.chooseBox = false;
+            newState.yourBox = {index: props.text-1}
+            props.setState(newState);
+        } else {
+            let oldBoxes = [...props.mainState.shuffledBoxes];
+            oldBoxes[props.text-1].value = '';
+            props.setState(oldBoxes);
+        }
     }
 
     return (
-        <StyledDiv style={{visibility: (props.yourBox!==true && props.boxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
+        <StyledDiv style={{visibility: (props.yourBox!==true && props.mainState.shuffledBoxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
                    yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}>
             <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
-            <StyledSpan>{props.text}</StyledSpan>
+            <StyledSpan>{props.yourBox && props.yourBoxVal.hasOwnProperty('index') ? props.yourBoxVal.index+1 : props.text}</StyledSpan>
         </StyledDiv>
     );
 }

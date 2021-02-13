@@ -11,8 +11,8 @@ const StyledDiv = styled.div`
     font-family: inherit;
     width: ${props=> props.value === '' ? '40%' : '100%'};
     box-sizing: border-box;
-    height: 38px;
-    max-height: 38px;
+    height: 36px;
+    max-height: 36px;
 `;
 
 function PanelItem(props) {
@@ -20,7 +20,7 @@ function PanelItem(props) {
 
     return (
         <StyledDiv bgColor={props.bgColor} bgGradient={props.bgGradient} left={props.left} value={props.value} >
-            <span>{(props.value === '' || props.id === 'lwc-02' || props.id === 'lwc-06' || props.id === 'lwc-10' || props.id === 'lwc-12') ? props.value : ` ${props.value} د `}</span>
+            {(props.value === '' || props.id === 'lwc-02' || props.id === 'lwc-06' || props.id === 'lwc-10' || props.id === 'lwc-12') ? props.value : ` ${props.value} د `}
         </StyledDiv>
     );
 }

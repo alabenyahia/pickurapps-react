@@ -22,10 +22,14 @@ const StyledColumn = styled.div`
 
 function BoxesHolder(props) {
     function renderBoxes() {
-        if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text}/></StyledColumn>
-        else return props.boxes.map((item, index)=>
+        if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text} yourBoxVal={props.yourBoxVal}/></StyledColumn>
+        else return props.mainState.shuffledBoxes.map((item, index)=>
             (<StyledColumn>
-                <Box key={item.id} text={index+1} boxes={props.boxes} setState={props.setState}/>
+                {
+                    index !== props.mainState.yourBox.index &&
+                    <Box key={item.id} text={index+1} mainState={props.mainState} setState={props.setState}/>
+                }
+
             </StyledColumn>));
     }
 
