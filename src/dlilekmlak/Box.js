@@ -37,7 +37,9 @@ function Box(props) {
         } else {
             let oldBoxes = [...props.mainState.shuffledBoxes];
             oldBoxes[props.text-1].value = '';
-            props.setState(oldBoxes);
+            let oldBoxes2 = [...props.mainState.boxes];
+            oldBoxes2[oldBoxes[props.text-1].index].value = ''
+            props.setState({boxes:oldBoxes2, shuffledBoxes: oldBoxes});
         }
     }
 
@@ -45,7 +47,7 @@ function Box(props) {
         <StyledDiv style={{visibility: (props.yourBox!==true && props.mainState.shuffledBoxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
                    yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}>
             <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
-            <StyledSpan>{props.yourBox && props.yourBoxVal.hasOwnProperty('index') ? props.yourBoxVal.index+1 : props.text}</StyledSpan>
+            <StyledSpan>{props.yourBox && props.yourBoxVal.hasOwnProperty('index')? props.yourBoxVal.index+1 : props.text}</StyledSpan>
         </StyledDiv>
     );
 }

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Box from "./Box";
-import Panel from "./Panel";
 import React from "react";
 
 const StyledDiv = styled.div`
@@ -24,10 +23,10 @@ function BoxesHolder(props) {
     function renderBoxes() {
         if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text} yourBoxVal={props.yourBoxVal}/></StyledColumn>
         else return props.mainState.shuffledBoxes.map((item, index)=>
-            (<StyledColumn>
+            (<StyledColumn key={item.id}>
                 {
                     index !== props.mainState.yourBox.index &&
-                    <Box key={item.id} text={index+1} mainState={props.mainState} setState={props.setState}/>
+                    <Box text={index+1} mainState={props.mainState} setState={props.setState}/>
                 }
 
             </StyledColumn>));

@@ -4,7 +4,7 @@ import {GameData} from "./gameData";
 import Panel from "./Panel";
 import styled from "styled-components";
 import BoxesHolder from "./BoxesHolder";
-import Box from "./Box";
+import cloneDeep from "lodash/cloneDeep"
 
 const StyledDiv = styled.div`
   display: flex;
@@ -22,11 +22,6 @@ const StyledCenterDiv = styled.div`
 `;
 
 
-const StyledMyBoxHolder = styled.div`
-  flex-basis: 16.6666666667%;
-  margin: 8px 24px;
-`;
-
 const StyledH3 = styled.h3`
   padding: 4px; 
   background-color: #f20f0f;
@@ -39,14 +34,11 @@ const StyledH3 = styled.h3`
 class GameMain extends React.Component{
     constructor(props) {
         super(props);
-
-        this.gameData = new GameData();
-        console.log("GD",this.gameData.shuffledBoxes);
-        this.state = {boxes: [...this.gameData.boxes], shuffledBoxes: [...this.gameData.shuffledBoxes], yourBox: {}, chooseBox: true};
         this.setState = this.setState.bind(this);
-        console.log(this.state.shuffledBoxes)
-    }
 
+        let gameData = new GameData();
+        this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes), yourBox: {}, chooseBox: true};
+    }
 
     render() {
         return (

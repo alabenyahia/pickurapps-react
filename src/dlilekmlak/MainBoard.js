@@ -2,8 +2,6 @@ import {Grid} from "@material-ui/core";
 import styled from 'styled-components';
 import bgImg from './imgs/bg.jpg';
 
-
-
 const StyledGridContainer = styled(Grid)`
     flex: 1;
     justify-content: center;
