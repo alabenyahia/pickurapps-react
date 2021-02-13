@@ -30,7 +30,7 @@ function Box(props) {
     return (
         <StyledDiv>
             <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
-            <StyledSpan>24</StyledSpan>
+            <StyledSpan>{props.text}</StyledSpan>
         </StyledDiv>
     );
 }

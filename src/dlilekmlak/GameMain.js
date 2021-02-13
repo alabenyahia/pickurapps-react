@@ -9,6 +9,7 @@ import BoxesHolder from "./BoxesHolder";
 const StyledDiv = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
 `;
 
 const StyledPanelsDiv = styled.div`
@@ -41,7 +42,7 @@ class GameMain extends React.Component{
                     </StyledPanelsDiv>
 
                     <StyledCenterDiv>
-                        <BoxesHolder boxes={this.state.boxes}/>
+                        <BoxesHolder boxes={this.state.shuffledBoxes}/>
                     </StyledCenterDiv>
 
                     <StyledPanelsDiv>

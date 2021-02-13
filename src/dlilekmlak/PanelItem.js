@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-    padding: 0.5rem 1rem;
+    padding: 0.35rem 1.3rem;
     background: ${props=> props.bgColor};
     background: ${props=> props.bgGradient};
     color: #ffffff;

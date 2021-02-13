@@ -19,7 +19,7 @@ const StyledColumn = styled.div`
 
 function BoxesHolder(props) {
     function renderBoxes() {
-        return props.boxes.map((item)=> <StyledColumn><Box key={item.id} /></StyledColumn>)
+        return props.boxes.map((item, index)=> <StyledColumn><Box key={item.id} text={index+1}/></StyledColumn>)
     }
 
     return (
