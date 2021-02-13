@@ -3,8 +3,8 @@ import MainBoard from "./MainBoard";
 import {GameData} from "./gameData";
 import Panel from "./Panel";
 import styled from "styled-components";
-import shuffle from "lodash/shuffle";
 import BoxesHolder from "./BoxesHolder";
+import Box from "./Box";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -22,7 +22,18 @@ const StyledCenterDiv = styled.div`
 `;
 
 
+const StyledMyBoxHolder = styled.div`
+  flex-basis: 16.6666666667%;
+  margin: 8px 24px;
+`;
 
+const StyledH3 = styled.h3`
+  padding: 4px; 
+  background-color: #f20f0f;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0 24px;
+`;
 
 
 class GameMain extends React.Component{
@@ -30,22 +41,26 @@ class GameMain extends React.Component{
         super(props);
 
         const gameData = new GameData();
-        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes};
+        this.state = {boxes: gameData.boxes, shuffledBoxes: gameData.shuffledBoxes, chooseBox: true};
     }
 
     render() {
         return (
             <MainBoard>
                 <StyledDiv>
-                    <StyledPanelsDiv>
+                    <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
                         <Panel panelItems={this.state.boxes.slice(0, 12)} left={false}/>
                     </StyledPanelsDiv>
 
                     <StyledCenterDiv>
                         <BoxesHolder boxes={this.state.shuffledBoxes}/>
+
+                        <BoxesHolder yourBox={true}/>
+
+                        {this.state.chooseBox && <StyledH3>أختار صندوق</StyledH3>}
                     </StyledCenterDiv>
 
-                    <StyledPanelsDiv>
+                    <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
                         <Panel panelItems={this.state.boxes.slice(12, 24)} left={true}/>
                     </StyledPanelsDiv>
                 </StyledDiv>

@@ -3,7 +3,7 @@ import BoxImg from "./imgs/box.svg";
 import YourBoxImg from "./imgs/your-box.svg"
 
 const StyledDiv = styled.div`
-  cursor: pointer;
+  cursor: ${props => props.yourBox ? 'default' : 'pointer'} ;
   width: 85%;
   box-sizing: border-box;
   margin: 5px 10px;
@@ -28,7 +28,7 @@ const StyledSpan = styled.span`
 function Box(props) {
 
     return (
-        <StyledDiv>
+        <StyledDiv yourBox={props.yourBox}>
             <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
             <StyledSpan>{props.text}</StyledSpan>
         </StyledDiv>

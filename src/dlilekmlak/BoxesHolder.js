@@ -2,13 +2,14 @@ import styled from "styled-components";
 import Box from "./Box";
 
 const StyledDiv = styled.div`
-  padding: 10px 8px;
+  padding: ${props => props.yourBox ? '0' : '10px 8px'};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: ${props=> props.yourBox ? 'transparent' : 'rgba(255, 255, 255, 0.4)'};
   border-radius: 8px;
   margin: 8px 24px;
+  justify-content: center;
 `;
 
 const StyledColumn = styled.div`
@@ -19,11 +20,12 @@ const StyledColumn = styled.div`
 
 function BoxesHolder(props) {
     function renderBoxes() {
-        return props.boxes.map((item, index)=> <StyledColumn><Box key={item.id} text={index+1}/></StyledColumn>)
+        if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text}/></StyledColumn>
+        else return props.boxes.map((item, index)=> <StyledColumn><Box key={item.id} text={index+1}/></StyledColumn>)
     }
 
     return (
-        <StyledDiv>
+        <StyledDiv yourBox={props.yourBox}>
             {renderBoxes()}
         </StyledDiv>
     );
