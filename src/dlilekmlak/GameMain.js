@@ -43,7 +43,7 @@ class GameMain extends React.Component{
         this.MySwal = withReactContent(Swal);
         this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
             yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
-            showSwal: false, bankTime: false};
+            showSwal: false};
     }
 
 
@@ -51,7 +51,7 @@ class GameMain extends React.Component{
 
         if (this.state.showSwal) {
             this.MySwal.fire(this.state.shuffledBoxes[this.state.yourBox.index]);
-            this.setState({showSwal: false, bankTime: false});
+            this.setState({showSwal: false});
         }
     }
 
