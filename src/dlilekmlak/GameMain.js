@@ -5,6 +5,7 @@ import Panel from "./Panel";
 import styled from "styled-components";
 import BoxesHolder from "./BoxesHolder";
 import cloneDeep from "lodash/cloneDeep"
+import BoxOpening from "./BoxOpening";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -37,7 +38,8 @@ class GameMain extends React.Component{
         this.setState = this.setState.bind(this);
 
         let gameData = new GameData();
-        this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes), yourBox: {}, chooseBox: true};
+        this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
+            yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1};
     }
 
     render() {
@@ -48,13 +50,21 @@ class GameMain extends React.Component{
                         <Panel panelItems={this.state.boxes.slice(0, 12)} left={false} />
                     </StyledPanelsDiv>
 
-                    <StyledCenterDiv>
-                        <BoxesHolder mainState={this.state} setState={this.setState}/>
+                    {
+                        this.state.boxOpening ? (
+                            <StyledCenterDiv style={{display: 'flex', justifyContent: 'center'}}>
+                                <BoxOpening mainState={this.state} setState={this.setState}/>
+                            </StyledCenterDiv>
+                        ) : (
+                            <StyledCenterDiv>
+                                <BoxesHolder mainState={this.state} setState={this.setState}/>
 
-                        <BoxesHolder yourBoxVal={this.state.yourBox} yourBox={true}/>
+                                <BoxesHolder yourBoxVal={this.state.yourBox} yourBox={true}/>
 
-                        {this.state.chooseBox && <StyledH3>أختار صندوق</StyledH3>}
-                    </StyledCenterDiv>
+                                {this.state.chooseBox && <StyledH3>أختار صندوق</StyledH3>}
+                            </StyledCenterDiv>
+                        )
+                    }
 
                     <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible', direction: 'rtl'}}>
                         <Panel panelItems={this.state.boxes.slice(12, 24)} left={true} />

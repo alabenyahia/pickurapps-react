@@ -35,11 +35,7 @@ function Box(props) {
             newState.yourBox = {index: props.text-1}
             props.setState(newState);
         } else {
-            let oldBoxes = [...props.mainState.shuffledBoxes];
-            oldBoxes[props.text-1].value = '';
-            let oldBoxes2 = [...props.mainState.boxes];
-            oldBoxes2[oldBoxes[props.text-1].index].value = ''
-            props.setState({boxes:oldBoxes2, shuffledBoxes: oldBoxes});
+            props.setState({boxOpening: true, openedBoxIndex: props.text-1});
         }
     }
 
