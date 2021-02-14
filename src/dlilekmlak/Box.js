@@ -32,7 +32,7 @@ function Box(props) {
         if (props.mainState.chooseBox) {
             let newState = {...props.mainState};
             newState.chooseBox = false;
-            newState.yourBox = {index: props.text-1}
+            newState.yourBox = {index: props.text-1};
             props.setState(newState);
         } else {
             props.setState({boxOpening: true, openedBoxIndex: props.text-1});

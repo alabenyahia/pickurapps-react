@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useRef} from "react"
 import MainBoard from "./MainBoard";
 import {GameData} from "./gameData";
 import Panel from "./Panel";
@@ -6,6 +6,8 @@ import styled from "styled-components";
 import BoxesHolder from "./BoxesHolder";
 import cloneDeep from "lodash/cloneDeep"
 import BoxOpening from "./BoxOpening";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -38,8 +40,19 @@ class GameMain extends React.Component{
         this.setState = this.setState.bind(this);
 
         let gameData = new GameData();
+        this.MySwal = withReactContent(Swal);
         this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
-            yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1};
+            yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
+            showSwal: false, bankTime: false};
+    }
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+        if (this.state.showSwal) {
+            this.MySwal.fire(this.state.shuffledBoxes[this.state.yourBox.index]);
+            this.setState({showSwal: false, bankTime: false});
+        }
     }
 
     render() {

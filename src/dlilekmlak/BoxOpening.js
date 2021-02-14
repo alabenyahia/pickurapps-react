@@ -31,7 +31,9 @@ function BoxOpening(props) {
                     oldBoxes[props.mainState.openedBoxIndex].value = '';
                     let oldBoxes2 = [...props.mainState.boxes];
                     oldBoxes2[oldBoxes[props.mainState.openedBoxIndex].index].value = '';
-                    props.setState({boxes:oldBoxes2, shuffledBoxes: oldBoxes, boxOpening: false})
+                    const numOpenedBoxes = props.mainState.numOpenedBoxes;
+                    const swal = (numOpenedBoxes === 5 || numOpenedBoxes === 11 || numOpenedBoxes === 17 || numOpenedBoxes === 21)
+                    props.setState((prevState)=>{return {boxes:oldBoxes2, shuffledBoxes: oldBoxes, boxOpening: false, showSwal: swal, numOpenedBoxes: prevState.numOpenedBoxes+1}})
                 }, 600);
             }, 800);
         }
