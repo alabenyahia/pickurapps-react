@@ -30,10 +30,7 @@ function Box(props) {
     const handleClick = () => {
         if (props.yourBox) return
         if (props.mainState.chooseBox) {
-            let newState = {...props.mainState};
-            newState.chooseBox = false;
-            newState.yourBox = {index: props.text-1};
-            props.setState(newState);
+            props.setState({chooseBox: false, yourBox: {index:props.text-1}});
         } else {
             props.setState({boxOpening: true, openedBoxIndex: props.text-1});
         }

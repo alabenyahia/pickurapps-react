@@ -32,8 +32,10 @@ function BoxOpening(props) {
                     let oldBoxes2 = [...props.mainState.boxes];
                     oldBoxes2[oldBoxes[props.mainState.openedBoxIndex].index].value = '';
                     const numOpenedBoxes = props.mainState.numOpenedBoxes;
-                    const swal = (numOpenedBoxes === 5 || numOpenedBoxes === 11 || numOpenedBoxes === 17 || numOpenedBoxes === 21)
-                    props.setState((prevState)=>{return {boxes:oldBoxes2, shuffledBoxes: oldBoxes, boxOpening: false, showSwal: swal, numOpenedBoxes: prevState.numOpenedBoxes+1}})
+                    const proposalSwal = (numOpenedBoxes === 5 || numOpenedBoxes === 11 || numOpenedBoxes === 17 || numOpenedBoxes === 21)
+                    const winnings = numOpenedBoxes === 22 ? props.mainState.shuffledBoxes[props.mainState.yourBox.index] : null
+                    props.setState((prevState)=>{return {boxes:oldBoxes2, shuffledBoxes: oldBoxes, boxOpening: false,
+                        showProposalSwal: proposalSwal, numOpenedBoxes: prevState.numOpenedBoxes+1, winnings: winnings}})
                 }, 600);
             }, 800);
         }

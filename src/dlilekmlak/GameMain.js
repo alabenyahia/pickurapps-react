@@ -9,6 +9,8 @@ import BoxOpening from "./BoxOpening";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import random from "lodash/random"
+import ProposalSwal from "./ProposalSwal";
+import WinningSwal from "./WinningSwal";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -44,26 +46,59 @@ class GameMain extends React.Component{
         this.MySwal = withReactContent(Swal);
         this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
             yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
-            showSwal: false};
+            showProposalSwal: false, winnings: null, wasInYourBox: null};
     }
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.hasOwnProperty('winnings') && this.state.winnings !== null) {
+            let wasInUrBox = this.state.wasInYourBox === null ? false : this.convertBoxValue(this.state.wasInYourBox);
+            if (wasInUrBox !== false) wasInUrBox = wasInUrBox === 1 ? this.state.wasInYourBox.value : this.formatWinnings(wasInUrBox);
+            let winnings;
 
-        if (this.state.showSwal) {
+            if (this.state.wasInYourBox === null ) {
+                winnings = this.convertBoxValue(this.state.winnings);
+                if (winnings === 1 ) winnings = this.state.winnings;
+                else winnings = this.formatWinnings(winnings);
+            } else {
+                winnings = this.formatWinnings(this.state.winnings);
+            }
+
+
+            this.MySwal.fire({
+                html: <WinningSwal winnings={winnings} wasInUrBox={wasInUrBox}/>,
+                background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
+                confirmButtonText: 'أي',
+                confirmButtonColor: '#00C851',
+                showDenyButton: true,
+                denyButtonText: 'لا',
+                denyButtonColor: '#ff4444',
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                allowOutsideClick: false
+            }).then((result)=>{
+                if (result.isConfirmed) {
+                    this.resetState();
+                } else if (result.isDenied) {
+                    this.props.history.push('/dlilekmlak');
+                }
+            });
+        } else if (this.state.showProposalSwal) {
             let switchRand = random(0, 1);
             let minVal = {}
             let maxVal = {}
             for (let i=0; i<this.state.boxes.length; i++) {
                 if (this.state.boxes[i].value!=='') {
-                    minVal = this.state.boxes[i];
+                    minVal = {...this.state.boxes[i]};
+                    if (minVal.id === 'lwc-02' || minVal.id === 'lwc-06' || minVal.id === 'lwc-10' || minVal.id === 'lwc-12') minVal.value = 1;
                     break;
                 }
             }
 
             for (let i=this.state.boxes.length-1; i>=0; i--) {
                 if (this.state.boxes[i].value!=='') {
-                    maxVal = this.state.boxes[i];
+                    maxVal = {...this.state.boxes[i]};
+                    if (maxVal.id === 'lwc-02' || maxVal.id === 'lwc-06' || maxVal.id === 'lwc-10' || maxVal.id === 'lwc-12') maxVal.value = 1;
                     break;
                 }
             }
@@ -141,10 +176,37 @@ class GameMain extends React.Component{
             console.log("max", maxVal);
             console.log("proposal", proposal);
 
-            this.MySwal.fire(""+proposal);
-            this.setState({showSwal: false});
+            this.MySwal.fire({
+                html: <ProposalSwal isSwitch={switchRand===0} proposal={proposal}/>,
+                background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
+                confirmButtonText: 'أي نقبل',
+                confirmButtonColor: '#00C851',
+                showDenyButton: true,
+                denyButtonText: 'لا نرفض',
+                denyButtonColor: '#ff4444',
+                allowEscapeKey: false,
+                allowEnterKey: false,
+                allowOutsideClick: false
+            }).then((result)=>{
+                if (result.isConfirmed) {
+                    if (switchRand === 0) {
+                        this.setState({chooseBox: true});
+                    } else {
+                        this.setState({winnings: proposal, wasInYourBox: this.state.shuffledBoxes[this.state.yourBox.index]});
+                    }
+                }
+            });
+            this.setState({showProposalSwal: false});
         }
     }
+
+    resetState() {
+        let gameData = new GameData();
+        this.setState({boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
+            yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
+            showProposalSwal: false, winnings: null, wasInYourBox: null});
+    }
+
 
     convertBoxValue(val) {
         if (val.id === 'lwc-02' || val.id === 'lwc-06' || val.id === 'lwc-10' || val.id === 'lwc-12') return 1;
@@ -153,6 +215,18 @@ class GameMain extends React.Component{
         if (val.id === 'rwc-01' || val.id === 'rwc-02' || val.id === 'rwc-03' || val.id === 'rwc-04' || val.id === 'rwc-05' || val.id === 'rwc-06' ||
             val.id === 'rwc-07' || val.id === 'rwc-08' || val.id === 'rwc-09' || val.id === 'rwc-10') return parseFloat(val.value)*1000;
         if (val.id === 'rwc-11' || val.id === 'rwc-12') return parseFloat(val.value)*1000000;
+    }
+
+    formatWinnings(val) {
+        val = val.toString();
+        let j = 0;
+        let str = "";
+        for (let i=val.length-1; i>=0; i--) {
+            str= val[i] + str;
+            j++;
+            if (j%3===0 && i>0) str = '.'+str;
+        }
+        return str;
     }
 
     render() {

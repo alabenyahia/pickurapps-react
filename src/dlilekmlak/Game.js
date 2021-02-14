@@ -1,7 +1,9 @@
 import GameMenu from "./GameMenu";
 import GameMain from "./GameMain";
+import {useHistory} from "react-router-dom";
 
 function Game(props) {
+    const history = useHistory()
 
     function renderGame() {
         if (props.path === '/dlilekmlak') {
@@ -10,7 +12,7 @@ function Game(props) {
             );
         } else {
             return (
-                <GameMain />
+                <GameMain history={history}/>
             );
         }
     }
