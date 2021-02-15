@@ -1,4 +1,4 @@
-import React, {useRef} from "react"
+import React from "react"
 import MainBoard from "./MainBoard";
 import {GameData} from "./gameData";
 import Panel from "./Panel";
@@ -52,16 +52,32 @@ class GameMain extends React.Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.state.hasOwnProperty('winnings') && this.state.winnings !== null) {
-            let wasInUrBox = this.state.wasInYourBox === null ? false : this.convertBoxValue(this.state.wasInYourBox);
-            if (wasInUrBox !== false) wasInUrBox = wasInUrBox === 1 ? this.state.wasInYourBox.value : this.formatWinnings(wasInUrBox);
-            let winnings;
 
-            if (this.state.wasInYourBox === null ) {
-                winnings = this.convertBoxValue(this.state.winnings);
-                if (winnings === 1 ) winnings = this.state.winnings;
-                else winnings = this.formatWinnings(winnings);
+            let wasInUrBox;
+            if (this.state.wasInYourBox === null) {
+                wasInUrBox = false
             } else {
-                winnings = this.formatWinnings(this.state.winnings);
+                wasInUrBox = this.convertBoxValue(this.state.wasInYourBox);
+            }
+            if (wasInUrBox !== false) {
+                if (wasInUrBox === 1) {
+                    if (wasInUrBox.id==='lwc-03') wasInUrBox = `${this.state.wasInYourBox.value} د `;
+                    else wasInUrBox = this.state.wasInYourBox.value;
+                } else {
+                    wasInUrBox =`${this.formatWinnings(wasInUrBox)} د `;
+                }
+            }
+
+            let winnings;
+            if (this.state.wasInYourBox === null ) {
+                winnings =this.convertBoxValue(this.state.winnings);
+                if (winnings === 1 ) {
+                    if (winnings.id ==='lwc-03') winnings =`${winnings} د ` ;
+                    else winnings = this.state.winnings.value;
+                }
+                else winnings =`${this.formatWinnings(winnings)} د ` ;
+            } else {
+                winnings =`${this.formatWinnings(this.state.winnings)} د `;
             }
 
 
