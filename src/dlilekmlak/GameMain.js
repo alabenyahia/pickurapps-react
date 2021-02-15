@@ -193,7 +193,7 @@ class GameMain extends React.Component{
             console.log("proposal", proposal);
 
             this.MySwal.fire({
-                html: <ProposalSwal isSwitch={switchRand===0} proposal={proposal}/>,
+                html: <ProposalSwal isSwitch={switchRand===0} proposal={`${this.formatWinnings(proposal)} د `}/>,
                 background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
                 confirmButtonText: 'أي نقبل',
                 confirmButtonColor: '#00C851',
