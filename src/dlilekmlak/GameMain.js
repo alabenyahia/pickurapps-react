@@ -50,9 +50,23 @@ class GameMain extends React.Component{
             showProposalSwal: false, winnings: null, wasInYourBox: null};
     }
 
+    playWinningSound(winning, wasInUrBox) {
+        this.gameAudio.stopAllAudio();
+        if (wasInUrBox) {
+            wasInUrBox = this.convertBoxValue(wasInUrBox);
+            if (winning > wasInUrBox) this.gameAudio.clappingAudio.play();
+            else this.gameAudio.laughingAudio.play();
+        } else {
+            winning = this.convertBoxValue(winning);
+            if (winning < 5000) this.gameAudio.laughingAudio.play();
+            else if (winning >=5000 && winning<100000) this.gameAudio.clappingAudio.play();
+            else this.gameAudio.goodClappingAudio.play();
+        }
+    }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.hasOwnProperty('winnings') && this.state.winnings !== null) {
+        if (this.state.winnings !== null) {
 
             let wasInUrBox;
             if (this.state.wasInYourBox === null) {
@@ -81,7 +95,7 @@ class GameMain extends React.Component{
                 winnings =`${this.formatWinnings(this.state.winnings)} د `;
             }
 
-
+            this.playWinningSound(this.state.winnings, this.state.wasInYourBox);
             this.MySwal.fire({
                 html: <WinningSwal winnings={winnings} wasInUrBox={wasInUrBox}/>,
                 background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
@@ -98,6 +112,7 @@ class GameMain extends React.Component{
                     actions: 'swal-actions-style'
                 }
             }).then((result)=>{
+                this.gameAudio.stopAllAudio();
                 if (result.isConfirmed) {
                     this.resetState();
                 } else if (result.isDenied) {
@@ -199,6 +214,10 @@ class GameMain extends React.Component{
             console.log("max", maxVal);
             console.log("proposal", proposal);
 
+            this.gameAudio.stopAllAudio();
+            this.gameAudio.phoneAudio.loop = true;
+            this.gameAudio.phoneAudio.play();
+
             this.MySwal.fire({
                 html: <ProposalSwal isSwitch={switchRand===0} proposal={`${this.formatWinnings(proposal)} د `}/>,
                 background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
@@ -215,6 +234,9 @@ class GameMain extends React.Component{
                     actions: 'swal-actions-style'
                 }
             }).then((result)=>{
+                this.gameAudio.phoneAudio.pause();
+                this.gameAudio.phoneAudio.currentTime = 0;
+
                 if (result.isConfirmed) {
                     if (switchRand === 0) {
                         this.setState({chooseBox: true});
@@ -235,6 +257,7 @@ class GameMain extends React.Component{
     }
 
     componentWillUnmount() {
+        this.gameAudio.stopAllAudio();
         this.MySwal.close();
     }
 
@@ -271,7 +294,7 @@ class GameMain extends React.Component{
                     {
                         this.state.boxOpening ? (
                             <StyledCenterDiv style={{display: 'flex', justifyContent: 'center'}}>
-                                <BoxOpening mainState={this.state} setState={this.setState}/>
+                                <BoxOpening gameAudio={this.gameAudio} mainState={this.state} setState={this.setState}/>
                             </StyledCenterDiv>
                         ) : (
                             <StyledCenterDiv>

@@ -21,9 +21,45 @@ const StyledSpan = styled.span`
 
 function BoxOpening(props) {
     const [text, setText] = useState('');
+
+    function playSound(index) {
+        switch (index) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+                props.gameAudio.goodClappingAudio.play();
+                break;
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+                props.gameAudio.clappingAudio.play();
+                break;
+            case 18:
+            case 19:
+            case 20:
+            case 21:
+            case 22:
+            case 23:
+                props.gameAudio.laughingAudio.play();
+                break;
+        }
+    }
     useEffect(()=>{
         let id1, id2;
         if (props.mainState.boxOpening && props.mainState.openedBoxIndex >= 0) {
+            props.gameAudio.boxOpeningAudio.play();
             setText(props.mainState.openedBoxIndex+1);
             id1 = setInterval(()=> {
                 const openedBox = props.mainState.shuffledBoxes[props.mainState.openedBoxIndex];
@@ -39,6 +75,7 @@ function BoxOpening(props) {
                     const winnings = numOpenedBoxes === 22 ? props.mainState.shuffledBoxes[props.mainState.yourBox.index] : null
                     props.setState((prevState)=>{return {boxes:oldBoxes2, shuffledBoxes: oldBoxes, boxOpening: false,
                         showProposalSwal: proposalSwal, numOpenedBoxes: prevState.numOpenedBoxes+1, winnings: winnings}})
+                    playSound(openedBox.index);
                 }, 600);
             }, 800);
         }

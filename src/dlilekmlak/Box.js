@@ -35,6 +35,7 @@ function Box(props) {
             props.setState({chooseBox: false, yourBox: {index:props.text-1}});
             props.gameAudio.boxChosen.play();
         } else {
+            props.gameAudio.stopAllAudio();
             props.setState({boxOpening: true, openedBoxIndex: props.text-1});
         }
     }
