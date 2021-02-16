@@ -16,6 +16,7 @@ const StyledSpan = styled.span`
   color: #000000;
   font-size: 1.5rem;
   transform: translate(-50%, -50%);
+  direction: rtl;
 `;
 
 function BoxOpening(props) {
@@ -25,7 +26,9 @@ function BoxOpening(props) {
         if (props.mainState.boxOpening && props.mainState.openedBoxIndex >= 0) {
             setText(props.mainState.openedBoxIndex+1);
             id1 = setInterval(()=> {
-                setText(props.mainState.shuffledBoxes[props.mainState.openedBoxIndex].value);
+                const openedBox = props.mainState.shuffledBoxes[props.mainState.openedBoxIndex];
+                if (openedBox.id === 'lwc-02' || openedBox.id === 'lwc-06' || openedBox.id === 'lwc-10' || openedBox.id === 'lwc-12') setText(openedBox.value)
+                else setText(` ${openedBox.value} د `);
                 id2 = setInterval(()=>{
                     let oldBoxes = [...props.mainState.shuffledBoxes];
                     oldBoxes[props.mainState.openedBoxIndex].value = '';

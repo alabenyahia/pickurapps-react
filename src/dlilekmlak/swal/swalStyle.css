@@ -1,0 +1,30 @@
+.swal-buttons-style {
+    font-family: "Lalezar", sans-serif !important;
+    padding: 12px 24px;
+    border: none;
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.swal-confirmbutton-style {
+    background-color: #00C851;
+    margin-left: 12px;
+}
+
+.swal-confirmbutton-style:hover {
+    background-color: #00923d;
+}
+
+.swal-denybutton-style {
+    background-color: #ff4444;
+}
+
+.swal-denybutton-style:hover {
+    background-color: #bf3333;
+}
+
+.swal-actions-style {
+    margin: 0;
+    direction: rtl;
+}

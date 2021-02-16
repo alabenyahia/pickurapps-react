@@ -26,7 +26,7 @@ function BoxesHolder(props) {
             (<StyledColumn key={item.id}>
                 {
                     index !== props.mainState.yourBox.index &&
-                    <Box text={index+1} mainState={props.mainState} setState={props.setState}/>
+                    <Box text={index+1} mainState={props.mainState} setState={props.setState} gameAudio={props.gameAudio}/>
                 }
 
             </StyledColumn>));

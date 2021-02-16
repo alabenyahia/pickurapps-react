@@ -1,4 +1,11 @@
 import shuffle from "lodash/shuffle"
+import boxOpeningAudio from "./audio/box_opening_sound.mp3"
+import clappingAudio from "./audio/clapping_sound.mp3"
+import goodClappingAudio from "./audio/good_clapping_sound.mp3"
+import laughingAudio from "./audio/laughing_sound.mp3"
+import oneOrTwoMillAudio from "./audio/one_or_two_m_sound.mp3"
+import phoneAudio from "./audio/phone_sound.mp3"
+import boxChosen from "./audio/box_chosen_sound.mp3"
 
 class GameData {
     constructor() {
@@ -8,12 +15,55 @@ class GameData {
         this.boxes[5].value = this.things[1];
         this.boxes[9].value = this.things[2];
         this.boxes[11].value = this.things[3];
-        console.log("boxes",this.boxes)
         this.shuffledBoxes = shuffle(this.boxes);
-        console.log("shuffled",this.shuffledBoxes);
-        console.log("ruuuun");
+
     }
 }
+
+class GameAudio {
+    constructor() {
+        this.boxOpeningAudio = new Audio(boxOpeningAudio);
+        this.boxOpeningAudio.load();
+        this.clappingAudio = new Audio(clappingAudio);
+        this.clappingAudio.load();
+        this.goodClappingAudio = new Audio(goodClappingAudio);
+        this.goodClappingAudio.load();
+        this.laughingAudio = new Audio(laughingAudio);
+        this.laughingAudio.load();
+        this.oneOrTwoMillAudio = new Audio(oneOrTwoMillAudio);
+        this.oneOrTwoMillAudio.load();
+        this.phoneAudio = new Audio(phoneAudio);
+        this.phoneAudio.load();
+        this.boxChosen = new Audio(boxChosen);
+        this.boxChosen.load();
+    }
+
+    stopAllAudio() {
+        this.boxOpeningAudio.pause();
+        this.boxOpeningAudio.currentTime = 0;
+
+        this.goodClappingAudio.pause();
+        this.goodClappingAudio.currentTime = 0;
+
+        this.clappingAudio.pause();
+        this.clappingAudio.currentTime = 0;
+
+        this.laughingAudio.pause();
+        this.laughingAudio.currentTime = 0;
+
+        this.oneOrTwoMillAudio.pause();
+        this.oneOrTwoMillAudio.currentTime = 0;
+
+        this.phoneAudio.pause();
+        this.phoneAudio.currentTime = 0;
+
+        this.boxChosen.pause();
+        this.boxChosen.currentTime = 0;
+
+    }
+}
+
+
 
 let things = [
     "كلسيتة", "براية", "بلايستايشن", "بافات", "كاسكات", "تلفاز", "مخدة", "شمعة", "براد تاي ", "أمبوبة", "شارجور", "100ج قلوب ", "بريكية", "قازوزة", "صحفة لبلابي", "شيشة"
@@ -46,4 +96,4 @@ let boxes = [
     {index:23, id: "rwc-12", value: "2.000.000"}
 ];
 
-export {GameData}
+export {GameData, GameAudio}

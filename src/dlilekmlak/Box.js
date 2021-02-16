@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import BoxImg from "./imgs/box.svg";
 import YourBoxImg from "./imgs/your-box.svg"
+import PressedBoxImg from "./imgs/box-pressed.svg"
+import {useState} from "react";
 
 const StyledDiv = styled.div`
   cursor: ${props => props.yourBox ? 'default' : 'pointer'} ;
@@ -26,11 +28,12 @@ const StyledSpan = styled.span`
 `;
 
 function Box(props) {
-
+    const [isHovered, setIsHovered] = useState(false);
     const handleClick = () => {
         if (props.yourBox) return
         if (props.mainState.chooseBox) {
             props.setState({chooseBox: false, yourBox: {index:props.text-1}});
+            props.gameAudio.boxChosen.play();
         } else {
             props.setState({boxOpening: true, openedBoxIndex: props.text-1});
         }
@@ -38,8 +41,9 @@ function Box(props) {
 
     return (
         <StyledDiv style={{visibility: (props.yourBox!==true && props.mainState.shuffledBoxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
-                   yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}>
-            <StyledImg src={props.yourBox ? YourBoxImg : BoxImg} alt="Box"/>
+                   yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}
+                    onMouseOver={()=>setIsHovered(true)} onMouseOut={()=>setIsHovered(false)}>
+            <StyledImg src={props.yourBox ? YourBoxImg : isHovered? PressedBoxImg : BoxImg} alt="Box"/>
             <StyledSpan>{props.yourBox && props.yourBoxVal.hasOwnProperty('index')? props.yourBoxVal.index+1 : props.text}</StyledSpan>
         </StyledDiv>
     );

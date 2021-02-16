@@ -1,6 +1,6 @@
 import React from "react"
 import MainBoard from "./MainBoard";
-import {GameData} from "./gameData";
+import {GameAudio, GameData} from "./gameData";
 import Panel from "./Panel";
 import styled from "styled-components";
 import BoxesHolder from "./BoxesHolder";
@@ -9,8 +9,9 @@ import BoxOpening from "./BoxOpening";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import random from "lodash/random"
-import ProposalSwal from "./ProposalSwal";
-import WinningSwal from "./WinningSwal";
+import ProposalSwal from "./swal/ProposalSwal";
+import WinningSwal from "./swal/WinningSwal";
+import "./swal/swalStyle.css"
 
 const StyledDiv = styled.div`
   display: flex;
@@ -41,8 +42,8 @@ class GameMain extends React.Component{
     constructor(props) {
         super(props);
         this.setState = this.setState.bind(this);
-
         let gameData = new GameData();
+        this.gameAudio = new GameAudio();
         this.MySwal = withReactContent(Swal);
         this.state = {boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
             yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
@@ -85,13 +86,17 @@ class GameMain extends React.Component{
                 html: <WinningSwal winnings={winnings} wasInUrBox={wasInUrBox}/>,
                 background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
                 confirmButtonText: 'أي',
-                confirmButtonColor: '#00C851',
                 showDenyButton: true,
                 denyButtonText: 'لا',
-                denyButtonColor: '#ff4444',
                 allowEscapeKey: false,
                 allowEnterKey: false,
-                allowOutsideClick: false
+                allowOutsideClick: false,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal-buttons-style swal-confirmbutton-style',
+                    denyButton: 'swal-buttons-style swal-denybutton-style',
+                    actions: 'swal-actions-style'
+                }
             }).then((result)=>{
                 if (result.isConfirmed) {
                     this.resetState();
@@ -188,6 +193,8 @@ class GameMain extends React.Component{
                     break;
             }
 
+
+
             console.log("min", minVal);
             console.log("max", maxVal);
             console.log("proposal", proposal);
@@ -196,13 +203,17 @@ class GameMain extends React.Component{
                 html: <ProposalSwal isSwitch={switchRand===0} proposal={`${this.formatWinnings(proposal)} د `}/>,
                 background: 'linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)',
                 confirmButtonText: 'أي نقبل',
-                confirmButtonColor: '#00C851',
                 showDenyButton: true,
                 denyButtonText: 'لا نرفض',
-                denyButtonColor: '#ff4444',
                 allowEscapeKey: false,
                 allowEnterKey: false,
-                allowOutsideClick: false
+                allowOutsideClick: false,
+                buttonsStyling: false,
+                customClass: {
+                    confirmButton: 'swal-buttons-style swal-confirmbutton-style',
+                    denyButton: 'swal-buttons-style swal-denybutton-style',
+                    actions: 'swal-actions-style'
+                }
             }).then((result)=>{
                 if (result.isConfirmed) {
                     if (switchRand === 0) {
@@ -221,6 +232,10 @@ class GameMain extends React.Component{
         this.setState({boxes: cloneDeep(gameData.boxes), shuffledBoxes: cloneDeep(gameData.shuffledBoxes),
             yourBox: {}, chooseBox: true, boxOpening: false, openedBoxIndex: -1, numOpenedBoxes: 0,
             showProposalSwal: false, winnings: null, wasInYourBox: null});
+    }
+
+    componentWillUnmount() {
+        this.MySwal.close();
     }
 
 
@@ -260,7 +275,7 @@ class GameMain extends React.Component{
                             </StyledCenterDiv>
                         ) : (
                             <StyledCenterDiv>
-                                <BoxesHolder mainState={this.state} setState={this.setState}/>
+                                <BoxesHolder gameAudio={this.gameAudio} mainState={this.state} setState={this.setState}/>
 
                                 <BoxesHolder yourBoxVal={this.state.yourBox} yourBox={true}/>
 

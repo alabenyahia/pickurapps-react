@@ -13,6 +13,7 @@ const StyledDiv = styled.div`
     box-sizing: border-box;
     height: 36px;
     max-height: 36px;
+    cursor: default;
 `;
 
 function PanelItem(props) {
