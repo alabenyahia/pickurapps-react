@@ -6,13 +6,13 @@ import { Favorite } from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
     footer: {
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: theme.spacing(3, 2),
+        flexDirection: 'column',
+        padding: '16px',
         marginTop: 'auto',
         backgroundColor: theme.palette.primary.main,
         color: '#ffffff',
-        fontWeight: '500'
+        fontWeight: '500',
+        textAlign: 'center'
     },
 }));
 
@@ -20,7 +20,8 @@ export default function Footer() {
     const classes = useStyles();
     return (
         <footer className={classes.footer}>
-            Made with <Favorite color='secondary' fontSize='small' style={{margin: '0 4px'}}/> by pickurapps © {new Date().getFullYear()} ✌️
+            <span style={{display: 'block', marginBottom: '8px'}}>✌</span>
+            <span style={{display: 'block'}}>pickurapps © {new Date().getFullYear()}</span>
         </footer>
     );
 }

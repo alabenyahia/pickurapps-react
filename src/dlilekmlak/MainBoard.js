@@ -1,6 +1,8 @@
 import {Grid} from "@material-ui/core";
 import styled from 'styled-components';
 import bgImg from './imgs/bg.jpg';
+import {useEffect, useLayoutEffect, useState} from "react";
+import NotAvailableError from "./NotAvailableError";
 
 const StyledGridContainer = styled(Grid)`
     flex: 1;
@@ -25,11 +27,20 @@ const StyledGridItem = styled(Grid)`
 `;
 
 function MainBoard(props) {
+    const [pageDimens, setPageDimens] = useState([window.innerWidth, window.innerHeight]);
+    useLayoutEffect(()=> {
+        window.addEventListener('resize', ()=> {
+            setPageDimens([window.innerWidth, window.innerHeight]);
+        })
+    }, [])
 
     return (
         <StyledGridContainer container>
             <StyledGridItem item xs={12} >
-                {props.children}
+                {
+                    (pageDimens[0] < 850 || pageDimens[1] < 500) ?
+                        <NotAvailableError /> : props.children
+                }
             </StyledGridItem>
         </StyledGridContainer>
     );
