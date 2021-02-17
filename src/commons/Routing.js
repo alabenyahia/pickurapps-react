@@ -8,6 +8,7 @@ import CreateBaccalcForm from "../baccalc/CreateBaccalcForm";
 import MainBoard from "../guessflags/MainBoard";
 import GFGame from "../guessflags/Game";
 import DMGame from "../dlilekmlak/Game"
+import ShowWinnings from "../dlilekmlak/ShowWinnings";
 
 function Routing() {
     return (
@@ -49,6 +50,10 @@ function Routing() {
 
             <Route path='/dlilekmlak/game' exact>
                 <DMGame path='/dlilekmlak/game'/>
+            </Route>
+
+            <Route path='/dlilekmlak/wins' exact>
+                <ShowWinnings />
             </Route>
         </Switch>
     );

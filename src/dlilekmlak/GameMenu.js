@@ -21,6 +21,9 @@ const StyledBtn = styled.button`
 `;
 
 
+
+
+
 function GameMenu(props) {
     const history = useHistory();
 
