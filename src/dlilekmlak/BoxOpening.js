@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import BoxOpeningImg from "./imgs/box-oppening.svg"
 import {useEffect, useState} from "react";
+import {motion} from "framer-motion";
 
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   display: flex;
   width: 50%;
   position: relative;
@@ -87,7 +88,7 @@ function BoxOpening(props) {
     }, [props]);
 
     return (
-        <StyledDiv>
+        <StyledDiv transition={{duration: 0.35}} initial={{scale: 0}} animate={{scale: 1}}>
             <img style={{width: '100%'}} src={BoxOpeningImg} alt="Box Opening"/>
             <StyledSpan>{text}</StyledSpan>
         </StyledDiv>

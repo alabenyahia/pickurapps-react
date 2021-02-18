@@ -3,8 +3,9 @@ import BoxImg from "./imgs/box.svg";
 import YourBoxImg from "./imgs/your-box.svg"
 import PressedBoxImg from "./imgs/box-pressed.svg"
 import {useState} from "react";
+import {motion} from "framer-motion"
 
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   cursor: ${props => props.yourBox ? 'default' : 'pointer'} ;
   width: 85%;
   box-sizing: border-box;
@@ -29,20 +30,29 @@ const StyledSpan = styled.span`
 
 function Box(props) {
     const [isHovered, setIsHovered] = useState(false);
-    const handleClick = () => {
+    const [animate, setAnimate] = useState(false)
+    const handleClick = ()=> {
         if (props.yourBox) return
+        setAnimate(true);
+        if (props.mainState.chooseBox) props.gameAudio.boxChosen.play();
+    }
+
+    const handleAnimationComplete = () => {
+        setAnimate(false);
         if (props.mainState.chooseBox) {
             props.setState({chooseBox: false, yourBox: {index:props.text-1}});
-            props.gameAudio.boxChosen.play();
         } else {
             props.gameAudio.stopAllAudio();
             props.setState({boxOpening: true, openedBoxIndex: props.text-1});
         }
     }
 
+    const isEmpty = !props.yourBox && props.mainState.shuffledBoxes[props.text-1].value === '';
+
     return (
-        <StyledDiv style={{visibility: (props.yourBox!==true && props.mainState.shuffledBoxes[props.text-1].value === '') ? 'hidden' : 'visible'}}
+        <StyledDiv transition={{duration: 0.4}} animate={animate?{scale: 0}:{}} style={{visibility: isEmpty ? 'hidden' : 'visible'}}
                    yourBox={props.yourBox} text={props.text} onClick={()=>handleClick()}
+                   onAnimationComplete={()=>handleAnimationComplete()}
                     onMouseOver={()=>setIsHovered(true)} onMouseOut={()=>setIsHovered(false)}>
             <StyledImg src={props.yourBox ? YourBoxImg : isHovered? PressedBoxImg : BoxImg} alt="Box"/>
             <StyledSpan>{props.yourBox && props.yourBoxVal.hasOwnProperty('index')? props.yourBoxVal.index+1 : props.text}</StyledSpan>
