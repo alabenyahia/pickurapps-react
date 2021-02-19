@@ -13,8 +13,8 @@ import {AnimatePresence} from "framer-motion";
 function Routing() {
     const location = useLocation();
     return (
-        <AnimatePresence>
-        <Switch location={location} key={location.key}>
+        <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.pathname}>
             <Route path='/dlilekmlak/game'>
                 <DMGame path='/dlilekmlak/game'/>
             </Route>

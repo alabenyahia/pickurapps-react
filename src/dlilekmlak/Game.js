@@ -33,11 +33,7 @@ function Game(props) {
     }
 
     return (
-        <MainBoard
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit">
+        <MainBoard>
             {renderGame()}
         </MainBoard>
 

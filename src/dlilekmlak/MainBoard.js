@@ -6,15 +6,15 @@ import NotAvailableError from "./NotAvailableError";
 import {motion} from "framer-motion";
 import {containerVariants} from "../commons/routingAnimation";
 
-const StyledGridContainer = styled(motion.div)`
-  flex: 1!important;
+const StyledContainer = styled(motion.div)`
+  flex: 1;
   justify-content: center;
   flex-direction: column;
-  display: flex!important;
+  display: flex;
   align-items: center;
 `;
 
-const StyledGridItem = styled.div`
+const StyledItem = styled.div`
   max-width: 1000px;
   max-height: 550px;
   width: 100%;
@@ -38,18 +38,18 @@ function MainBoard(props) {
     }, [])
 
     return (
-        <StyledGridContainer
+        <StyledContainer
             variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit">
-            <StyledGridItem>
+            initial="out"
+            animate="in"
+            exit="out">
+            <StyledItem>
                 {
                     (pageDimens[0] < 850 || pageDimens[1] < 500) ?
                         <NotAvailableError /> : props.children
                 }
-            </StyledGridItem>
-        </StyledGridContainer>
+            </StyledItem>
+        </StyledContainer>
     );
 }
 

@@ -26,9 +26,9 @@ function Game(props) {
     return (
         <motion.div
             variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit">
+            initial="out"
+            animate="in"
+            exit="out">
             {renderGame()}
         </motion.div>
     )

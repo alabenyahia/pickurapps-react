@@ -1,15 +1,14 @@
 const containerVariants = {
-    hidden: {
-        opacity: 0,
-    },
-    visible: {
+    in: {
         opacity: 1,
-        transition: {delay: 0.35, duration: 0.35}
+        x: 0
     },
-    exit: {
-        y: '-100vh',
-        transition: {ease: 'easeInOut'}
-    }
+    out: {
+        opacity: 0,
+        x: '-100vw'
+        // transition: { duration: 0.35}
+    },
+
 };
 
 export {containerVariants};

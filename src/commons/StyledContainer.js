@@ -19,9 +19,9 @@ function StyledContainer(props) {
     return (
         <StyledMain
             variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit">
+            initial="out"
+            animate="in"
+            exit="out">
             {props.children}
         </StyledMain>
     );
