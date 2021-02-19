@@ -2,6 +2,8 @@ import useStateFromLS from "./useStateFromLS";
 import {continentsDefaultData} from "./gameData";
 import GameChooseCont from "./GameChooseCont";
 import GameMain from "./GameMain";
+import {motion} from "framer-motion";
+import {containerVariants} from "../commons/routingAnimation";
 
 function Game(props) {
     const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
@@ -22,9 +24,13 @@ function Game(props) {
     }
 
     return (
-        <div>
+        <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit">
             {renderGame()}
-        </div>
+        </motion.div>
     )
 }
 

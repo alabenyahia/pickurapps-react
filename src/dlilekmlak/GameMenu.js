@@ -31,12 +31,12 @@ function GameMenu(props) {
         history.push('/dlilekmlak/'+path);
     }
     return (
-        <MainBoard>
+        <>
             <div style={{direction: 'rtl', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%'}}>
                 <StyledBtn onClick={()=>handleClick('game')} play={true}> أبدأ العب<Icon style={{marginRight: '8px'}}>play_circle</Icon></StyledBtn>
                 <StyledBtn onClick={()=>handleClick('wins')}  play={false}> قائمة الرابحين<Icon style={{marginRight: '8px'}}>list_alt</Icon></StyledBtn>
             </div>
-        </MainBoard>
+        </>
     );
 }
 

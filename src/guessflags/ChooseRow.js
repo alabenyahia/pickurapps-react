@@ -13,7 +13,7 @@ function ChooseRow(props) {
     }
 
     return (
-        <StyledRow>
+        <StyledRow >
             {renderBtns()}
         </StyledRow>
     );

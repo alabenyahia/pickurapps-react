@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import {Icon} from "@material-ui/core";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
+import {motion} from "framer-motion";
+import {useState} from "react";
 
-const StyledCard = styled.div`
+
+const StyledCard = styled(motion.div)`
   background-color: #7D5A5A;
   border-radius: 6px;
   cursor: pointer;
@@ -10,16 +13,17 @@ const StyledCard = styled.div`
   width: 100%;
   color: white;
   text-align: center;
-  transition: transform 150ms ease-in;
-  
+
   &:hover {
-    transform: scale(1.05);
+    background-color: #6E4D4D;
   }
+
+
 `;
 
 const StyledCardImgContainer = styled.div`
-  font-size: 60px; 
-  height: 60px; 
+  font-size: 60px;
+  height: 60px;
   padding: 24px 0;
 `;
 
@@ -30,6 +34,7 @@ const StyledCardText = styled.div`
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 
+
   @media screen and (max-width: 600px) {
     font-size: 0.8rem;
   }
@@ -37,22 +42,29 @@ const StyledCardText = styled.div`
   @media screen and (max-width: 320px) {
     font-size: 0.65rem;
   }
-  
+
 `;
 
 
-
 function StageCard(props) {
+    const history = useHistory();
+    const [animate, setAnimate] = useState(false)
+
+    const handleClick = () => {
+        if (props.isLocked) setAnimate(true);
+        else history.push(props.to);
+        props.handleContCardClick(props.isLocked)
+    }
 
     return (
-        <NavLink to={props.isLocked ? false : props.to} exact style={{textDecoration: "none"}}>
-            <StyledCard onClick={()=> props.handleContCardClick(props.isLocked)}>
-                <StyledCardImgContainer>
-                    <Icon fontSize='inherit' color='inherit'>{props.isLocked ? 'lock' : 'lock_open'}</Icon>
-                </StyledCardImgContainer>
-                <StyledCardText>{props.name}</StyledCardText>
-            </StyledCard>
-        </NavLink>
+        <StyledCard animate={animate ? {translateX: [0, -10, 10, -10, 10, -10, 10, -10, 8, -8, 0]} : {}}
+                    onClick={() => handleClick()}
+                    onAnimationComplete={() => setAnimate(false)}>
+            <StyledCardImgContainer>
+                <Icon fontSize='inherit' color='inherit'>{props.isLocked ? 'lock' : 'lock_open'}</Icon>
+            </StyledCardImgContainer>
+            <StyledCardText>{props.name}</StyledCardText>
+        </StyledCard>
     );
 }
 

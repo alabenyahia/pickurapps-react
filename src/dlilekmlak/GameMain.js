@@ -285,7 +285,7 @@ class GameMain extends React.Component{
 
     render() {
         return (
-            <MainBoard>
+            <>
                 <StyledDiv>
                     <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
                         <Panel panelItems={this.state.boxes.slice(0, 12)} left={false} />
@@ -311,7 +311,7 @@ class GameMain extends React.Component{
                         <Panel panelItems={this.state.boxes.slice(12, 24)} left={true} />
                     </StyledPanelsDiv>
                 </StyledDiv>
-            </MainBoard>
+            </>
         );
     }
 }

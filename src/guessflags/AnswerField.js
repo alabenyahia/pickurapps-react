@@ -29,11 +29,9 @@ const StyledResetBtn = styled.div`
   cursor: pointer;
   display: inline-block;
   font-size: 0.875rem;
-  transition: transform 150ms ease-in;
-
+  
   &:hover {
     background-color: #6E4D4D;
-    transform: scale(1.07);
   }
 `;
 

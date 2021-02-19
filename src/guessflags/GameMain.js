@@ -131,6 +131,7 @@ function GameMain(props) {
     };
 
     const handleChooseBtnClick = (char) => {
+        console.log('fireeed');
         let oldText = answText;
         oldText+=char;
         setAnswText(oldText);
