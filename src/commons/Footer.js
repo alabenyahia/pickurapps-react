@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Favorite } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +20,7 @@ export default function Footer() {
     return (
         <footer className={classes.footer}>
             <span style={{display: 'block', marginBottom: '8px'}}>✌</span>
-            <span style={{display: 'block'}}>pickurapps © {new Date().getFullYear()}</span>
+            <span style={{display: 'block'}}>© {new Date().getFullYear()} pickurapps</span>
         </footer>
     );
 }

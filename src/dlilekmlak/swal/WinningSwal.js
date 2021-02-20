@@ -18,19 +18,19 @@ const StyledInput = styled.input`
   border-radius: 6px;
   font-family: inherit;
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.8);
+  color: #FAEBD7;
   direction: rtl;
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: #FAEBD7;
   }
 
   &:-ms-input-placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: #FAEBD7;
   }
 
   &::-ms-input-placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: #FAEBD7;
   }
 
 
@@ -71,7 +71,7 @@ function WinningSwal(props) {
             <h3 style={{margin: '12px 0', direction: 'rtl', fontSize: '2rem'}}> ربحت : {props.winnings}</h3>
             {
                 props.wasInUrBox && (
-                    <p style={{margin: '8px 0', direction: 'rtl', color: 'rgba(255, 255, 255, 0.8)'}}> كان في صندوقك
+                    <p style={{margin: '8px 0', direction: 'rtl', color: '#FAEBD7'}}> كان في صندوقك
                         : {props.wasInUrBox} </p>)
             }
             <form style={{display: 'flex'}} autoComplete="off">
@@ -87,10 +87,10 @@ function WinningSwal(props) {
             {
                 msg.text && <p style={{
                     backgroundColor: msg.isError ? '#ff4444' : '#00C851'
-                    , color: 'rgba(255, 255, 255, 0.8)', padding: '8px', direction: 'rtl',
+                    , color: '#FAEBD7', padding: '8px', direction: 'rtl',
                 }}>{msg.text}</p>
             }
-            <p style={{margin: '8px 0', direction: 'rtl', color: 'rgba(255, 255, 255, 0.65)'}}>تحب تعاود تلعب ؟</p>
+            <p style={{margin: '8px 0', direction: 'rtl', color: '#FAEBD7'}}>تحب تعاود تلعب ؟</p>
         </StyledDiv>
     );
 }

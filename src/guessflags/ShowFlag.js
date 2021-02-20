@@ -19,7 +19,7 @@ function ShowFlag(props) {
     return (
         <StyledShowFlagContainer>
             <div style={{padding: '6px 0'}}>Flag of which country?</div>
-            <div><img src={props.imgSrc} alt="Flag"/></div>
+            <div><img style={{pointerEvents: 'none'}} src={props.imgSrc} alt="Flag"/></div>
             <div><Button fullWidth color="inherit" onClick={() => props.handleOnNextFlagClick()}>Next flag (20
                 coins)<Icon>navigate_next</Icon></Button></div>
         </StyledShowFlagContainer>

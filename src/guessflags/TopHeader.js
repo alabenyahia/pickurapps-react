@@ -3,6 +3,7 @@ import {IconButton} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import coloredCoins from "./imgs/coin-colored.svg";
 import {NavLink} from "react-router-dom";
+
 const StyledHeader = styled.div`
   background-color: #7D5A5A;
   padding: 16px;

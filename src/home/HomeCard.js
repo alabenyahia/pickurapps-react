@@ -35,7 +35,7 @@ function HomeCard(props) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">{props.cardTitle}</Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="div">
                         {props.cardText}
                         <ul>
                             <li>{props.cardTextLi1}</li>

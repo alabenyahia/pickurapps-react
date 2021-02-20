@@ -36,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     btnStyle: {
+        margin: '8px 0',
         '@media screen and (max-width:600px)': {
-            width: '100%'
+            width: 'calc(100% - 16px)'
         }
     },
     h3Style: {
+        marginBottom: '12px',
         '@media screen and (max-width:960px)': {
             fontSize: '2rem'
         },

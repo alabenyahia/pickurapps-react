@@ -129,7 +129,9 @@ function ShowWinnings() {
                 }
             }
         }
+
         if (winningsArr.length > 0) {
+            if (winningsArr.length > 1) winningsArr.sort(function(a, b){return b.id - a.id});
             return winningsArr.map((item) => (
                     <tr key={item.id}>
                         <StyledTd>{item.name}</StyledTd>
