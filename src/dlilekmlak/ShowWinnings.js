@@ -9,6 +9,7 @@ const StyledDiv = styled.div`
   direction: rtl;
   width: 100%;
   align-items: center;
+  overflow: auto;
 `;
 
 
@@ -30,6 +31,7 @@ const StyledThead = styled.thead`
 const StyledTbody = styled.tbody`
   text-align: center;
   padding: 16px 0;
+  overflow: auto;
 
 `;
 
