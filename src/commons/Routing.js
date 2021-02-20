@@ -9,6 +9,7 @@ import GFGame from "../guessflags/Game";
 import DMGame from "../dlilekmlak/Game"
 import ShowWinnings from "../dlilekmlak/ShowWinnings";
 import {AnimatePresence} from "framer-motion";
+import ContactForm from "../contact/ContactForm";
 
 function Routing() {
     const location = useLocation();
@@ -46,6 +47,12 @@ function Routing() {
                     <Grid container spacing={3}>
                         {CreateBaccalcBtns()}
                     </Grid>
+                </StyledContainer>
+            </Route>
+
+            <Route path='/contact'>
+                <StyledContainer>
+                    <ContactForm />
                 </StyledContainer>
             </Route>
 
