@@ -87,7 +87,7 @@ function BoxOpening(props) {
                             winnings: winnings
                         }
                     })
-                    playSound(openedBox.index);
+                    if (props.mainState.numOpenedBoxes < 21) playSound(openedBox.index);
                 }, 600);
             }, 800);
         }
