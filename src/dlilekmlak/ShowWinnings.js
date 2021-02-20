@@ -57,14 +57,16 @@ const StyledBtn = styled.button`
   align-items: center;
   width: fit-content;
   transition: transform 200ms ease-out;
-  &:hover{
+
+  &:hover {
     transform: scale(1.07);
   }
 `;
 
-function ShowWinnings(props) {
+function ShowWinnings() {
     const history = useHistory()
 
+    // format the winning date
     function formatDate(date) {
         const dt = new Date(date);
         let dateStr = dt.getDate().toString();
@@ -108,9 +110,9 @@ function ShowWinnings(props) {
         }
 
         dateStr += dt.getFullYear().toString() + " - ";
-        dateStr += (dt.getHours()<10 ? `0${dt.getHours()}` : dt.getHours()) + ' : ' ;
-        dateStr += (dt.getMinutes()<10 ? `0${dt.getMinutes()}` : dt.getMinutes()) + ' : ' ;
-        dateStr += dt.getSeconds()<10 ? `0${dt.getSeconds()}` : dt.getSeconds() ;
+        dateStr += (dt.getHours() < 10 ? `0${dt.getHours()}` : dt.getHours()) + ' : ';
+        dateStr += (dt.getMinutes() < 10 ? `0${dt.getMinutes()}` : dt.getMinutes()) + ' : ';
+        dateStr += dt.getSeconds() < 10 ? `0${dt.getSeconds()}` : dt.getSeconds();
         return dateStr;
     }
 

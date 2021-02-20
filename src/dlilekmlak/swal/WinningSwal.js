@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Icon, TextField} from "@material-ui/core";
+import {Icon} from "@material-ui/core";
 import {useState} from "react";
 import {motion} from "framer-motion";
 
@@ -43,9 +43,11 @@ function WinningSwal(props) {
     const [msg, setMsg] = useState({text: "", isError: false});
     const [animate, setAnimate] = useState(false);
 
+    // handle save winnings btn click
     const handleClick = (e) => {
         e.preventDefault();
 
+        // show error if player already saved or has not entered his name
         if (value.length <= 0) {
             setMsg({text: "أكتب إسمك !", isError: true});
             setAnimate(true);

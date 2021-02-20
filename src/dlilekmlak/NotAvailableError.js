@@ -10,8 +10,7 @@ const StyledDiv = styled.div`
   line-height: 2rem;
 `;
 
-function NotAvailableError(props) {
-
+function NotAvailableError() {
 
     return (
         <div style={{

@@ -1,7 +1,6 @@
-import {Grid} from "@material-ui/core";
 import styled from 'styled-components';
 import bgImg from './imgs/bg.jpg';
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useLayoutEffect, useState} from "react";
 import NotAvailableError from "./NotAvailableError";
 import {motion} from "framer-motion";
 import {containerVariants} from "../commons/routingAnimation";
@@ -31,11 +30,13 @@ const StyledItem = styled.div`
 
 function MainBoard(props) {
     const [pageDimens, setPageDimens] = useState([window.innerWidth, window.innerHeight]);
+
+
     useLayoutEffect(()=> {
         window.addEventListener('resize', ()=> {
             setPageDimens([window.innerWidth, window.innerHeight]);
         })
-    }, [])
+    }, []);
 
     return (
         <StyledContainer

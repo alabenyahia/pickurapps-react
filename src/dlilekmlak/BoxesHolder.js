@@ -7,7 +7,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: ${props=> props.yourBox ? 'transparent' : 'rgba(255, 255, 255, 0.4)'};
+  background-color: ${props => props.yourBox ? 'transparent' : 'rgba(255, 255, 255, 0.4)'};
   border-radius: 8px;
   margin: 8px 24px;
   justify-content: center;
@@ -20,13 +20,17 @@ const StyledColumn = styled.div`
 `;
 
 function BoxesHolder(props) {
+
+    // render game boxes
     function renderBoxes() {
-        if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text} yourBoxVal={props.yourBoxVal}/></StyledColumn>
-        else return props.mainState.shuffledBoxes.map((item, index)=>
+        if (props.yourBox) return <StyledColumn><Box yourBox={props.yourBox} text={props.text}
+                                                     yourBoxVal={props.yourBoxVal}/></StyledColumn>
+        else return props.mainState.shuffledBoxes.map((item, index) =>
             (<StyledColumn key={item.id}>
                 {
                     index !== props.mainState.yourBox.index &&
-                    <Box text={index+1} mainState={props.mainState} setState={props.setState} gameAudio={props.gameAudio}/>
+                    <Box text={index + 1} mainState={props.mainState} setState={props.setState}
+                         gameAudio={props.gameAudio}/>
                 }
 
             </StyledColumn>));

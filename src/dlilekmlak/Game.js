@@ -4,12 +4,12 @@ import {useHistory} from "react-router-dom";
 import MainBoard from "./MainBoard";
 
 function Game(props) {
-    const history = useHistory()
+    const history = useHistory();
 
     function renderGame() {
         if (props.path === '/dlilekmlak') {
             return (
-                <GameMenu />
+                <GameMenu/>
             );
         } else {
             return (

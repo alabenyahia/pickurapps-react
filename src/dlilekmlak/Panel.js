@@ -3,7 +3,7 @@ import PanelItem from "./PanelItem";
 function Panel(props) {
     function renderPanel() {
 
-        return props.panelItems.map((item, index) => {
+        return props.panelItems.map((item) => {
             let bgColor = '';
             let bgGradient = '';
             switch (item.id) {
@@ -13,7 +13,7 @@ function Panel(props) {
                 case 'lwc-04':
                 case 'lwc-05':
                 case 'lwc-06':
-                    bgColor =  '#39bdff';
+                    bgColor = '#39bdff';
                     bgGradient = 'linear-gradient(90deg, #39bdff 0%, #1777ff 100%)';
                     break;
                 case 'lwc-07':
@@ -22,7 +22,7 @@ function Panel(props) {
                 case 'lwc-10':
                 case 'lwc-11':
                 case 'lwc-12':
-                    bgColor =  '#1873fc';
+                    bgColor = '#1873fc';
                     bgGradient = 'linear-gradient(90deg, #1873fc 0%, #0016ff 100%)';
                     break;
                 case 'rwc-01':
@@ -31,23 +31,23 @@ function Panel(props) {
                 case 'rwc-04':
                 case 'rwc-05':
                 case 'rwc-06':
-                    bgColor =  '#edbb8f';
+                    bgColor = '#edbb8f';
                     bgGradient = 'linear-gradient(90deg, #e7bb94 0%, #e9b889 100%)';
                     break;
                 case 'rwc-07':
                 case 'rwc-08':
                 case 'rwc-09':
                 case 'rwc-10':
-                    bgColor =  '#be0703';
+                    bgColor = '#be0703';
                     bgGradient = 'linear-gradient(90deg, #be0703 0%, #ba0e0b 100%)';
                     break;
                 case 'rwc-11':
                 case 'rwc-12':
-                    bgColor =  '#b68218';
+                    bgColor = '#b68218';
                     bgGradient = 'linear-gradient(90deg, #b68218 0%, #e5d956 100%)';
                     break;
                 default:
-                    bgColor =  '#39bdff';
+                    bgColor = '#39bdff';
                     bgGradient = 'linear-gradient(90deg, #39bdff 0%, #1777ff 100%)';
             }
             return (<PanelItem key={item.id} left={props.left} bgColor={bgColor} bgGradient={bgGradient}
