@@ -30,14 +30,18 @@ const StyledBtn = styled.button`
 function TopHeader(props) {
     const {continent} = useParams();
     const history = useHistory();
+
+    // reset the continent if player click reset
     const handleResetClick = () => {
         let oldObj = {...props.contData};
+        // make current flag number back to 1 and is completed to false
         oldObj[continent].currFlagNum = 1;
         oldObj[continent].isCompleted = false;
         props.setContData(oldObj);
         history.push('/guessflags');
     }
 
+    // redirect to game main page if player clicks don't reset
     const handleDontResetClick = () => {
         history.push('/guessflags');
     }

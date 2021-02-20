@@ -8,9 +8,6 @@ import {containerVariants} from "../commons/routingAnimation";
 function Game(props) {
     const [contData, setContData] = useStateFromLS(continentsDefaultData, 'guessflags-contdata');
 
-
-    console.log("path=", props.path);
-
     function renderGame() {
         if (props.path === '/guessflags') {
             return (
@@ -18,7 +15,7 @@ function Game(props) {
             );
         } else {
             return (
-                <GameMain contData={contData} setContData={setContData} />
+                <GameMain contData={contData} setContData={setContData}/>
             );
         }
     }

@@ -604,26 +604,31 @@ const continentsDefaultData = {
         isLocked: false,
         currFlagNum: 1,
         isCompleted: false,
+        name: 'South America'
     },
     na: {
         isLocked: true,
         currFlagNum: 1,
         isCompleted: false,
+        name: 'North America'
     },
     eur: {
         isLocked: true,
         currFlagNum: 1,
         isCompleted: false,
+        name: 'Europe'
     },
     asi: {
         isLocked: true,
         currFlagNum: 1,
         isCompleted: false,
+        name: 'Asia'
     },
     afr: {
         isLocked: true,
         currFlagNum: 1,
         isCompleted: false,
+        name: 'Africa'
     }
 };
 

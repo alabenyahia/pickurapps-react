@@ -23,16 +23,18 @@ class ChooseBtn extends React.Component {
         this.state = {isVisible: true, animate: false};
     }
 
-
+    // reset visibility before element renders if resetVisibility prop passed
     static getDerivedStateFromProps(props) {
         if (props.resetVisibility) {
             props.setResetVisibility(false);
             return {isVisible: true};
-        }
+        } else return null;
     }
 
+    // run when button animation complete
     handleAnimationComplete() {
         if (this.state.animate) {
+            // set button to invisible & call btn handler from parent
             this.setState({isVisible: false, animate: false});
             this.props.handleChooseBtnClick(this.props.char);
         }

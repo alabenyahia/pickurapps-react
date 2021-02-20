@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Icon} from "@material-ui/core";
-import {NavLink, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {motion} from "framer-motion";
 import {useState} from "react";
 
@@ -50,6 +50,7 @@ function StageCard(props) {
     const history = useHistory();
     const [animate, setAnimate] = useState(false)
 
+    // fire when a continent card is clicked
     const handleClick = () => {
         if (props.isLocked) setAnimate(true);
         else history.push(props.to);

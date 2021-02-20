@@ -13,22 +13,24 @@ const StyledDiv = styled.div`
 `;
 
 const StyledBtn = styled.div`
-    background-color: #ffffff;
-    color: #7D5A5A;
-    padding: 12px 0;
-    border: 0;
-    border-radius: 6px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 2%;
-    width: 96%;
-    text-align: center;
+  background-color: #ffffff;
+  color: #7D5A5A;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2%;
+  width: 96%;
+  text-align: center;
 `;
 
 function ShowError() {
     const [redirect, setRedirect] = useState(false)
 
+    // show error message then redirect after 5 secondes
+    // (runs each time this component mounts)
     useEffect(() => {
         const id = setTimeout(function () {
             setRedirect(true);
@@ -39,7 +41,7 @@ function ShowError() {
     return (
         <>
             <StyledDiv>
-                Please choose a continent first.<br />
+                Please choose a continent first.<br/>
                 Redirected after 5 secondes.
             </StyledDiv>
             <NavLink to='/guessflags' exact style={{textDecoration: 'none'}}>

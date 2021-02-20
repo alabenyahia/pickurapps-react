@@ -29,7 +29,7 @@ const StyledResetBtn = styled.div`
   cursor: pointer;
   display: inline-block;
   font-size: 0.875rem;
-  
+
   &:hover {
     background-color: #6E4D4D;
   }
@@ -37,6 +37,7 @@ const StyledResetBtn = styled.div`
 
 function AnswerField(props) {
     const handleResetBtnClick = () => {
+        // set player answer to empty & set reset visibility state to true
         props.setAnswText("");
         props.setResetVisibility(true);
     }
@@ -44,7 +45,7 @@ function AnswerField(props) {
     return (
         <StyledAnswerContainer>
             <StyledAnswerInput>{props.text}</StyledAnswerInput>
-            <StyledResetBtn onClick={()=> handleResetBtnClick()}>RESET</StyledResetBtn>
+            <StyledResetBtn onClick={() => handleResetBtnClick()}>RESET</StyledResetBtn>
         </StyledAnswerContainer>
     );
 }

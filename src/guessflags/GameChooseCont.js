@@ -10,7 +10,8 @@ function GameChooseCont(props) {
 
     return (
         <MainBoard>
-            <StageCards contData={props.contData} handleContCardClick={(isLocked)=> isLocked ? setShowContLockedToast(true) : setShowContLockedToast(false)}/>
+            <StageCards contData={props.contData}
+                        handleContCardClick={(isLocked) => isLocked ? setShowContLockedToast(true) : setShowContLockedToast(false)}/>
 
             <Snackbar
                 open={showContLockedToast}
@@ -21,8 +22,9 @@ function GameChooseCont(props) {
                     message="Complete previous continents to unlock this!"
                     style={{backgroundColor: '#ff4444'}}
                     action={
-                        <IconButton size="small" aria-label="close" color="inherit" onClick={(e, r) => r === 'clickaway' ? false : setShowContLockedToast(false)}>
-                            <CloseIcon fontSize="small" />
+                        <IconButton size="small" aria-label="close" color="inherit"
+                                    onClick={(e, r) => r === 'clickaway' ? false : setShowContLockedToast(false)}>
+                            <CloseIcon fontSize="small"/>
                         </IconButton>
                     }/>
             </Snackbar>
