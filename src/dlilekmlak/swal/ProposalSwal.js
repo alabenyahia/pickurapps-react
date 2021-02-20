@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import {motion} from "framer-motion";
 
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   color: #ffffff;
   text-align: center;
   font-family: "Lalezar", sans-serif;
@@ -18,19 +19,18 @@ function ProposalSwal(props) {
     function renderPropSwal() {
         if (props.isSwitch) {
             return (
-                <StyledDiv>
-                    <StyledP> البانكة تقترح عليك : تغيير الصندوق</StyledP>
-                </StyledDiv>
+                <StyledP> البانكة تقترح عليك : تغيير الصندوق</StyledP>
             );
         } else {
             return (
-                <StyledDiv>
-                    <StyledP> البانكة تقترح عليك : {props.proposal} </StyledP>
-                </StyledDiv>
+                <StyledP> البانكة تقترح عليك : {props.proposal} </StyledP>
             );
         }
     }
-    return renderPropSwal();
+
+    return <StyledDiv animate={{scale:[1, 1.15, 1]}} transition={{repeat: Infinity}}>
+        {renderPropSwal()}
+    </StyledDiv>
 }
 
 export default ProposalSwal;

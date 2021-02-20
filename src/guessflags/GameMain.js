@@ -16,7 +16,7 @@ import withReactContent from "sweetalert2-react-content";
 import WinningSwal from "./WinningSwal";
 import { useHistory } from "react-router-dom";
 import ContCompletedMsg from "./ContCompletedMsg";
-
+import Confetti from "react-confetti";
 
 
 function GameMain(props) {
@@ -24,6 +24,8 @@ function GameMain(props) {
     const [answText, setAnswText] = useState("");
     const [resetVisibility, setResetVisibility] = useState(false);
     const [coins, setCoins] = useStateFromLS(80, 'guessflags-coins');
+    const [coinsToast, setCoinsToast] = useState(false);
+    const [isConfettiOpen, setIsConfettiOpen] = useState(false);
     let {continent} = useParams();
     const contDBCopy = useRef({...contDB});
     let shouldRandomize = useRef(true);
@@ -70,6 +72,7 @@ function GameMain(props) {
         let oldObj = {...props.contData};
         oldObj[continent].isCompleted = true;
         props.setContData(oldObj);
+        setIsConfettiOpen(true);
         MySwal.current.fire({
             html: <WinningSwal num={answText.length} type='next_cont'/>,
             padding: '1rem',
@@ -79,6 +82,7 @@ function GameMain(props) {
             allowOutsideClick: false,
             background: '#7D5A5A'
         }).then(() => {
+            setIsConfettiOpen(false);
             if (history)
                 history.push('/guessflags');
         });
@@ -119,14 +123,19 @@ function GameMain(props) {
     }
 
     const handleOnNextFlagClick = () => {
-        setAnswText("");
-        setResetVisibility(true);
-        if (continent && props.contData[continent].currFlagNum < 10) {
-            let oldObj = {...props.contData}
-            oldObj[continent].currFlagNum++;
-            props.setContData(oldObj);
+        if (coins>= 20) {
+            setCoins((prev)=>prev-20);
+            setAnswText("");
+            setResetVisibility(true);
+            if (continent && props.contData[continent].currFlagNum < 10) {
+                let oldObj = {...props.contData}
+                oldObj[continent].currFlagNum++;
+                props.setContData(oldObj);
+            } else {
+                contCompleted();
+            }
         } else {
-            contCompleted();
+            setCoinsToast(true);
         }
     };
 
@@ -174,6 +183,23 @@ function GameMain(props) {
                                     </IconButton>
                                 }/>
                         </Snackbar>
+
+                        <Snackbar
+                            open={coinsToast}
+                            autoHideDuration={3000}
+                            onClose={(e, r) => r === 'clickaway' ? false : setCoinsToast(false)}
+                        >
+                            <SnackbarContent
+                                message="NOT ENOUGH COINS !"
+                                style={{backgroundColor: '#ff4444'}}
+                                action={
+                                    <IconButton size="small" aria-label="close" color="inherit"
+                                                onClick={(e, r) => r === 'clickaway' ? false : setCoinsToast(false) }>
+                                        <CloseIcon fontSize="small" />
+                                    </IconButton>
+                                }/>
+                        </Snackbar>
+
                     </>
                 );
             }
@@ -188,6 +214,9 @@ function GameMain(props) {
     return (
         <MainBoard>
             {renderMain()}
+            {
+                isConfettiOpen && <Confetti/>
+            }
         </MainBoard>
     );
 }

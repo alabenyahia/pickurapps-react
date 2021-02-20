@@ -18,6 +18,10 @@ const StyledBtn = styled.button`
     font-family: inherit;
     display: inline-flex;
     align-items: center;
+    transition: transform 200ms ease-out;
+    &:hover{
+      transform: scale(1.07);
+    }
 `;
 
 

@@ -19,7 +19,7 @@ function Routing() {
                 <DMGame path='/dlilekmlak/game'/>
             </Route>
 
-            <Route path='/dlilekmlak/wins'>
+            <Route path='/dlilekmlak/wins' >
                 <ShowWinnings/>
             </Route>
 

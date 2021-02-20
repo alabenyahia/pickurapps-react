@@ -56,6 +56,10 @@ const StyledBtn = styled.button`
   display: inline-flex;
   align-items: center;
   width: fit-content;
+  transition: transform 200ms ease-out;
+  &:hover{
+    transform: scale(1.07);
+  }
 `;
 
 function ShowWinnings(props) {
