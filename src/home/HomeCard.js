@@ -8,7 +8,7 @@ import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
-        minHeight: '450px',
+        minHeight: '500px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
