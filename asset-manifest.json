@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/pickurapps-react/static/css/main.fac78c06.chunk.css",
-    "main.js": "/pickurapps-react/static/js/main.4d6a1d10.chunk.js",
-    "main.js.map": "/pickurapps-react/static/js/main.4d6a1d10.chunk.js.map",
+    "main.js": "/pickurapps-react/static/js/main.f78868e4.chunk.js",
+    "main.js.map": "/pickurapps-react/static/js/main.f78868e4.chunk.js.map",
     "runtime-main.js": "/pickurapps-react/static/js/runtime-main.c23c01e3.js",
     "runtime-main.js.map": "/pickurapps-react/static/js/runtime-main.c23c01e3.js.map",
     "static/js/2.601ce7be.chunk.js": "/pickurapps-react/static/js/2.601ce7be.chunk.js",
@@ -79,6 +79,6 @@
     "static/js/runtime-main.c23c01e3.js",
     "static/js/2.601ce7be.chunk.js",
     "static/css/main.fac78c06.chunk.css",
-    "static/js/main.4d6a1d10.chunk.js"
+    "static/js/main.f78868e4.chunk.js"
   ]
 }
