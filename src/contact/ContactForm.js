@@ -23,11 +23,12 @@ const StyledBtn = styled(Button)`
 function ContactForm() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [object, setObject] = useState('');
+    const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorToast, setShowErrorToast] = useState(false);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
+
     // valide form inputs
     const validateForm = () => {
         if (name.length<3) {
@@ -39,8 +40,8 @@ function ContactForm() {
             setErrorMessage('Invalid Email Address');
             return false;
         }
-        if (object.length<3) {
-            setErrorMessage('Object must be at least 3 characters');
+        if (subject.length<3) {
+            setErrorMessage('Subject must be at least 3 characters');
             return false;
         }
         if (message.length<5) {
@@ -55,11 +56,30 @@ function ContactForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            setShowSuccessToast(true);
-            setName('');
-            setEmail('');
-            setObject('');
-            setMessage('');
+
+            const API_KEY = process.env.REACT_APP_MAILGUN_API_KEY;
+            // TODO: change domain to pickurapps
+            const DOMAIN = 'sandboxe9456a32ce7645488858eecd493bd9d2.mailgun.org';
+            const mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
+            const data = {
+                from: 'users@pickurapps.com',
+                // TODO: Change email to pickurapps
+                to: 'alabny01@gmail.com',
+                subject: subject,
+                text: `from: ${email}\nmessage:${message}`
+            };
+
+            mailgun.messages().send(data, (error, body) => {
+                if (!error) {
+                    setShowSuccessToast(true);
+                    setName('');
+                    setEmail('');
+                    setSubject('');
+                    setMessage('');
+                }
+            });
+
         } else {
             setShowErrorToast(true);
         }
@@ -76,8 +96,8 @@ function ContactForm() {
             case 'email':
                 setEmail(e.target.value);
                 break;
-            case 'object':
-                setObject(e.target.value);
+            case 'subject':
+                setSubject(e.target.value);
                 break;
             case 'message':
                 setMessage(e.target.value);
@@ -102,7 +122,7 @@ function ContactForm() {
                                    label="Your Email Address" variant="outlined"/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth value={object} onChange={(e) => handleChange(e)} id="object" label="Object"
+                        <TextField fullWidth value={subject} onChange={(e) => handleChange(e)} id="subject" label="Subject"
                                    variant="outlined"/>
                     </Grid>
                     <Grid item xs={12}>
