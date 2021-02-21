@@ -58,16 +58,14 @@ function ContactForm() {
         if (validateForm()) {
 
             const API_KEY = process.env.REACT_APP_MAILGUN_API_KEY;
-            // TODO: change domain to pickurapps
-            const DOMAIN = 'sandboxe9456a32ce7645488858eecd493bd9d2.mailgun.org';
+            const DOMAIN = 'pickurapps.tech';
             const mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
 
             const data = {
                 from: 'users@pickurapps.com',
-                // TODO: Change email to pickurapps
-                to: 'alabny01@gmail.com',
+                to: 'pikurapps@gmail.com',
                 subject: subject,
-                text: `from: ${email}\nmessage:${message}`
+                text: `name: ${name}\nemail: ${email}\nmessage: ${message}`
             };
 
             mailgun.messages().send(data, (error, body) => {
