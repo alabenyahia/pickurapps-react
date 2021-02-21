@@ -11,9 +11,19 @@ const StyledBtn = styled(motion.div)`
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
-
+  
   &:hover {
     background-color: #6E4D4D;
+  }
+  
+  @media screen and (max-width: 600px) {
+    margin: 0 6px 6px 6px;
+    padding: 9px;
+  }
+
+  @media screen and (max-width: 370px) {
+    margin: 0 4px 4px 4px;
+    padding: 7px;
   }
 `;
 
