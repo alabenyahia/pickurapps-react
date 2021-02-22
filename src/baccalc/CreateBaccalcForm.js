@@ -66,15 +66,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function CreateBaccalcForm(props) {
-    let { section } = useParams();
+    let {section} = useParams();
     const classes = useStyles();
 
     const [sessionRadio, setSessionRadio] = useState('principale');
 
     // initialize principale & controle inputs object with convenient keys
     const initInputsState = session => {
-        const objc =  session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
-        const recObj={};
+        const objc = session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
+        const recObj = {};
         for (const prop in objc) {
             recObj[section + '-' + prop] = "";
         }
@@ -105,15 +105,15 @@ export default function CreateBaccalcForm(props) {
     // handle marks textfields change
     const handleInputChange = (e, session) => {
         const oldObj = session === 'principale' ? {...prinInputs} : {...contInputs};
-        oldObj[e.target.name] = e.target.value ;
+        oldObj[e.target.name] = e.target.value;
         if (session === 'principale') setPrinInputs(oldObj);
         else setContInputs(oldObj);
         // handle inputs to disable
-        if (session === 'controle' && inputsToDisable.length >0) {
-            for (let i=0; i<inputsToDisable.length; i++) {
+        if (session === 'controle' && inputsToDisable.length > 0) {
+            for (let i = 0; i < inputsToDisable.length; i++) {
                 if (e.target.name === inputsToDisable[i].toDisable) {
-                    for (let j=0; j<inputsToDisable.length; j++) {
-                        if (j===i) continue;
+                    for (let j = 0; j < inputsToDisable.length; j++) {
+                        if (j === i) continue;
                         let oldArr = [...inputsToDisable];
                         if (e.target.value.length > 0) {
                             oldArr[j].disabled = true;
@@ -150,7 +150,7 @@ export default function CreateBaccalcForm(props) {
                 score = calcScore(true, prinInputs, contInputs, section, inputsToDisable);
             } else {
                 moy = calcContMoy(prinInputs, contInputs, section, inputsToDisable);
-                score = calcScore(false, prinInputs, contInputs, section,inputsToDisable);
+                score = calcScore(false, prinInputs, contInputs, section, inputsToDisable);
             }
 
             const swalContent = (
@@ -161,7 +161,7 @@ export default function CreateBaccalcForm(props) {
                     <p className={classes.swalPStyle}>{score}</p>
                 </>
             );
-
+            window.document.getElementById('root').scrollIntoView();
             // show moyenne & score in an alert box
             MySwal.fire({
                 html: swalContent,
@@ -183,19 +183,22 @@ export default function CreateBaccalcForm(props) {
     // render the textfields for the 'matieres'
     function renderMatieres(session) {
         const matieres = [];
-        const objc =  session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
+        const objc = session === 'principale' ? sectionData[section].matiere.sesPrin : sectionData[section].matiere.sesCont;
         for (const prop in objc) {
             let disabledObjIndex = false;
-            if (session === 'controle' && inputsToDisable.length > 0 ) {
-                for (let i=0; i<inputsToDisable.length; i++) {
+            if (session === 'controle' && inputsToDisable.length > 0) {
+                for (let i = 0; i < inputsToDisable.length; i++) {
                     if (inputsToDisable[i].toDisable === section + '-' + prop) disabledObjIndex = i;
                 }
             }
             let matiere = (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={section + '-' + prop}>
-                    <TextField fullWidth label={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled ? 'Désactivé' : objc[prop].name : objc[prop].name} className={classes.textField}
+                    <TextField fullWidth
+                               label={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled ? 'Désactivé' : objc[prop].name : objc[prop].name}
+                               className={classes.textField}
                                disabled={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled : false}
-                               color="primary" variant="outlined" type="number" onChange={(e) => handleInputChange(e, session)}
+                               color="primary" variant="outlined" type="number"
+                               onChange={(e) => handleInputChange(e, session)}
                                name={section + '-' + prop} value={prinInputs[section + '-' + prop]}/>
                 </Grid>
             );
@@ -205,34 +208,39 @@ export default function CreateBaccalcForm(props) {
     }
 
 
-
     return (
         <form className={classes.root} onSubmit={handleFormSubmit} method="POST" noValidate>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography className={classes.h3Style} component="h3" variant="h3" display="block" color="secondary">Choisissez votre Session</Typography>
+                    <Typography className={classes.h3Style} component="h3" variant="h3" display="block"
+                                color="secondary">Choisissez votre Session</Typography>
                     <FormControl component="fieldset">
-                        <RadioGroup aria-label="sessionradio" name="sessionradio" value={sessionRadio} onChange={(e)=>setSessionRadio(e.target.value)}>
-                            <FormControlLabel value="principale" control={<Radio />} label="Session Principale"/>
-                            <FormControlLabel value="controle" control={<Radio />} label="Session Controle" />
+                        <RadioGroup aria-label="sessionradio" name="sessionradio" value={sessionRadio}
+                                    onChange={(e) => setSessionRadio(e.target.value)}>
+                            <FormControlLabel value="principale" control={<Radio/>} label="Session Principale"/>
+                            <FormControlLabel value="controle" control={<Radio/>} label="Session Controle"/>
                         </RadioGroup>
                     </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography className={classes.h3Style} component="h3" variant="h3" display="block" color="secondary">{sessionRadio === 'principale' ? 'Entrez vos Note ' : 'Entrez vos notes de principale'}</Typography>
+                    <Typography className={classes.h3Style} component="h3" variant="h3" display="block"
+                                color="secondary">{sessionRadio === 'principale' ? 'Entrez vos Note ' : 'Entrez vos notes de principale'}</Typography>
                     <Grid className={classes.gridStyle} container spacing={2}>{renderMatieres('principale')}</Grid>
                 </Grid>
                 {
                     sessionRadio === 'controle' &&
                     <Grid item xs={12}>
-                        <Typography className={classes.h3Style} component="h3" variant="h3" display="block" color="secondary">Entrez vos notes de controle</Typography>
+                        <Typography className={classes.h3Style} component="h3" variant="h3" display="block"
+                                    color="secondary">Entrez vos notes de controle</Typography>
                         <Grid className={classes.gridStyle} container spacing={2}>{renderMatieres('controle')}</Grid>
                     </Grid>
                 }
                 <Grid item xs={12}>
-                    <motion.div animate={isToastOpen ? {translateX: [0, -10, 10, -10, 10, -10, 10, -10, 8, -8, 0]} : {}}>
-                        <Button className={classes.btnStyle} size='large' endIcon={<Icon>send</Icon>} type="submit" variant="contained" color="secondary">Calculer</Button>
+                    <motion.div
+                        animate={isToastOpen ? {translateX: [0, -10, 10, -10, 10, -10, 10, -10, 8, -8, 0]} : {}}>
+                        <Button className={classes.btnStyle} size='large' endIcon={<Icon>send</Icon>} type="submit"
+                                variant="contained" color="secondary">Calculer</Button>
                     </motion.div>
                 </Grid>
             </Grid>
@@ -247,7 +255,7 @@ export default function CreateBaccalcForm(props) {
                     className={classes.toastStyle}
                     action={
                         <IconButton size="small" aria-label="close" color="inherit" onClick={handleToastClose}>
-                            <CloseIcon fontSize="small" />
+                            <CloseIcon fontSize="small"/>
                         </IconButton>
                     }/>
             </Snackbar>

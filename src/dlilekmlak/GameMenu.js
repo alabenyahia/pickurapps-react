@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import {Icon} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
+import { Helmet } from 'react-helmet';
+import {Title} from "@material-ui/icons";
 
 const StyledBtn = styled.button`
   border: none;
@@ -33,6 +35,9 @@ function GameMenu() {
     }
     return (
         <>
+            <Helmet>
+                <title>Dlilek Mlak Menu | pickurapps</title>
+            </Helmet>
             <div style={{
                 direction: 'rtl',
                 display: 'flex',

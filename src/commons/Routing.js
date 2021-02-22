@@ -10,6 +10,7 @@ import DMGame from "../dlilekmlak/Game"
 import ShowWinnings from "../dlilekmlak/ShowWinnings";
 import {AnimatePresence} from "framer-motion";
 import ContactForm from "../contact/ContactForm";
+import {Helmet} from "react-helmet";
 
 function Routing() {
     const location = useLocation();
@@ -38,12 +39,18 @@ function Routing() {
 
             <Route path='/baccalc/:section'>
                 <StyledContainer>
+                    <Helmet>
+                        <title>Bac Tunisie Calcul (moyenne & score) | pickurapps</title>
+                    </Helmet>
                     <CreateBaccalcForm/>
                 </StyledContainer>
             </Route>
 
             <Route path='/baccalc'>
                 <StyledContainer>
+                    <Helmet>
+                        <title>Bac Tunisie Calcul (moyenne & score) | pickurapps</title>
+                    </Helmet>
                     <Grid container spacing={3}>
                         {CreateBaccalcBtns()}
                     </Grid>
@@ -52,12 +59,18 @@ function Routing() {
 
             <Route path='/contact'>
                 <StyledContainer>
+                    <Helmet>
+                        <title>Contact | pickurapps</title>
+                    </Helmet>
                     <ContactForm />
                 </StyledContainer>
             </Route>
 
             <Route path='/'>
                 <StyledContainer>
+                    <Helmet>
+                        <title>Home | pickurapps</title>
+                    </Helmet>
                     <Grid container spacing={3}>
                         {createHomeCards()}
                     </Grid>

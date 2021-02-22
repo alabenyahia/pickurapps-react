@@ -3,6 +3,7 @@ import StageCards from "./StageCards";
 import {IconButton, Snackbar, SnackbarContent} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import {useState} from "react";
+import {Helmet} from "react-helmet";
 
 
 function GameChooseCont(props) {
@@ -10,6 +11,9 @@ function GameChooseCont(props) {
 
     return (
         <MainBoard>
+            <Helmet>
+                <title>Guess Flags Menu | pickurapps</title>
+            </Helmet>
             <StageCards contData={props.contData}
                         handleContCardClick={(isLocked) => isLocked ? setShowContLockedToast(true) : setShowContLockedToast(false)}/>
 

@@ -17,6 +17,7 @@ import WinningSwal from "./WinningSwal";
 import {useHistory} from "react-router-dom";
 import ContCompletedMsg from "./ContCompletedMsg";
 import Confetti from "react-confetti";
+import {Helmet} from "react-helmet";
 
 
 function GameMain(props) {
@@ -81,6 +82,7 @@ function GameMain(props) {
         oldObj[continent].isCompleted = true;
         props.setContData(oldObj);
         setIsConfettiOpen(true);
+        window.document.getElementById('root').scrollIntoView();
         MySwal.current.fire({
             html: <WinningSwal num={answText.length} type='next_cont'/>,
             padding: '1rem',
@@ -143,6 +145,7 @@ function GameMain(props) {
                 oldObj[continent].currFlagNum++;
                 props.setContData(oldObj);
             } else {
+
                 contCompleted();
             }
         } else {
@@ -173,6 +176,9 @@ function GameMain(props) {
             } else {
                 return (
                     <>
+                        <Helmet>
+                            <title>Guess Flags Game | pickurapps</title>
+                        </Helmet>
                         <TopHeader coins={coins} currFlagNum={props.contData[continent].currFlagNum}/>
                         <ShowFlag
                             imgSrc={contDBCopy.current[continent].flags[props.contData[continent].currFlagNum - 1].imgSrc}

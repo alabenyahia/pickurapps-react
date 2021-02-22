@@ -11,6 +11,7 @@ import random from "lodash/random"
 import ProposalSwal from "./swal/ProposalSwal";
 import WinningSwal from "./swal/WinningSwal";
 import "./swal/swalStyle.css"
+import {Helmet} from "react-helmet";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -301,6 +302,9 @@ class GameMain extends React.Component {
     render() {
         return (
             <>
+                <Helmet>
+                    <title>Dlilek Mlak Game | pickurapps</title>
+                </Helmet>
                 <StyledDiv>
                     <StyledPanelsDiv style={{visibility: this.state.chooseBox ? 'hidden' : 'visible'}}>
                         <Panel panelItems={this.state.boxes.slice(0, 12)} left={false}/>

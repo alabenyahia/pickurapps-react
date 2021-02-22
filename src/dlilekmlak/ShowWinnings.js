@@ -2,6 +2,7 @@ import styled from "styled-components"
 import MainBoard from "./MainBoard";
 import {Icon} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -154,6 +155,9 @@ function ShowWinnings() {
 
     return (
         <MainBoard>
+            <Helmet>
+                <title>Dlilek Mlak Winnings | pickurapps</title>
+            </Helmet>
             <StyledDiv>
                 <StyledTable>
                     <StyledThead>
