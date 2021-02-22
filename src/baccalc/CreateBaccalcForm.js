@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     btnStyle: {
-        margin: '8px 0',
+        margin: '8px',
         '@media screen and (max-width:600px)': {
             width: 'calc(100% - 16px)'
         }
@@ -136,9 +136,17 @@ export default function CreateBaccalcForm(props) {
         setIsToastOpen(false);
     }
 
+    const handleFormReset = (e) => {
+        e.preventDefault();
+        setPrinInputs(initInputsState('principale'));
+        setContInputs(initInputsState('controle'));
+        console.log('pr', prinInputs, 'con', contInputs);
+    }
+
     // handle calculer button click
     const handleFormSubmit = (e) => {
         e.preventDefault();
+        console.log("pr", prinInputs, "cnt", contInputs);
         // if all inputs are valid calculate else show error message toast
         if (validateInputs(sessionRadio, prinInputs, contInputs, inputsToDisable)) {
             let moy;
@@ -199,7 +207,7 @@ export default function CreateBaccalcForm(props) {
                                disabled={disabledObjIndex !== false ? inputsToDisable[disabledObjIndex].disabled : false}
                                color="primary" variant="outlined" type="number"
                                onChange={(e) => handleInputChange(e, session)}
-                               name={section + '-' + prop} value={prinInputs[section + '-' + prop]}/>
+                               name={section + '-' + prop} value={session === 'principale' ? prinInputs[section + '-' + prop] : contInputs[section + '-' + prop]}/>
                 </Grid>
             );
             matieres.push(matiere);
@@ -236,12 +244,18 @@ export default function CreateBaccalcForm(props) {
                         <Grid className={classes.gridStyle} container spacing={2}>{renderMatieres('controle')}</Grid>
                     </Grid>
                 }
-                <Grid item xs={12}>
+                <Grid item xs={6} style={{textAlign: 'right'}}>
                     <motion.div
                         animate={isToastOpen ? {translateX: [0, -10, 10, -10, 10, -10, 10, -10, 8, -8, 0]} : {}}>
                         <Button className={classes.btnStyle} size='large' endIcon={<Icon>send</Icon>} type="submit"
                                 variant="contained" color="secondary">Calculer</Button>
                     </motion.div>
+
+                </Grid>
+
+                <Grid item xs={6} style={{textAlign: 'left'}}>
+                    <Button className={classes.btnStyle} size='large' endIcon={<Icon>replay</Icon>} onClick={handleFormReset}
+                            color="secondary">Vider</Button>
                 </Grid>
             </Grid>
             <Snackbar
