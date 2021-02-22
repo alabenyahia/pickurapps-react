@@ -140,13 +140,12 @@ export default function CreateBaccalcForm(props) {
         e.preventDefault();
         setPrinInputs(initInputsState('principale'));
         setContInputs(initInputsState('controle'));
-        console.log('pr', prinInputs, 'con', contInputs);
     }
 
     // handle calculer button click
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log("pr", prinInputs, "cnt", contInputs);
+
         // if all inputs are valid calculate else show error message toast
         if (validateInputs(sessionRadio, prinInputs, contInputs, inputsToDisable)) {
             let moy;

@@ -15,6 +15,7 @@ const StyledDiv = styled(motion.div)`
   height: 36px;
   max-height: 36px;
   cursor: default;
+  user-select: none;
 `;
 
 function PanelItem(props) {

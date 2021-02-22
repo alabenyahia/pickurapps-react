@@ -29,6 +29,7 @@ const StyledResetBtn = styled.div`
   cursor: pointer;
   display: inline-block;
   font-size: 0.875rem;
+  user-select: none;
 
   &:hover {
     background-color: #6E4D4D;

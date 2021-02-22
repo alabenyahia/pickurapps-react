@@ -11,6 +11,7 @@ const StyledBtn = styled(motion.div)`
   text-align: center;
   border-radius: 4px;
   cursor: pointer;
+  user-select: none;
   
   &:hover {
     background-color: #6E4D4D;

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import {Helmet} from "react-helmet";
+import React from "react";
 
 const StyledDiv = styled.div`
   color: #ffffff;
@@ -20,6 +22,9 @@ function NotAvailableError() {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
+            <Helmet>
+                <title>Dlilek Mlak | pickurapps</title>
+            </Helmet>
             <StyledDiv>
                 This game is still not optimized for small screen but you can still Get the mobile app from Google Play
                 On the link below.

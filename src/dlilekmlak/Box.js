@@ -13,6 +13,7 @@ const StyledDiv = styled(motion.div)`
   position: relative;
   text-align: center;
   display: flex;
+  user-select: none;
 `;
 
 const StyledImg = styled.img`
