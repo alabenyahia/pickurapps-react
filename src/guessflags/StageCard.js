@@ -42,6 +42,7 @@ const StyledCardText = styled.div`
   @media screen and (max-width: 320px) {
     font-size: 0.65rem;
   }
+  user-select: none;
 
 `;
 
