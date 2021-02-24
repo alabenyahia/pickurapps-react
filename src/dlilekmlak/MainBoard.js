@@ -33,9 +33,14 @@ function MainBoard(props) {
 
 
     useLayoutEffect(()=> {
-        window.addEventListener('resize', ()=> {
+        function updatePageDimens(){
             setPageDimens([window.innerWidth, window.innerHeight]);
-        })
+        }
+
+        window.addEventListener('resize', () => updatePageDimens());
+
+        return () => window.removeEventListener("resize", updatePageDimens);
+
     }, []);
 
     return (

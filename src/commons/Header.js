@@ -87,6 +87,7 @@ export default function Header() {
         setResponsiveness();
 
         window.addEventListener("resize", () => setResponsiveness());
+        return () => window.removeEventListener("resize", setResponsiveness);
     }, []);
 
     const displayDesktop = () => {
