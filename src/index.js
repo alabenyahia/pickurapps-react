@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/analytics";
 import {firebaseConfig} from "./commons/firebaseConfig";
@@ -12,9 +12,9 @@ const analytics = firebase.analytics();
 
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
+      <HashRouter>
           <App />
-      </BrowserRouter>
+      </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
